@@ -1,108 +1,143 @@
-# vibe-scaffold
+# hummingbird-design-system
 
-Minimal semantic boilerplate for vibe coding. Bun · TypeScript · Next.js (App Router)
-· Vercel AI SDK · reducer state · hand-written CSS. No Tailwind, no Radix, no utility
-classes — semantic HTML styled directly, native elements doing native things.
+A monochrome, semantic-HTML design system — customizable **oklch** tokens, native
+elements, zero utility classes. Ships **React components** and the **raw CSS** (tokens,
+base element styles, component variants, and the identity's fonts).
 
-## Quick start
+Reconstructed from the Hummingbird Design studio's November 2015 identity: true greys
+only, squared corners, letterspaced uppercase display type, colour arriving only as
+photographic tint — or as your own live oklch customization.
+
+This repository is a Bun-workspace monorepo:
+
+```
+packages/hummingbird   → the published package `hummingbird-design-system`
+apps/web               → the living documentation + portfolio site (Next.js)
+```
+
+## Install
 
 ```bash
-bun install
-cp .env.example .env.local     # add ANTHROPIC_API_KEY for the chat route
-bun dev
+npm i hummingbird-design-system
+# peer deps: react, react-dom (^19)
 ```
 
-Open `http://localhost:3000` — the home page is the Hummingbird design system
-portfolio: full-height snap-scroll screens and a full-bleed photo slider, in
-the identity's borderless, monochrome manner. `/design-system` documents the
-whole system: every token ramp as swatches, live palette customization via
-oklch sliders, and every component with working examples. The written spec
-lives in `docs/hummingbird-design-system.md`.
+## Use it
 
-## What's inside
-
-```
-src/
-├── app/
-│   ├── layout.tsx            # root layout — receives the @panel slot
-│   ├── page.tsx              # portfolio landing (carousel + principles)
-│   ├── @panel/               # ★ parallel route slot (state-inspector aside)
-│   │   ├── default.tsx
-│   │   └── page.tsx
-│   ├── api/chat/route.ts     # ★ AI SDK streaming endpoint (Claude)
-│   ├── design-system/        # living design system documentation
-│   └── globals.css
-├── components/
-│   ├── primitives/           # single-element components (Button, Input, Dialog…)
-│   ├── composites/           # combinations (Card, SearchField, Chat)
-│   └── layouts/              # landmarks (Header, Panel, Footer)
-├── lib/                      # ★ ALL non-view code lives here
-│   ├── state/                # global reducer + actions + context + hooks
-│   └── classNames.ts
-└── styles/
-    ├── tokens.css            # ★ the entire theme — edit this file only
-    ├── base.css              # semantic element defaults
-    └── components.css        # variants + structural selectors
-```
-
-## The design system, in three sentences
-
-Every theme decision is a custom property in `tokens.css` — one neutral ramp, brand
-colors as customizable oklch channel triplets with nine-step variant ramps, one
-scale, squared corners. `base.css` styles semantic elements directly so plain HTML
-already looks right. `components.css` adds variants through selectors that mirror
-the markup (`button.primary`, `article.card > header`), never utility classes.
-
-Theming is `data-theme` on `<html>` (`light` — the default — / `dark` / `system`),
-driven by the global reducer; the same reducer carries live palette overrides that
-land as inline custom properties.
-
-## Global state
-
-`src/lib/state` — a typed `useReducer` with a discriminated action union and action
-creators, exposed via context:
+Import the stylesheet once at the root of your app, then use the components:
 
 ```tsx
-const { theme, panelOpen } = useAppState()
-const dispatch = useDispatch()
-dispatch(setTheme('dark'))
-dispatch(pushNotice('saved'))
+import 'hummingbird-design-system/styles.css'
+import { AppStateProvider } from 'hummingbird-design-system/state'
+import { Button, Card, Row, Grid, ArticleHero } from 'hummingbird-design-system'
+
+export default function App () {
+  return (
+    <AppStateProvider>          {/* theming, palette, notices */}
+      <Card title='Hello'>
+        <p>Semantic HTML, styled directly — no className, no utility soup.</p>
+        <Row>
+          <Button variant='primary'>Primary</Button>
+          <Button variant='ghost'>Ghost</Button>
+        </Row>
+      </Card>
+    </AppStateProvider>
+  )
+}
 ```
 
-Extend in three steps: add to the `AppAction` union → handle in `reducer.ts` →
-export a creator from `actions.ts`.
+### Exports map
 
-## Parallel routes
+| Import                                   | What you get                                          |
+| ---------------------------------------- | ----------------------------------------------------- |
+| `hummingbird-design-system`              | every primitive, composite, and layout component      |
+| `hummingbird-design-system/state`        | the reducer, action creators, `AppStateProvider`, hooks |
+| `hummingbird-design-system/styles.css`   | the whole stylesheet (declares layer order, `@import`s the rest) |
+| `hummingbird-design-system/tokens.css`   | just the theme tokens (+ `@font-face`)                |
+| `hummingbird-design-system/base.css`     | semantic element defaults                             |
+| `hummingbird-design-system/components.css` | component variants + structural CSS                 |
 
-`src/app/layout.tsx` takes a second slot prop, `panel`, rendered from `src/app/@panel`.
-The demo panel is a state inspector toggled from the header. Give any route its own
-panel by adding `@panel/<route>/page.tsx`.
+The stylesheet declares `@layer base, components;` internally, so import order never
+matters. To adopt only the theme (custom properties + fonts) without the component CSS,
+import `tokens.css` alone.
 
-## AI SDK
+## The system in three ideas
 
-`POST /api/chat` streams Claude with `streamText` + `toUIMessageStreamResponse`; the
-`Chat` composite consumes it through `useChat`. Swap the model or provider in one
-line inside `route.ts`.
+1. **The markup is the API.** Selectors mirror semantic markup — `button.primary`,
+   `article.card > header`, `aside[data-slot='panel']`. No utility classes, no Tailwind,
+   no Radix, no inline styles. Components take essential props only (no `className`, no
+   `style`, no size/colour/margin props — that is CSS's job).
+2. **One token file.** Every visual decision resolves to a custom property in
+   `tokens.css`. Brand colours are **oklch channel triplets** (`--accent-l/-c/-h`) with
+   nine-step `color-mix` ramps; the accent defaults to chroma 0, so it *is* ink until you
+   recolour it. `--radius` is `0`; the sole exception is `--radius-full` for icon
+   medallions.
+3. **Native first.** `<dialog>` with `showModal`, `<details name>` accordions, the
+   native Popover API, scroll-snap sliders, `:user-invalid` validation. JavaScript only
+   assists.
 
-## Deploying
+## Components
 
-**Vercel** — import the repo, set `ANTHROPIC_API_KEY`, done. Full server runtime.
+Fourteen-plus **primitives** (Button, Input, Textarea, Select, Checkbox, Radio, Switch,
+Slider, Heading, Mark, Badge, Progress, Disclosure, Dialog, **Popover**, **Icon**,
+**Medallion**), **composites** (Card, Field, Alert, Tabs, Breadcrumb, SearchField,
+Carousel, Meta, Swatches, ThemeCustomizer, **Notification**, **Lockup**, **FounderCard**,
+**Pillars**, **CapabilityStrip**, **ArticleHero**, **ContactPanel**, **RecentWork**), and
+**layouts** — landmarks in `layouts/landmarks/` (Header, Footer, Panel) plus the layout
+helpers **Row** (horizontal stacking), **Grid** (responsive grid view), and **Overlay**
+(fixed full-viewport takeover).
 
-**GitHub Pages** — push to `main`; the included workflow builds a static export
-(`bun run build:pages`) with `basePath = /<repo>` and publishes `./out`. API routes
-don't exist on static hosts, so the build script parks `src/app/api` and the chat UI
-shows a graceful notice instead.
+Every one is documented with a live example on the `/design-system` page; the written
+spec lives in [`docs/hummingbird-design-system.md`](docs/hummingbird-design-system.md).
 
-## Linting
+### Theming & state
 
-Flat config extending [`@tuomashatakka/eslint-config`](https://www.npmjs.com/package/@tuomashatakka/eslint-config):
+`hummingbird-design-system/state` is a typed `useReducer` exposed through context:
+
+```tsx
+import { useAppState, useDispatch, setTheme, pushNotice } from 'hummingbird-design-system/state'
+
+const { theme } = useAppState()
+const dispatch  = useDispatch()
+dispatch(setTheme('dark'))                 // mirrors data-theme on <html>
+dispatch(pushNotice('Saved', 'success'))   // renders in <Notification />
+```
+
+`theme` is `'light'` (default) / `'dark'` / `'system'`; `palette` holds per-colour oklch
+overrides applied as inline custom properties on `<html>`; `notices` back the
+`Notification` toast region. Mount `<Notification />` once near the root.
+
+## Develop
 
 ```bash
-bun run lint
-bun run typecheck
+bun install                 # install the whole workspace
+bun run build:pkg           # build the package → packages/hummingbird/dist (bunchee)
+bun run dev                 # build the package, then run the docs site (localhost:3000)
+bun run build               # build the package + the docs site
+bun run build:pages         # static export of the docs site → apps/web/out
+bun run lint                # @tuomashatakka/eslint-config
+bun run typecheck           # strict tsc, every workspace
 ```
+
+The docs app consumes the package through the Bun workspace and Next's
+`transpilePackages`, so a `bun run build:pkg` refreshes what the site renders.
+
+## Publish
+
+```bash
+cd packages/hummingbird
+npm publish                 # ships dist/ + styles/ (CSS + fonts); see the exports map
+```
+
+## Deploy the docs site
+
+- **Vercel** — import the repo, root the project at `apps/web`, set `ANTHROPIC_API_KEY`
+  for the chat route, ship.
+- **GitHub Pages** — push to `main`; `.github/workflows/deploy-pages.yml` builds the
+  package, runs `build:pages` (static export with `basePath = /<repo>`), and publishes
+  `apps/web/out`. The AI chat degrades gracefully where there is no server runtime.
 
 ## Conventions
 
-See `CLAUDE.md` — it doubles as the instruction file for AI coding agents and the
-architectural contract for humans.
+See [`CLAUDE.md`](CLAUDE.md) — it doubles as the instruction file for AI coding agents and
+the architectural contract for humans.

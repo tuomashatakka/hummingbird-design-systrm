@@ -1,0 +1,32 @@
+'use client'
+
+import { Button, Panel } from 'hummingbird-design-system'
+import { dismissNotice, pushNotice, useAppState, useDispatch } from 'hummingbird-design-system/state'
+
+// This page renders in parallel with src/app/page.tsx through the @panel slot.
+// Route-specific panels: add @panel/<route>/page.tsx next to the matching route.
+export default function PanelSlot () {
+  const state    = useAppState()
+  const dispatch = useDispatch()
+
+  return <Panel label='State inspector'>
+    <div data-layout='stack'>
+      <pre aria-label='Current app state'>
+        {JSON.stringify(state, null, 2)}
+      </pre>
+
+      <Button size='small' onClick={ () => dispatch(pushNotice('Hello from the reducer')) }>
+        Push notice
+      </Button>
+
+      {state.notices.map(notice =>
+        <p key={ notice.id } data-layout='cluster'>
+          <small>{notice.message}</small>
+
+          <Button variant='ghost' size='small' onClick={ () => dispatch(dismissNotice(notice.id)) }>
+            dismiss
+          </Button>
+        </p>)}
+    </div>
+  </Panel>
+}

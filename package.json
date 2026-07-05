@@ -1,30 +1,24 @@
 {
-  "name": "vibe-scaffold",
+  "name": "hummingbird-monorepo",
   "version": "0.1.0",
   "private": true,
-  "description": "Minimal semantic Next.js boilerplate for vibe coding — Bun, TypeScript, AI SDK, parallel routes, reducer state, zero utility classes.",
+  "description": "Hummingbird Design System — the publishable component/CSS package plus its living documentation site.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "build:pages": "bash scripts/build-static.sh",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@ai-sdk/anthropic": "^2.0.0",
-    "@ai-sdk/react": "^2.0.0",
-    "ai": "^5.0.0",
-    "next": "^15.5.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "dev": "bun run build:pkg && bun run --filter ./apps/web dev",
+    "build": "bun run build:pkg && bun run --filter ./apps/web build",
+    "build:pkg": "bun run --filter hummingbird-design-system build",
+    "build:pages": "bun run build:pkg && bun run --filter ./apps/web build:pages",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "bun run --filter '*' typecheck"
   },
   "devDependencies": {
     "@tuomashatakka/eslint-config": "latest",
     "@types/node": "^22.0.0",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
     "eslint": "^9.0.0",
     "typescript": "^5.8.0"
   }

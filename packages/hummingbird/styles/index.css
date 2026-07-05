@@ -1,0 +1,19 @@
+/* ————————————————————————————————————————————————
+   hummingbird-design-system — the complete stylesheet.
+
+   Import once, at the root of your app:
+     import 'hummingbird-design-system/styles.css'
+
+   Or cherry-pick the layers:
+     import 'hummingbird-design-system/tokens.css'
+     import 'hummingbird-design-system/base.css'
+     import 'hummingbird-design-system/components.css'
+
+   The cascade layers are declared here so import order never matters.
+   ———————————————————————————————————————————————— */
+
+@layer base, components;
+
+@import './tokens.css';
+@import './base.css';
+@import './components.css';

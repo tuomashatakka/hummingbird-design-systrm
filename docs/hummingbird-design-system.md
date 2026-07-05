@@ -5,6 +5,24 @@ November 2015 identity style guide, implemented as semantic HTML + design
 tokens. This document is the written spec; the living version — every
 component rendered with live examples — is the `/design-system` page.
 
+It ships as the npm package **`hummingbird-design-system`** (components + CSS +
+fonts). The source lives in `packages/hummingbird/`; the documentation and
+portfolio site that renders it lives in `apps/web/`.
+
+```bash
+npm i hummingbird-design-system
+```
+
+```tsx
+import 'hummingbird-design-system/styles.css'
+import { AppStateProvider } from 'hummingbird-design-system/state'
+import { Button, Card } from 'hummingbird-design-system'
+```
+
+The `exports` map: `.` (components), `./state` (reducer + provider + hooks),
+`./styles.css` (everything, with layer order), `./tokens.css`, `./base.css`,
+`./components.css` (the individual layers), and `./fonts/*`.
+
 ## Principles
 
 1. **Monochrome, by design.** The brand is true greys only. Color never
@@ -103,36 +121,48 @@ Rules: display type is never bolded for emphasis; body copy caps at
 ## Rhythm, shape, motion
 
 - **Spacing** — 4/8 grid: `xs` 8 · `sm` 12 · `md` 24 · `lg` 48 · `xl` 96 (px).
-- **Widths** — `--measure` 68ch · `--page-max` 80rem · `--panel-w` 20rem.
-- **Shape** — `--radius: 0`; borders are `--border` (hairline `--line`) and
-  `--border-strong` (`--ink`).
+- **Widths** — `--measure` 68ch · `--page-max` 80rem · `--panel-w` 20rem ·
+  `--grid-min` 16rem (the `Grid` column floor; `data-min` presets override it).
+- **Shape** — `--radius: 0`; the one exception is `--radius-full` (999px) for
+  icon medallions. Borders are `--border-hair` (hairline), `--border` (`--line`),
+  and `--border-strong` (`--ink`).
+- **Elevation** — `--shadow-1` / `--shadow-2`, used *very* sparingly (soft cards
+  and the recent-work grid lift on hover; nothing floats by default).
 - **Motion** — `--snap` (200ms cubic-bezier) for hovers and toggles, plus
   the signature reveal curve `--immersive` (cubic-bezier(0.16, 1, 0.3, 1))
-  for slide dots, nav underlines, and section reveals. All collapsed under
-  `prefers-reduced-motion`.
+  for slide dots, nav underlines, toast entrance, and section reveals. All
+  collapsed under `prefers-reduced-motion`.
 
 ## Component inventory
 
-### Primitives — `src/components/primitives/`
+### Primitives — `packages/hummingbird/src/components/primitives/`
 
-| Component  | Renders                          | Essential props                          |
-| ---------- | -------------------------------- | ---------------------------------------- |
-| Button     | `button`                         | variant, size, disabled, type, onClick   |
-| Input      | `input`                          | type, value, placeholder, required, onChange |
-| Textarea   | `textarea`                       | value, rows, placeholder, onChange       |
-| Select     | `select`                         | options, value, onChange                 |
-| Checkbox   | `label > input[type=checkbox]`   | label, checked, onChange                 |
-| Radio      | `label > input[type=radio]`      | label, name, value, checked, onChange    |
-| Switch     | `input[role=switch]`             | label, checked, onChange                 |
-| Slider     | `input[type=range]`              | label, min, max, step, value, onChange   |
-| Heading    | `h1`–`h6`                        | level, id                                |
-| Mark       | `svg` (brand mark, currentColor) | label                                    |
-| Badge      | `span[data-badge]`               | variant                                  |
-| Progress   | `progress`                       | label, value, max                        |
-| Disclosure | `details/summary`                | summary, open, name                      |
-| Dialog     | `dialog` (showModal)             | open, title, footer, onClose             |
+| Component  | Renders                              | Essential props                          |
+| ---------- | ------------------------------------ | ---------------------------------------- |
+| Button     | `button`                             | variant, size, disabled, type, onClick   |
+| Input      | `input`                              | type, value, placeholder, required, onChange |
+| Textarea   | `textarea`                           | value, rows, placeholder, onChange       |
+| Select     | `select`                             | options, value, onChange                 |
+| Checkbox   | `label > input[type=checkbox]`       | label, checked, onChange                 |
+| Radio      | `label > input[type=radio]`          | label, name, value, checked, onChange    |
+| Switch     | `input[role=switch]`                 | label, checked, onChange                 |
+| Slider     | `input[type=range]`                  | label, min, max, step, value, onChange   |
+| Heading    | `h1`–`h6`                            | level, id                                |
+| Mark       | `svg` (brand mark, currentColor)     | label                                    |
+| Badge      | `span[data-badge]`                   | variant                                  |
+| Progress   | `progress`                           | label, value, max                        |
+| Disclosure | `details/summary`                    | summary, open, name                      |
+| Dialog     | `dialog` (showModal)                 | open, title, footer, onClose             |
+| Popover    | `button[popovertarget]` + `[popover]`| label, id                                |
+| Icon       | `svg[data-icon]` (Feather line set)  | name, label                              |
+| Medallion  | `span[data-medallion] > Icon`        | icon, label                              |
 
-### Composites — `src/components/composites/`
+`Popover` is the native Popover API — the browser owns open/close and light dismiss.
+`Icon` covers the identity's affordances (user, umbrella, award, mail, phone, pin,
+clock, arrow, close, menu) at the 1.6px hairline stroke; `Medallion` wraps one in the
+one full-radius (`--radius-full`) element the system allows.
+
+### Composites — `packages/hummingbird/src/components/composites/`
 
 | Component       | Renders                                    | Essential props        |
 | --------------- | ------------------------------------------ | ---------------------- |
@@ -146,15 +176,36 @@ Rules: display type is never bolded for emphasis; body copy caps at
 | Meta            | `dl[data-meta]`                            | items                  |
 | Swatches        | `div[data-swatches]`                       | tokens, label          |
 | ThemeCustomizer | `form[data-component=theme-customizer]`    | —                      |
-| Chat            | `section[data-component=chat]`             | —                      |
+| Notification    | `output[data-notifications]` (toasts)      | timeout                |
+| Lockup          | `span[data-lockup]` (mark + wordmark)      | wordmark, variant      |
+| FounderCard     | `article[data-founder]` (slate block)      | name, role, cta        |
+| Pillars         | `ul[data-pillars]` (three-service strip)   | items                  |
+| CapabilityStrip | `ul[data-capabilities]` (medallions)       | items                  |
+| ArticleHero     | `section[data-article-hero]` (photo + tint)| title, image, tint, eyebrow, byline |
+| ContactPanel    | `section[data-contact]` (form on slate)    | heading, lead, details, onSubmit |
+| RecentWork      | `div[data-work]` (grid of figures)         | items, min             |
 
-### Layouts — `src/components/layouts/`
+`Notification` renders the global reducer's `notices`; the brand composites
+(`FounderCard`…`RecentWork`) reconstruct the identity's portfolio surfaces. The AI
+`Chat` (`section[data-component=chat]`) lives in `apps/web` — it is the only piece with
+AI-SDK dependencies, so it stays out of the package.
 
-| Component | Renders                    | Essential props |
-| --------- | -------------------------- | --------------- |
-| Header    | `body > header` (sticky)   | —               |
-| Footer    | `body > footer`            | —               |
-| Panel     | `aside[data-slot='panel']` | label           |
+### Layouts — `packages/hummingbird/src/components/layouts/`
+
+Landmarks live in the `layouts/landmarks/` subfolder; layout helpers sit alongside.
+
+| Component | Renders                            | Essential props | Folder      |
+| --------- | ---------------------------------- | --------------- | ----------- |
+| Header    | `body > header` (sticky)           | brand, links    | landmarks/  |
+| Footer    | `body > footer`                    | —               | landmarks/  |
+| Panel     | `aside[data-slot='panel']`         | label           | landmarks/  |
+| Row       | `[data-layout='row']`              | align, wrap     | layouts/    |
+| Grid      | `[data-layout='grid']`             | min             | layouts/    |
+| Overlay   | `[data-overlay]` (fixed takeover)  | open, label, onClose | layouts/ |
+
+`Row` stacks children horizontally on the gap rhythm; `Grid` is an auto-filling grid
+view whose column floor is a token preset (`--grid-min`); `Overlay` is a fixed,
+full-viewport layer over an opaque scrim, dismissing on backdrop click / Escape.
 
 ## Portfolio surfaces
 
@@ -184,11 +235,19 @@ literals.
 ## File map
 
 ```
-src/styles/tokens.css     # the whole theme: channels, ramps, scale, rhythm
-src/styles/base.css       # semantic element defaults (incl. range slider)
-src/styles/components.css # variants + structural CSS, selectors mirror markup
-src/components/…          # primitives / composites / layouts (see tables)
-src/lib/state/            # reducer, actions, provider (theme + palette)
-src/app/page.tsx          # portfolio landing with the highlight carousel
-src/app/design-system/    # the living design system documentation
+packages/hummingbird/
+  styles/tokens.css        # the whole theme: channels, ramps, scale, rhythm, fonts
+  styles/base.css          # semantic element defaults (incl. range slider)
+  styles/components.css    # variants + structural CSS, grouped with native nesting
+  styles/index.css         # declares layer order, @imports the three above
+  styles/fonts/            # the identity's .otf faces
+  src/components/…         # primitives / composites / layouts (see tables)
+  src/lib/state/           # reducer, actions, provider (theme + palette + notices)
+  src/{index,state}.ts     # the package entry points → the exports map
+
+apps/web/
+  src/app/page.tsx         # portfolio landing with the highlight carousel
+  src/app/portfolio/       # full portfolio page assembled from the composites
+  src/app/design-system/   # the living design system documentation
+  src/components/Chat.tsx   # the AI chat (app-only; AI-SDK deps)
 ```
