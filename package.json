@@ -1,0 +1,31 @@
+{
+  "name": "vibe-scaffold",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal semantic Next.js boilerplate for vibe coding — Bun, TypeScript, AI SDK, parallel routes, reducer state, zero utility classes.",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "build:pages": "bash scripts/build-static.sh",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.0",
+    "@ai-sdk/react": "^2.0.0",
+    "ai": "^5.0.0",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tuomashatakka/eslint-config": "latest",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.8.0"
+  }
+}
