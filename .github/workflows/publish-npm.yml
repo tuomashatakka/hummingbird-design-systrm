@@ -1,0 +1,45 @@
+name: Publish to npm
+
+# Ships packages/hummingbird to the public npm registry. Manual npm publish
+# from a laptop is how 0.2.2 ended up on GitHub Packages instead (that
+# registry was the package's publishConfig default) — this workflow always
+# targets registry.npmjs.org so consumers never need GitHub auth to install.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Set up Node (npm publish auth)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build package
+        run: bun run build:pkg
+
+      - name: Publish to npm
+        working-directory: packages/hummingbird
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

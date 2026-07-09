@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "bun run build:pkg && bun run --filter ./apps/web dev",
     "build": "bun run build:pkg && bun run --filter ./apps/web build",
-    "build:pkg": "bun run --filter hummingbird-design-system build",
+    "build:pkg": "bun run --filter ./packages/hummingbird build",
     "build:pages": "bun run build:pkg && bun run --filter ./apps/web build:pages",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
