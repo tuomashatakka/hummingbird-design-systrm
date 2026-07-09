@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Heading } from 'hummingbird-design-system'
+import { Heading } from '@tuomashatakka/hummingbird-design-system'
 
 
 interface Row {

@@ -17,8 +17,8 @@
       "dependencies": {
         "@ai-sdk/anthropic": "^2.0.0",
         "@ai-sdk/react": "^2.0.0",
+        "@tuomashatakka/hummingbird-design-system": "workspace:*",
         "ai": "^5.0.0",
-        "hummingbird-design-system": "workspace:*",
         "next": "^15.5.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
@@ -31,7 +31,7 @@
       },
     },
     "packages/hummingbird": {
-      "name": "hummingbird-design-system",
+      "name": "@tuomashatakka/hummingbird-design-system",
       "version": "0.1.0",
       "devDependencies": {
         "@types/react": "^19.1.0",
@@ -276,7 +276,9 @@
 
     "@swc/types": ["@swc/types@0.1.27", "", { "dependencies": { "@swc/counter": "^0.1.3" } }, "sha512-K6h3iUlqeM946U4sXFYeahefR1YBbXJvko+hv8WS8/0BNJ4OHiHRywMnQUJCqkR7Y9+hqQ1TvEpiKqUhz7NEFg=="],
 
-    "@tuomashatakka/eslint-config": ["@tuomashatakka/eslint-config@3.2.2", "", { "dependencies": { "@stylistic/eslint-plugin": "^5.10.0", "@types/react": "^19.2.14", "eslint": "^9.39.0", "eslint-plugin-import": "^2.32.0", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^5.2.0", "globals": "^16.5.0", "typescript": "^5.9.0", "typescript-eslint": "^8.58.0" }, "peerDependencies": { "react": "*" } }, "sha512-Zk2+EjOc4V5cJbjMxwDVjODbnWnVKdJpI0POQXJXgeIWJkUhGNlsP8822xRA6Q7fsA/YN9c2tWC3XI3fAH/2Iw=="],
+    "@tuomashatakka/eslint-config": ["@tuomashatakka/eslint-config@3.2.2", "https://npm.pkg.github.com/@tuomashatakka/eslint-config/-/eslint-config-3.2.2.tgz", { "dependencies": { "@stylistic/eslint-plugin": "^5.10.0", "@types/react": "^19.2.14", "eslint": "^9.39.0", "eslint-plugin-import": "^2.32.0", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^5.2.0", "globals": "^16.5.0", "typescript": "^5.9.0", "typescript-eslint": "^8.58.0" }, "peerDependencies": { "react": "*" } }, "sha512-Zk2+EjOc4V5cJbjMxwDVjODbnWnVKdJpI0POQXJXgeIWJkUhGNlsP8822xRA6Q7fsA/YN9c2tWC3XI3fAH/2Iw=="],
+
+    "@tuomashatakka/hummingbird-design-system": ["@tuomashatakka/hummingbird-design-system@workspace:packages/hummingbird"],
 
     "@types/estree": ["@types/estree@1.0.9", "", {}, "sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg=="],
 
@@ -523,8 +525,6 @@
     "has-tostringtag": ["has-tostringtag@1.0.2", "", { "dependencies": { "has-symbols": "^1.0.3" } }, "sha512-NqADB8VjPFLM2V0VvHUewwwsw0ZWBaIdgo+ieHtK3hasLz4qeCRjYcqfB6AQrBggRKppKF8L52/VqdVsO47Dlw=="],
 
     "hasown": ["hasown@2.0.4", "", { "dependencies": { "function-bind": "^1.1.2" } }, "sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A=="],
-
-    "hummingbird-design-system": ["hummingbird-design-system@workspace:packages/hummingbird"],
 
     "ignore": ["ignore@5.3.2", "", {}, "sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g=="],
 

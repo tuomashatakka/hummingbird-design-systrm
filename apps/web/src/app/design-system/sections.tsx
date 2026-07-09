@@ -5,7 +5,7 @@ import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
 import {
   ArticleHero, CapabilityStrip, ContactPanel, FounderCard, Grid, Heading, Icon,
   Lockup, Medallion, Pillars, Popover, RecentWork, Row,
-} from 'hummingbird-design-system'
+} from '@tuomashatakka/hummingbird-design-system'
 import { NotificationDemo, OverlayDemo } from './demos'
 
 

@@ -3,7 +3,7 @@ import bgClear from '@/assets/bg-mountain-clear.jpg'
 import {
   Alert, Badge, Breadcrumb, Button, Card, Carousel, Disclosure, Heading, Mark,
   Meta, Progress, Swatches, Tabs, ThemeCustomizer,
-} from 'hummingbird-design-system'
+} from '@tuomashatakka/hummingbird-design-system'
 import { Chat } from '@/components/Chat'
 import { DialogDemo, FormsDemo, SliderDemo } from './demos'
 import { Inventory } from './inventory'

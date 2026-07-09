@@ -135,6 +135,75 @@
     margin-block: var(--space-lg);
   }
 
+  /* — lists — */
+
+  /* No max-width here: components build their tracks/toolbars out of <ul>, so a
+     blanket measure on lists would cap a carousel or tablist. Prose that needs a
+     readable measure gets it from its container. */
+  ul, ol {
+    margin-block:         0 var(--space-sm);
+    padding-inline-start: var(--space-md);
+  }
+
+  li { margin-block-end: 0.25em; }
+
+  li > ul, li > ol { margin-block: 0.25em 0; }
+
+  ::marker { color: var(--ink-faint); }
+
+  /* lists that are plumbing, not prose */
+  nav :is(ul, ol), [role='list'] {
+    list-style:           none;
+    margin-block:         0;
+    padding-inline-start: 0;
+    max-width:            none;
+
+    & > li { margin-block-end: 0; }
+  }
+
+  /* — definition lists — */
+
+  dl {
+    margin-block: 0 var(--space-sm);
+    max-width:    var(--measure);
+  }
+
+  dt { font-weight: 600; }
+
+  dd {
+    margin-inline-start: 0;
+    margin-block-end:    var(--space-xs);
+    color:               var(--ink-soft);
+  }
+
+  /* — figures — */
+
+  figure { margin: 0 0 var(--space-sm); }
+
+  figcaption {
+    margin-block-start: var(--space-xs);
+    font-size:          var(--text-sm);
+    color:              var(--ink-faint);
+  }
+
+  /* — inline & block semantics — */
+
+  address { font-style: normal; }
+
+  mark {
+    background: var(--accent-wash);
+    color:      var(--ink);
+    padding:    0.1em 0.2em;
+  }
+
+  abbr[title] {
+    text-decoration:       underline dotted;
+    text-decoration-color: var(--ink-faint);
+    cursor:                help;
+  }
+
+  sub, sup { line-height: 0; }
+
   /* — interactive elements — */
 
   button {

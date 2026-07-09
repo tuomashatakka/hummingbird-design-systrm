@@ -4,8 +4,8 @@ import { useState } from 'react'
 import {
   Button, Checkbox, Dialog, Field, Heading, Input, Overlay, Radio, SearchField,
   Select, Slider, Switch, Textarea,
-} from 'hummingbird-design-system'
-import { pushNotice, useDispatch } from 'hummingbird-design-system/state'
+} from '@tuomashatakka/hummingbird-design-system'
+import { pushNotice, useDispatch } from '@tuomashatakka/hummingbird-design-system/state'
 
 
 const PLANS = [

@@ -1,6 +1,6 @@
 {
-  "name": "hummingbird-design-system",
-  "version": "0.1.0",
+  "name": "@tuomashatakka/hummingbird-design-system",
+  "version": "0.2.2",
   "description": "A monochrome, semantic-HTML design system — customizable oklch tokens, native elements, zero utility classes. Ships React components and the raw CSS.",
   "keywords": [
     "design-system",
@@ -16,10 +16,10 @@
   "author": "Tuomas Hatakka",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuomashatakka/hummingbird-design-systrm.git",
+    "url": "https://github.com/tuomashatakka/hummingbird-design-system.git",
     "directory": "packages/hummingbird"
   },
-  "homepage": "https://github.com/tuomashatakka/hummingbird-design-systrm#readme",
+  "homepage": "https://github.com/tuomashatakka/hummingbird-design-system#readme",
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -60,5 +60,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "typescript": "^5.8.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

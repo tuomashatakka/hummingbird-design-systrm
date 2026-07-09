@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { Footer, Header, Notification } from 'hummingbird-design-system'
-import { AppStateProvider } from 'hummingbird-design-system/state'
+import { Footer, Header, Notification } from '@tuomashatakka/hummingbird-design-system'
+import { AppStateProvider } from '@tuomashatakka/hummingbird-design-system/state'
 import './globals.css'
 
 
