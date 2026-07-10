@@ -16,7 +16,7 @@
   "author": "Tuomas Hatakka",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuomashatakka/hummingbird-design-system.git",
+    "url": "git+https://github.com/tuomashatakka/hummingbird-design-system.git",
     "directory": "packages/hummingbird"
   },
   "homepage": "https://github.com/tuomashatakka/hummingbird-design-system#readme",
