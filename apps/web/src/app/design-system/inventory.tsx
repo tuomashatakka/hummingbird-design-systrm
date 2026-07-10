@@ -96,7 +96,7 @@ export const Inventory: FC = () =>
     <p>
       Every component the package exports, and what it renders. Import from
       {' '}
-      <code>hummingbird-design-system</code>
+      <code>@tuomashatakka/hummingbird-design-system</code>
       .
     </p>
 

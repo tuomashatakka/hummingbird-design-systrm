@@ -297,7 +297,7 @@ export const TokensReference = () =>
       <code>tokens.css</code>
       . Import
       {' '}
-      <code>hummingbird-design-system/tokens.css</code>
+      <code>@tuomashatakka/hummingbird-design-system/tokens.css</code>
       {' '}
       alone to adopt the theme without the component CSS.
     </p>
