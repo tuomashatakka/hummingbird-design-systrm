@@ -17,9 +17,9 @@
     "typecheck": "bun run --filter '*' typecheck"
   },
   "devDependencies": {
-    "@tuomashatakka/eslint-config": "latest",
-    "@types/node": "^22.0.0",
-    "eslint": "^9.0.0",
-    "typescript": "^5.8.0"
+    "@tuomashatakka/eslint-config": "^4.0.1",
+    "@types/node": "^26.1.1",
+    "eslint": "^10.6.0",
+    "typescript": "^6.0.3"
   }
 }
