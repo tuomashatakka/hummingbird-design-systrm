@@ -578,8 +578,87 @@ export default function DesignSystemPage () {
 
             <td>Native elements, tokens only</td>
           </tr>
+
+          <tr>
+            <td>
+              <code>abbr / mark / sub / sup / samp</code>
+            </td>
+
+            <td>Text-level semantics — dotted underline, accent wash, mono</td>
+          </tr>
+
+          <tr>
+            <td>
+              <code>ul / ol / dl</code>
+            </td>
+
+            <td>Native markers via ::marker, hairline definition pairs</td>
+          </tr>
+
+          <tr>
+            <td>
+              <code>address</code>
+            </td>
+
+            <td>Italic-free contact block in the faint ink</td>
+          </tr>
         </tbody>
       </table>
+
+      <Heading level={ 3 }>Text-level semantics</Heading>
+
+      <p>
+        Everything below is plain HTML — no component imported.
+        {' '}
+        <abbr title='Oklab lightness · chroma · hue'>OKLCH</abbr>
+        {' '}
+        abbreviations carry a dotted underline,
+        {' '}
+        <mark>marked ranges</mark>
+        {' '}
+        sit on the accent wash, H
+        <sub>2</sub>
+        O subscripts and mc
+        <sup>2</sup>
+        {' '}
+        superscripts hold the baseline, and program output like
+        {' '}
+        <samp>build ok — 41 components</samp>
+        {' '}
+        uses the mono stack.
+      </p>
+
+      <Heading level={ 3 }>Lists</Heading>
+
+      <ol>
+        <li>Ordered lists number themselves through native markers.</li>
+
+        <li>
+          The numeral comes from
+          {' '}
+          <code>::marker</code>
+          , not pseudo-content.
+        </li>
+
+        <li>Unordered lists appear all over this page already.</li>
+      </ol>
+
+      <dl>
+        <dt>Definition list</dt>
+        <dd>Term / description pairs styled straight from base.css.</dd>
+        <dt>Meta</dt>
+        <dd>The Meta composite above is this element plus hairline rules.</dd>
+      </dl>
+
+      <Heading level={ 3 }>Rule &amp; address</Heading>
+      <p>A horizontal rule is the hairline divider between the two lines below.</p>
+      <hr />
+
+      <address>
+        Hummingbird · Tuusula, Finland ·
+        {' '}
+        <a href='mailto:contact@tuomashatakka.fi'>contact@tuomashatakka.fi</a>
+      </address>
     </section>
 
     <Inventory />
