@@ -1,7 +1,6 @@
 {
-  "name": "hummingbird-monorepo",
+  "name": "hummingbird-design-system",
   "version": "0.1.0",
-  "private": true,
   "description": "Hummingbird Design System — the publishable component/CSS package plus its living documentation site.",
   "workspaces": [
     "packages/*",
