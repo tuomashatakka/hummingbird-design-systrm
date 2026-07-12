@@ -188,6 +188,43 @@ export default function HomePage () {
     </section>
 
     <section>
+      <Heading level={ 6 }>How to use</Heading>
+
+      <Heading level={ 2 }>
+        Install &amp;
+        <br />
+        import
+      </Heading>
+
+      <p>
+        One package, one stylesheet, no config. Install, import the CSS once
+        at your app root, and compose with the components.
+      </p>
+
+      <pre>
+        <code>{'npm i hummingbird-design-system'}</code>
+      </pre>
+
+      <pre>
+        <code>{`import 'hummingbird-design-system/styles.css'
+import { Button, Card } from 'hummingbird-design-system'
+
+<Card title='Hello'>
+  <Button variant='primary'>Get started</Button>
+</Card>`}
+        </code>
+      </pre>
+
+      <p>
+        Prefer just the theme? Import
+        {' '}
+        <code>hummingbird-design-system/tokens.css</code>
+        {' '}
+        alone.
+      </p>
+    </section>
+
+    <section>
       <Heading level={ 6 }>Get started</Heading>
 
       <Heading level={ 2 }>

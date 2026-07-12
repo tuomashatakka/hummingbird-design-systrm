@@ -1,6 +1,6 @@
 {
   "name": "hummingbird-design-system",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A monochrome, semantic-HTML design system — customizable oklch tokens, native elements, zero utility classes. Ships React components and the raw CSS.",
   "keywords": [
     "design-system",

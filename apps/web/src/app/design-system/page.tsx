@@ -5,6 +5,7 @@ import {
   Meta, Progress, Swatches, Tabs, ThemeCustomizer,
 } from 'hummingbird-design-system'
 import { Chat } from '@/components/Chat'
+import { BaseElements } from './base-elements'
 import { DialogDemo, FormsDemo, SliderDemo } from './demos'
 import { Inventory } from './inventory'
 import { BrandComposites, LayoutHelpers, NewPrimitives, TokensReference } from './sections'
@@ -142,7 +143,12 @@ export default function DesignSystemPage () {
         {' '}
         <strong>Montserrat</strong>
         {' '}
-        for subheadings. A monospace stack covers code.
+        for subheadings. A monospace stack covers code. When the identity faces
+        are not installed, the stacks fall back to Poppins and Montserrat,
+        loaded from Google Fonts by
+        {' '}
+        <code>tokens.css</code>
+        .
       </p>
 
       <Heading level={ 1 }>Display / h1</Heading>
@@ -511,156 +517,7 @@ export default function DesignSystemPage () {
       <LayoutHelpers />
     </section>
 
-    <section>
-      <Heading id='elements' level={ 2 }>Base elements</Heading>
-
-      <p>
-        Plain HTML is styled directly in
-        {' '}
-        <code>base.css</code>
-        {' '}
-        — tables, rules, quotes, and form scaffolding need no components at all.
-      </p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Element</th>
-            <th>Treatment</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>
-              <code>table</code>
-            </td>
-
-            <td>Hairline row rules, uppercase display-face headers</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>fieldset / legend</code>
-            </td>
-
-            <td>Hairline frame, eyebrow legend</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>blockquote</code>
-            </td>
-
-            <td>Rule on the inline start, faint ink</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>hr</code>
-            </td>
-
-            <td>Single hairline with generous margins</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>pre / code / kbd</code>
-            </td>
-
-            <td>Mono stack on the wash surface</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>dialog / details / progress</code>
-            </td>
-
-            <td>Native elements, tokens only</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>abbr / mark / sub / sup / samp</code>
-            </td>
-
-            <td>Text-level semantics — dotted underline, accent wash, mono</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>ul / ol / dl</code>
-            </td>
-
-            <td>Native markers via ::marker, hairline definition pairs</td>
-          </tr>
-
-          <tr>
-            <td>
-              <code>address</code>
-            </td>
-
-            <td>Italic-free contact block in the faint ink</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <Heading level={ 3 }>Text-level semantics</Heading>
-
-      <p>
-        Everything below is plain HTML — no component imported.
-        {' '}
-        <abbr title='Oklab lightness · chroma · hue'>OKLCH</abbr>
-        {' '}
-        abbreviations carry a dotted underline,
-        {' '}
-        <mark>marked ranges</mark>
-        {' '}
-        sit on the accent wash, H
-        <sub>2</sub>
-        O subscripts and mc
-        <sup>2</sup>
-        {' '}
-        superscripts hold the baseline, and program output like
-        {' '}
-        <samp>build ok — 41 components</samp>
-        {' '}
-        uses the mono stack.
-      </p>
-
-      <Heading level={ 3 }>Lists</Heading>
-
-      <ol>
-        <li>Ordered lists number themselves through native markers.</li>
-
-        <li>
-          The numeral comes from
-          {' '}
-          <code>::marker</code>
-          , not pseudo-content.
-        </li>
-
-        <li>Unordered lists appear all over this page already.</li>
-      </ol>
-
-      <dl>
-        <dt>Definition list</dt>
-        <dd>Term / description pairs styled straight from base.css.</dd>
-        <dt>Meta</dt>
-        <dd>The Meta composite above is this element plus hairline rules.</dd>
-      </dl>
-
-      <Heading level={ 3 }>Rule &amp; address</Heading>
-      <p>A horizontal rule is the hairline divider between the two lines below.</p>
-      <hr />
-
-      <address>
-        Hummingbird · Tuusula, Finland ·
-        {' '}
-        <a href='mailto:contact@tuomashatakka.fi'>contact@tuomashatakka.fi</a>
-      </address>
-    </section>
-
+    <BaseElements />
     <Inventory />
   </div>
 }

@@ -1189,6 +1189,111 @@
     & figure[data-space='xl'] > div { inline-size: var(--space-xl); }
   }
 
+  /* — documentation specimen: live preview + the code that produced it — */
+
+  [data-specimen] {
+    margin: 0;
+    border: var(--border);
+
+    & > [data-specimen-preview] {
+      padding: var(--space-md);
+
+      & > * + * { margin-block-start: var(--space-sm); }
+    }
+
+    & > figcaption {
+      padding:            var(--space-xs) var(--space-md);
+      border-block-start: var(--border-hair);
+      font-size:          var(--text-xs);
+      color:              var(--ink-faint);
+    }
+
+    & > pre {
+      margin:             0;
+      border-block-start: var(--border-hair);
+      overflow-x:         auto;
+    }
+  }
+
+  /* — token previews (CSS variables reference) — */
+
+  [data-token-preview] {
+    display:     inline-flex;
+    align-items: center;
+    gap:         var(--space-xs);
+
+    & [data-chip] {
+      display:     inline-block;
+      flex:        none;
+      inline-size: 1.25rem;
+      block-size:  1.25rem;
+      border:      var(--border-hair);
+    }
+
+    &[data-token-preview='ramp'] {
+      gap: 0;
+
+      & [data-chip] {
+        inline-size: 0.875rem;
+        border:      none;
+      }
+    }
+
+    &[data-token-preview='scrim'] {
+      padding:    var(--space-xs);
+      background: var(--scrim);
+
+      & [data-chip] { border: none; }
+    }
+
+    &[data-token-preview='type'] {
+      font-size: var(--text-lg);
+      color:     var(--ink);
+    }
+
+    &[data-token-preview='scale'] {
+      align-items: baseline;
+      color:       var(--ink);
+    }
+
+    &[data-token-preview='lines'] [data-chip] {
+      inline-size: auto;
+      block-size:  auto;
+      padding:     0 var(--space-xs);
+      font-size:   var(--text-xs);
+      text-align:  center;
+    }
+
+    &[data-token-preview='bars'] [data-chip] {
+      block-size: var(--space-xs);
+      background: var(--ink);
+      border:     none;
+    }
+
+    &[data-token-preview='rules'] [data-chip] {
+      inline-size: var(--space-lg);
+      block-size:  0;
+      border:      none;
+    }
+
+    &[data-token-preview='boxes'] [data-chip] {
+      inline-size: 1.75rem;
+      block-size:  1.75rem;
+      background:  var(--paper);
+    }
+
+    &[data-token-preview='motion'] [data-chip] {
+      background: var(--ink);
+      border:     none;
+      animation:  token-motion 1.6s var(--immersive) infinite alternate;
+    }
+  }
+
+  @keyframes token-motion {
+    from { translate: 0 0; }
+    to   { translate: var(--space-lg) 0; }
+  }
+
   /* — line icons — */
 
   [data-icon] {
