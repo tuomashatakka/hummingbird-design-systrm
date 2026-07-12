@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react'
 import type { FC } from 'react'
-import { Button, Icon } from '@/components/primitives'
-import { dismissNotice, useAppState, useDispatch } from '@/lib/state'
+import { Button, Icon } from 'Δ/components/primitives'
+import { dismissNotice, useAppState, useDispatch } from 'Δ/lib/state'
 
 
 interface NotificationProps {

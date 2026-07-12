@@ -1,8 +1,8 @@
 'use client'
 
 import type { FC, ReactNode } from 'react'
-import photoClear from '@/assets/bg-mountain-clear.jpg'
-import photoDark from '@/assets/bg-mountain-dark.jpg'
+import photoClear from 'Δ/assets/bg-mountain-clear.jpg'
+import photoDark from 'Δ/assets/bg-mountain-dark.jpg'
 import {
   Alert, ArticleHero, Badge, Breadcrumb, Button, CapabilityStrip, Card,
   Carousel, Checkbox, ContactPanel, Disclosure, Field, FounderCard, Grid,
@@ -10,7 +10,7 @@ import {
   Progress, Radio, RecentWork, Row, SearchField, Select, Slider, Swatches,
   Switch, Tabs, Textarea,
 } from 'hummingbird-design-system'
-import { Specimen } from '@/components/Specimen'
+import { Specimen } from 'Δ/components/Specimen'
 import { DialogDemo, NotificationDemo, OverlayDemo } from './demos'
 
 

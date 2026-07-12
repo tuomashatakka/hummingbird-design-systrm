@@ -1,8 +1,8 @@
 'use client'
 
 import type { FC, ReactNode } from 'react'
-import { Button } from '@/components/primitives'
-import { setPanel, useAppState, useDispatch } from '@/lib/state'
+import { Button } from 'Δ/components/primitives'
+import { setPanel, useAppState, useDispatch } from 'Δ/lib/state'
 
 
 interface PanelProps {

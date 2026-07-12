@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import bgBlue from '@/assets/bg-mountain-blue.jpg'
-import bgClear from '@/assets/bg-mountain-clear.jpg'
-import bgDark from '@/assets/bg-mountain-dark.jpg'
-import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
+import bgBlue from 'Δ/assets/bg-mountain-blue.jpg'
+import bgClear from 'Δ/assets/bg-mountain-clear.jpg'
+import bgDark from 'Δ/assets/bg-mountain-dark.jpg'
+import bgMagenta from 'Δ/assets/bg-mountain-magenta.jpg'
 import { Badge, Carousel, Heading, Mark, Meta } from 'hummingbird-design-system'
 
 
@@ -206,7 +206,7 @@ export default function HomePage () {
       </pre>
 
       <pre>
-        <code>{`import 'hummingbird-design-system/styles.css'
+        <code>{`import 'hummingbird-design-system/styles'
 import { Button, Card } from 'hummingbird-design-system'
 
 <Card title='Hello'>
@@ -216,11 +216,8 @@ import { Button, Card } from 'hummingbird-design-system'
       </pre>
 
       <p>
-        Prefer just the theme? Import
-        {' '}
-        <code>hummingbird-design-system/tokens.css</code>
-        {' '}
-        alone.
+        The one import carries the whole system — tokens, semantic element
+        defaults, and component CSS, layered in the right order.
       </p>
     </section>
 

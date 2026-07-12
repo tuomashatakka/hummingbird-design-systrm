@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Mark } from '@/components/primitives'
+import { Mark } from 'Δ/components/primitives'
 
 
 interface LockupProps {

@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { Heading } from 'hummingbird-design-system'
-import { HtmlSpecimen } from '@/components/Specimen'
+import { HtmlSpecimen } from 'Δ/components/Specimen'
 
 
 // Every base element styled by base.css, shown as a specimen whose preview is

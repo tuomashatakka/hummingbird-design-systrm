@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import bgBlue from '@/assets/bg-mountain-blue.jpg'
-import bgClear from '@/assets/bg-mountain-clear.jpg'
-import bgDark from '@/assets/bg-mountain-dark.jpg'
-import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
+import bgBlue from 'Δ/assets/bg-mountain-blue.jpg'
+import bgClear from 'Δ/assets/bg-mountain-clear.jpg'
+import bgDark from 'Δ/assets/bg-mountain-dark.jpg'
+import bgMagenta from 'Δ/assets/bg-mountain-magenta.jpg'
 import {
   ArticleHero, CapabilityStrip, ContactPanel, FounderCard, Heading, Mark,
   Pillars, RecentWork,

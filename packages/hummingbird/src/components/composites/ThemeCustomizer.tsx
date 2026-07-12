@@ -1,12 +1,12 @@
 'use client'
 
 import type { FC } from 'react'
-import { Button, Slider } from '@/components/primitives'
+import { Button, Slider } from 'Δ/components/primitives'
 import {
   BRAND_COLORS, PALETTE_DEFAULTS,
   resetPalette, setBrandColor, useAppState, useDispatch,
-} from '@/lib/state'
-import type { ColorChannels } from '@/lib/state'
+} from 'Δ/lib/state'
+import type { ColorChannels } from 'Δ/lib/state'
 
 
 const CHANNELS = [ 'lightness', 'chroma', 'hue' ] as const

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import bgClear from '@/assets/bg-mountain-clear.jpg'
+import bgClear from 'Δ/assets/bg-mountain-clear.jpg'
 import {
   Alert, Badge, Breadcrumb, Button, Card, Carousel, Disclosure, Heading, Mark,
   Meta, Progress, Swatches, Tabs, ThemeCustomizer,
 } from 'hummingbird-design-system'
-import { Chat } from '@/components/Chat'
+import { Chat } from 'Δ/components/Chat'
 import { BaseElements } from './base-elements'
 import { DialogDemo, FormsDemo, SliderDemo } from './demos'
 import { Inventory } from './inventory'
@@ -49,9 +49,9 @@ export default function DesignSystemPage () {
       <p>
         The complete Hummingbird system: identity, tokens, and every primitive,
         composite, and layout in the package — live. Every visual decision below
-        resolves to
+        resolves to the package&apos;s
         {' '}
-        <code>hummingbird-design-system/tokens.css</code>
+        <code>styles/tokens.css</code>
         ; edit that file (or slide the customizer) and watch everything follow.
       </p>
     </section>

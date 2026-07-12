@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react'
-import { classNames } from '@/lib/classNames'
+import { classNames } from 'Δ/lib/classNames'
 
 
 interface ButtonProps {

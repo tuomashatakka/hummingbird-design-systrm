@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from 'react'
-import bgBlue from '@/assets/bg-mountain-blue.jpg'
-import bgClear from '@/assets/bg-mountain-clear.jpg'
-import bgDark from '@/assets/bg-mountain-dark.jpg'
-import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
+import bgBlue from 'Δ/assets/bg-mountain-blue.jpg'
+import bgClear from 'Δ/assets/bg-mountain-clear.jpg'
+import bgDark from 'Δ/assets/bg-mountain-dark.jpg'
+import bgMagenta from 'Δ/assets/bg-mountain-magenta.jpg'
 import {
   ArticleHero, CapabilityStrip, ContactPanel, FounderCard, Grid, Heading, Icon,
   Lockup, Medallion, Pillars, Popover, RecentWork, Row,
@@ -393,15 +393,15 @@ export const TokensReference = () =>
     <Heading id='variables' level={ 2 }>CSS variables</Heading>
 
     <p>
-      Every visual decision resolves to a custom property in
+      Every visual decision resolves to a custom property in the package&apos;s
       {' '}
-      <code>tokens.css</code>
-      . Import
+      <code>styles/tokens.css</code>
+      , pulled in by the single
       {' '}
-      <code>hummingbird-design-system/tokens.css</code>
+      <code>hummingbird-design-system/styles</code>
       {' '}
-      alone to adopt the theme without the component CSS. Each preview samples
-      the live variable, so the swatches follow the theme and the customizer.
+      import. Each preview samples the live variable, so the swatches follow
+      the theme and the customizer.
     </p>
 
     {TABLES.map(table =>

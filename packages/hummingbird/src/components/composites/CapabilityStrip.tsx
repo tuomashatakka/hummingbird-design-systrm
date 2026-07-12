@@ -1,6 +1,6 @@
 import type { FC } from 'react'
-import { Medallion } from '@/components/primitives'
-import type { IconName } from '@/components/primitives'
+import { Medallion } from 'Δ/components/primitives'
+import type { IconName } from 'Δ/components/primitives'
 
 
 interface Capability {

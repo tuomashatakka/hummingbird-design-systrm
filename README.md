@@ -28,7 +28,7 @@ npm i hummingbird-design-system
 Import the stylesheet once at the root of your app, then use the components:
 
 ```tsx
-import 'hummingbird-design-system/styles.css'
+import 'hummingbird-design-system/styles'
 import { AppStateProvider } from 'hummingbird-design-system/state'
 import { Button, Card, Row, Grid, ArticleHero } from 'hummingbird-design-system'
 
@@ -53,14 +53,11 @@ export default function App () {
 | ---------------------------------------- | ----------------------------------------------------- |
 | `hummingbird-design-system`              | every primitive, composite, and layout component      |
 | `hummingbird-design-system/state`        | the reducer, action creators, `AppStateProvider`, hooks |
-| `hummingbird-design-system/styles.css`   | the whole stylesheet (declares layer order, `@import`s the rest) |
-| `hummingbird-design-system/tokens.css`   | just the theme tokens (+ the font fallback `@import`) |
-| `hummingbird-design-system/base.css`     | semantic element defaults                             |
-| `hummingbird-design-system/components.css` | component variants + structural CSS                 |
+| `hummingbird-design-system/styles`       | the whole stylesheet — tokens, base defaults, components |
 
-The stylesheet declares `@layer base, components;` internally, so import order never
-matters. To adopt only the theme (custom properties + fonts) without the component CSS,
-import `tokens.css` alone.
+One stylesheet import covers everything: it declares `@layer base, components;` and
+pulls in the tokens, the semantic element defaults, and the component CSS in the right
+order.
 
 ## The system in three ideas
 

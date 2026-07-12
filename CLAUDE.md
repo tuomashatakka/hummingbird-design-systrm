@@ -71,8 +71,10 @@ cd packages/hummingbird && npm publish   # unscoped → npmjs; needs --otp=<code
 
 `files` ships `dist/` (bunchee JS + `.d.ts`) and `styles/` (raw CSS; no font files —
 the stacks fall back to Poppins/Montserrat via a Google Fonts `@import` in
-`tokens.css`). The `exports` map exposes `.`, `./state`, `./styles.css`,
-`./tokens.css`, `./base.css`, and `./components.css`.
+`tokens.css`). The `exports` map exposes `.`, `./state`, and `./styles` (the whole
+stylesheet — the individual CSS files are internal). The styles entry is the pattern
+key `./style*`: bunchee skips wildcard keys instead of warning about CSS entries, and
+Node rejects empty `*` matches, so the star sits before the final `s`.
 
 ## Deployment (docs site)
 

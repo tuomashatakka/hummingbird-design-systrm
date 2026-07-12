@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Grid } from '@/components/layouts'
+import { Grid } from 'Δ/components/layouts'
 
 
 interface WorkItem {

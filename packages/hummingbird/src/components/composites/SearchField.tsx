@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { FC, FormEvent } from 'react'
-import { Button, Input } from '@/components/primitives'
+import { Button, Input } from 'Δ/components/primitives'
 
 
 interface SearchFieldProps {

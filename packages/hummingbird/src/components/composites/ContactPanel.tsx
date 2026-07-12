@@ -1,8 +1,8 @@
 'use client'
 
 import type { FC, FormEvent } from 'react'
-import { Button, Icon } from '@/components/primitives'
-import type { IconName } from '@/components/primitives'
+import { Button, Icon } from 'Δ/components/primitives'
+import type { IconName } from 'Δ/components/primitives'
 
 
 interface ContactDetail {

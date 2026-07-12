@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react'
-import { Mark } from '@/components/primitives'
+import { Mark } from 'Δ/components/primitives'
 
 
 interface FounderCardProps {

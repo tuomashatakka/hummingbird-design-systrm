@@ -1,8 +1,8 @@
 'use client'
 
 import type { FC } from 'react'
-import { Button, Mark } from '@/components/primitives'
-import { setTheme, togglePanel, useAppState, useDispatch } from '@/lib/state'
+import { Button, Mark } from 'Δ/components/primitives'
+import { setTheme, togglePanel, useAppState, useDispatch } from 'Δ/lib/state'
 
 
 interface NavLink {

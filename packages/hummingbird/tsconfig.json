@@ -14,7 +14,7 @@
     "jsx": "react-jsx",
     "declaration": true,
     "paths": {
-      "@/*": [ "./src/*" ]
+      "Δ/*": [ "./src/*" ]
     }
   },
   "include": [ "src/**/*.ts", "src/**/*.tsx" ],

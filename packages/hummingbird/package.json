@@ -37,11 +37,8 @@
       "types": "./dist/state.d.ts",
       "import": "./dist/state.js"
     },
-    "./styles.css": "./styles/index.css",
-    "./tokens.css": "./styles/tokens.css",
-    "./base.css": "./styles/base.css",
-    "./components.css": "./styles/components.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./style*": "./styles/styles.css"
   },
   "scripts": {
     "build": "bunchee",

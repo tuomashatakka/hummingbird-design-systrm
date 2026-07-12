@@ -20,7 +20,7 @@ npm i hummingbird-design-system
 Import the stylesheet once at the root of your app, then use the components:
 
 ```tsx
-import 'hummingbird-design-system/styles.css'
+import 'hummingbird-design-system/styles'
 import { AppStateProvider } from 'hummingbird-design-system/state'
 import { Button, Card, Row, Grid, ArticleHero } from 'hummingbird-design-system'
 
@@ -41,26 +41,23 @@ export default function App () {
 
 ### Exports map
 
-| Import (`hummingbird-design-system…`) | What you get                                                     |
-| ---------------------------------------------------- | ---------------------------------------------------------------- |
-| `.`                                                   | every primitive, composite, and layout component                 |
-| `./state`                                             | the reducer, action creators, `AppStateProvider`, hooks          |
-| `./styles.css`                                        | the whole stylesheet (declares layer order, `@import`s the rest) |
-| `./tokens.css`                                        | just the theme tokens (+ the font fallback `@import`)            |
-| `./base.css`                                          | semantic element defaults                                        |
-| `./components.css`                                    | component variants + structural CSS                              |
+| Import (`hummingbird-design-system…`) | What you get                                             |
+| ------------------------------------- | -------------------------------------------------------- |
+| `.`                                    | every primitive, composite, and layout component         |
+| `./state`                              | the reducer, action creators, `AppStateProvider`, hooks  |
+| `./styles`                             | the whole stylesheet — tokens, base defaults, components |
 
-The stylesheet declares `@layer base, components;` internally, so import order never
-matters. To adopt only the theme (custom properties + fonts) without the component CSS,
-import `tokens.css` alone.
+One stylesheet import covers everything: it declares `@layer base, components;` and
+pulls in the tokens, the semantic element defaults, and the component CSS in the right
+order.
 
 ### Fonts
 
 No font files ship with the package. The identity's faces — Sofia Pro, Novecento Sans
 Wide, TeX Gyre Adventor — render when installed locally; otherwise the stacks fall back
 to **Poppins** (for Sofia Pro) and **Montserrat** (for Novecento and the wordmark face),
-loaded automatically through a Google Fonts `@import` in `tokens.css`. Self-host those
-two families and the `@import` becomes a no-op you can drop.
+loaded automatically through a Google Fonts `@import` inside the stylesheet. Self-host
+those two families and the `@import` becomes a no-op.
 
 ## The system in three ideas
 
