@@ -1,0 +1,8 @@
+# The `files` allowlist in package.json is the primary gate (dist/ + styles/).
+# This file is a safety net in case `files` is ever removed.
+src/
+node_modules/
+tsconfig.json
+*.tgz
+*.log
+.DS_Store

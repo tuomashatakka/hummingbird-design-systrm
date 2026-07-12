@@ -66,7 +66,8 @@ bun run typecheck    # strict tsc, every workspace
 ## Publishing the package
 
 ```
-cd packages/hummingbird && npm publish
+cd packages/hummingbird && npm run release:npm   # → npmjs (needs -- --otp=<code>)
+cd packages/hummingbird && npm publish           # → GitHub Packages (scope default in ~/.npmrc)
 ```
 
 `files` ships `dist/` (bunchee JS + `.d.ts`) and `styles/` (raw CSS + fonts). The

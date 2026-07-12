@@ -126,8 +126,12 @@ The docs app consumes the package through the Bun workspace and Next's
 
 ```bash
 cd packages/hummingbird
-npm publish                 # ships dist/ + styles/ (CSS + fonts); see the exports map
+npm run release:npm         # → npmjs (overrides the scope's GitHub-Packages mapping; pass -- --otp=<code>)
+npm publish                 # → GitHub Packages (the @tuomashatakka scope default)
 ```
+
+Both ship `dist/` + `styles/` (CSS + fonts) plus the package `README.md` and `LICENSE`;
+`prepublishOnly` rebuilds `dist/` first. See the exports map above.
 
 ## Deploy the docs site
 

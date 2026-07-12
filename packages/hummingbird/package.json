@@ -47,7 +47,9 @@
   "scripts": {
     "build": "bunchee",
     "dev": "bunchee --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bunchee",
+    "release:npm": "npm publish --@tuomashatakka:registry=https://registry.npmjs.org/"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -63,5 +65,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/tuomashatakka/hummingbird-design-system/issues"
   }
 }
