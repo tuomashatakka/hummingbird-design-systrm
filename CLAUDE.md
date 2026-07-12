@@ -66,13 +66,13 @@ bun run typecheck    # strict tsc, every workspace
 ## Publishing the package
 
 ```
-cd packages/hummingbird && npm run release:npm   # → npmjs (needs -- --otp=<code>)
-cd packages/hummingbird && npm publish           # → GitHub Packages (scope default in ~/.npmrc)
+cd packages/hummingbird && npm publish   # unscoped → npmjs; needs --otp=<code> (2FA)
 ```
 
-`files` ships `dist/` (bunchee JS + `.d.ts`) and `styles/` (raw CSS + fonts). The
-`exports` map exposes `.`, `./state`, `./styles.css`, `./tokens.css`, `./base.css`,
-`./components.css`, and `./fonts/*`.
+`files` ships `dist/` (bunchee JS + `.d.ts`) and `styles/` (raw CSS; no font files —
+the stacks fall back to Poppins/Montserrat via a Google Fonts `@import` in
+`tokens.css`). The `exports` map exposes `.`, `./state`, `./styles.css`,
+`./tokens.css`, `./base.css`, and `./components.css`.
 
 ## Deployment (docs site)
 

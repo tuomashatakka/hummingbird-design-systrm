@@ -18,7 +18,7 @@ const config: NextConfig = {
   images:            { unoptimized: isStaticExport },
   // The design system is a workspace package shipped as compiled ESM in dist/;
   // transpiling it lets Next handle its 'use client' modules cleanly.
-  transpilePackages: [ '@tuomashatakka/hummingbird-design-system' ],
+  transpilePackages: [ 'hummingbird-design-system' ],
 }
 
 export default config

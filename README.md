@@ -2,7 +2,8 @@
 
 A monochrome, semantic-HTML design system — customizable **oklch** tokens, native
 elements, zero utility classes. Ships **React components** and the **raw CSS** (tokens,
-base element styles, component variants, and the identity's fonts).
+base element styles, component variants). No font files ship: the identity's faces fall
+back to Poppins / Montserrat via a Google Fonts `@import` in `tokens.css`.
 
 Reconstructed from the Hummingbird Design studio's November 2015 identity: true greys
 only, squared corners, letterspaced uppercase display type, colour arriving only as
@@ -53,7 +54,7 @@ export default function App () {
 | `hummingbird-design-system`              | every primitive, composite, and layout component      |
 | `hummingbird-design-system/state`        | the reducer, action creators, `AppStateProvider`, hooks |
 | `hummingbird-design-system/styles.css`   | the whole stylesheet (declares layer order, `@import`s the rest) |
-| `hummingbird-design-system/tokens.css`   | just the theme tokens (+ `@font-face`)                |
+| `hummingbird-design-system/tokens.css`   | just the theme tokens (+ the font fallback `@import`) |
 | `hummingbird-design-system/base.css`     | semantic element defaults                             |
 | `hummingbird-design-system/components.css` | component variants + structural CSS                 |
 
@@ -126,11 +127,10 @@ The docs app consumes the package through the Bun workspace and Next's
 
 ```bash
 cd packages/hummingbird
-npm run release:npm         # → npmjs (overrides the scope's GitHub-Packages mapping; pass -- --otp=<code>)
-npm publish                 # → GitHub Packages (the @tuomashatakka scope default)
+npm publish                 # unscoped → npmjs; pass --otp=<code> (2FA)
 ```
 
-Both ship `dist/` + `styles/` (CSS + fonts) plus the package `README.md` and `LICENSE`;
+Ships `dist/` + `styles/` (raw CSS) plus the package `README.md` and `LICENSE`;
 `prepublishOnly` rebuilds `dist/` first. See the exports map above.
 
 ## Deploy the docs site

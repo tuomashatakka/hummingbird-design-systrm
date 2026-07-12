@@ -7,7 +7,7 @@ import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
 import {
   ArticleHero, CapabilityStrip, ContactPanel, FounderCard, Heading, Mark,
   Pillars, RecentWork,
-} from '@tuomashatakka/hummingbird-design-system'
+} from 'hummingbird-design-system'
 
 
 export const metadata: Metadata = {

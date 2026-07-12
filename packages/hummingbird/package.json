@@ -1,6 +1,6 @@
 {
-  "name": "@tuomashatakka/hummingbird-design-system",
-  "version": "0.2.4",
+  "name": "hummingbird-design-system",
+  "version": "0.3.0",
   "description": "A monochrome, semantic-HTML design system — customizable oklch tokens, native elements, zero utility classes. Ships React components and the raw CSS.",
   "keywords": [
     "design-system",
@@ -41,15 +41,13 @@
     "./tokens.css": "./styles/tokens.css",
     "./base.css": "./styles/base.css",
     "./components.css": "./styles/components.css",
-    "./fonts/*": "./styles/fonts/*",
     "./package.json": "./package.json"
   },
   "scripts": {
     "build": "bunchee",
     "dev": "bunchee --watch",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "bunchee",
-    "release:npm": "npm publish --@tuomashatakka:registry=https://registry.npmjs.org/"
+    "prepublishOnly": "bunchee"
   },
   "peerDependencies": {
     "react": "^19.0.0",

@@ -3,7 +3,7 @@
 import { useChat } from '@ai-sdk/react'
 import { useState } from 'react'
 import type { FC, FormEvent } from 'react'
-import { Button, Input } from '@tuomashatakka/hummingbird-design-system'
+import { Button, Input } from 'hummingbird-design-system'
 
 // Streams from src/app/api/chat/route.ts — requires a server runtime (Vercel / bun dev).
 // On the static GitHub Pages build the API route does not exist; the composite

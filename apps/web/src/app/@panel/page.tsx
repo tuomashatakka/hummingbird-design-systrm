@@ -1,7 +1,7 @@
 'use client'
 
-import { Button, Panel } from '@tuomashatakka/hummingbird-design-system'
-import { dismissNotice, pushNotice, useAppState, useDispatch } from '@tuomashatakka/hummingbird-design-system/state'
+import { Button, Panel } from 'hummingbird-design-system'
+import { dismissNotice, pushNotice, useAppState, useDispatch } from 'hummingbird-design-system/state'
 
 // This page renders in parallel with src/app/page.tsx through the @panel slot.
 // Route-specific panels: add @panel/<route>/page.tsx next to the matching route.

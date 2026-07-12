@@ -1,3 +1,3 @@
 /* The docs/portfolio site pulls the whole design system in from the
    published package. Cascade-layer order is declared inside that stylesheet. */
-@import '@tuomashatakka/hummingbird-design-system/styles.css';
+@import 'hummingbird-design-system/styles.css';

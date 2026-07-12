@@ -5,7 +5,7 @@ import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
 import {
   ArticleHero, CapabilityStrip, ContactPanel, FounderCard, Grid, Heading, Icon,
   Lockup, Medallion, Pillars, Popover, RecentWork, Row,
-} from '@tuomashatakka/hummingbird-design-system'
+} from 'hummingbird-design-system'
 import { NotificationDemo, OverlayDemo } from './demos'
 
 
@@ -297,7 +297,7 @@ export const TokensReference = () =>
       <code>tokens.css</code>
       . Import
       {' '}
-      <code>@tuomashatakka/hummingbird-design-system/tokens.css</code>
+      <code>hummingbird-design-system/tokens.css</code>
       {' '}
       alone to adopt the theme without the component CSS.
     </p>

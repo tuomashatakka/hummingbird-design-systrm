@@ -14,7 +14,7 @@
     "@ai-sdk/anthropic": "^4.0.11",
     "@ai-sdk/react": "^4.0.20",
     "ai": "^7.0.19",
-    "@tuomashatakka/hummingbird-design-system": "workspace:*",
+    "hummingbird-design-system": "workspace:*",
     "next": "^16.2.10",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"

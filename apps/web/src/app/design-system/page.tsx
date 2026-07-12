@@ -3,7 +3,7 @@ import bgClear from '@/assets/bg-mountain-clear.jpg'
 import {
   Alert, Badge, Breadcrumb, Button, Card, Carousel, Disclosure, Heading, Mark,
   Meta, Progress, Swatches, Tabs, ThemeCustomizer,
-} from '@tuomashatakka/hummingbird-design-system'
+} from 'hummingbird-design-system'
 import { Chat } from '@/components/Chat'
 import { DialogDemo, FormsDemo, SliderDemo } from './demos'
 import { Inventory } from './inventory'
@@ -50,7 +50,7 @@ export default function DesignSystemPage () {
         composite, and layout in the package — live. Every visual decision below
         resolves to
         {' '}
-        <code>@tuomashatakka/hummingbird-design-system/tokens.css</code>
+        <code>hummingbird-design-system/tokens.css</code>
         ; edit that file (or slide the customizer) and watch everything follow.
       </p>
     </section>

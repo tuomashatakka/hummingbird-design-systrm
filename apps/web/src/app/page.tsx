@@ -3,7 +3,7 @@ import bgBlue from '@/assets/bg-mountain-blue.jpg'
 import bgClear from '@/assets/bg-mountain-clear.jpg'
 import bgDark from '@/assets/bg-mountain-dark.jpg'
 import bgMagenta from '@/assets/bg-mountain-magenta.jpg'
-import { Badge, Carousel, Heading, Mark, Meta } from '@tuomashatakka/hummingbird-design-system'
+import { Badge, Carousel, Heading, Mark, Meta } from 'hummingbird-design-system'
 
 
 const SLIDES = [

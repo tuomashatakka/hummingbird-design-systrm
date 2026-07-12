@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Heading } from '@tuomashatakka/hummingbird-design-system'
+import { Heading } from 'hummingbird-design-system'
 
 
 interface Row {
@@ -96,7 +96,7 @@ export const Inventory: FC = () =>
     <p>
       Every component the package exports, and what it renders. Import from
       {' '}
-      <code>@tuomashatakka/hummingbird-design-system</code>
+      <code>hummingbird-design-system</code>
       .
     </p>
 

@@ -11,75 +11,13 @@
    see the note next to it.
    ———————————————————————————————————————————————— */
 
-/* Montserrat has no local file in the source kit — Google Fonts,
-   same substitution the original style sheet uses. @import must
-   precede all other rules, so it comes before the local @font-face
-   declarations below. */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
-
-@font-face {
-  font-family: 'Novecento Sans Wide';
-  src: url('./fonts/Novecentosanswide-Light.otf') format('opentype');
-  font-weight: 300; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Novecento Sans Wide';
-  src: url('./fonts/Novecentosanswide-Book.otf') format('opentype');
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Novecento Sans Wide';
-  src: url('./fonts/Novecentosanswide-Normal.otf') format('opentype');
-  font-weight: 450; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Novecento Sans Wide';
-  src: url('./fonts/Novecentosanswide-Medium.otf') format('opentype');
-  font-weight: 500; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Novecento Sans Wide';
-  src: url('./fonts/Novecentosanswide-DemiBold.otf') format('opentype');
-  font-weight: 600; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Novecento Sans Wide';
-  src: url('./fonts/Novecentosanswide-Bold.otf') format('opentype');
-  font-weight: 700; font-style: normal; font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sofia Pro';
-  src: url('./fonts/SofiaPro-ExtraLight.otf') format('opentype');
-  font-weight: 200; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Sofia Pro';
-  src: url('./fonts/SofiaPro-Light.otf') format('opentype');
-  font-weight: 300; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Sofia Pro';
-  src: url('./fonts/SofiaPro-Regular.otf') format('opentype');
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-
-/* TeX Gyre Adventor — the wordmark face from the identity kit. */
-@font-face {
-  font-family: 'TeX Gyre Adventor';
-  src: url('./fonts/TeXGyreAdventor-Regular.otf') format('opentype');
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'TeX Gyre Adventor';
-  src: url('./fonts/TeXGyreAdventor-Bold.otf') format('opentype');
-  font-weight: 700; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Sofia Pro';
-  src: url('./fonts/SofiaPro-Bold.otf') format('opentype');
-  font-weight: 700; font-style: normal; font-display: swap;
-}
+/* No font files ship with the package. The identity's faces —
+   Sofia Pro, Novecento Sans Wide, TeX Gyre Adventor — render
+   when installed locally; otherwise each stack falls back to a
+   Google Fonts substitute (Poppins for Sofia Pro, Montserrat
+   for Novecento and the wordmark face), loaded here. @import
+   must precede all other rules. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300..700&family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 :root {
   /* — color · neutral ramp (true greys, brightness 19% / 28%) — */
@@ -169,10 +107,10 @@
   --success-900: color-mix(in oklch, var(--success) 38%, var(--ink));
 
   /* — type — */
-  --font-sans:    'Sofia Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-display: 'Novecento Sans Wide', 'Futura PT', Futura, 'Helvetica Neue', sans-serif;
+  --font-sans:    'Sofia Pro', 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Novecento Sans Wide', 'Montserrat', 'Futura PT', Futura, 'Helvetica Neue', sans-serif;
   --font-sub:     'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-mark:    'TeX Gyre Adventor', 'Futura PT', Futura, sans-serif;
+  --font-mark:    'TeX Gyre Adventor', 'Montserrat', 'Futura PT', Futura, sans-serif;
   --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', monospace;
 
   --text-xs: 0.6875rem; /* 11px — caption, eyebrow */

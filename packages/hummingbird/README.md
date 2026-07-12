@@ -1,8 +1,8 @@
-# @tuomashatakka/hummingbird-design-system
+# hummingbird-design-system
 
 A monochrome, semantic-HTML design system — customizable **oklch** tokens, native
 elements, zero utility classes. Ships **React components** and the **raw CSS** (tokens,
-base element styles, component variants, and the identity's fonts).
+base element styles, component variants).
 
 Reconstructed from the Hummingbird Design studio's November 2015 identity: true greys
 only, squared corners, letterspaced uppercase display type, colour arriving only as
@@ -11,7 +11,7 @@ photographic tint — or as your own live oklch customization.
 ## Install
 
 ```bash
-npm i @tuomashatakka/hummingbird-design-system
+npm i hummingbird-design-system
 # peer deps: react, react-dom (^19)
 ```
 
@@ -20,9 +20,9 @@ npm i @tuomashatakka/hummingbird-design-system
 Import the stylesheet once at the root of your app, then use the components:
 
 ```tsx
-import '@tuomashatakka/hummingbird-design-system/styles.css'
-import { AppStateProvider } from '@tuomashatakka/hummingbird-design-system/state'
-import { Button, Card, Row, Grid, ArticleHero } from '@tuomashatakka/hummingbird-design-system'
+import 'hummingbird-design-system/styles.css'
+import { AppStateProvider } from 'hummingbird-design-system/state'
+import { Button, Card, Row, Grid, ArticleHero } from 'hummingbird-design-system'
 
 export default function App () {
   return (
@@ -41,19 +41,26 @@ export default function App () {
 
 ### Exports map
 
-| Import (`@tuomashatakka/hummingbird-design-system…`) | What you get                                                     |
+| Import (`hummingbird-design-system…`) | What you get                                                     |
 | ---------------------------------------------------- | ---------------------------------------------------------------- |
 | `.`                                                   | every primitive, composite, and layout component                 |
 | `./state`                                             | the reducer, action creators, `AppStateProvider`, hooks          |
 | `./styles.css`                                        | the whole stylesheet (declares layer order, `@import`s the rest) |
-| `./tokens.css`                                        | just the theme tokens (+ `@font-face`)                           |
+| `./tokens.css`                                        | just the theme tokens (+ the font fallback `@import`)            |
 | `./base.css`                                          | semantic element defaults                                        |
 | `./components.css`                                    | component variants + structural CSS                              |
-| `./fonts/*`                                           | the raw font files                                               |
 
 The stylesheet declares `@layer base, components;` internally, so import order never
 matters. To adopt only the theme (custom properties + fonts) without the component CSS,
 import `tokens.css` alone.
+
+### Fonts
+
+No font files ship with the package. The identity's faces — Sofia Pro, Novecento Sans
+Wide, TeX Gyre Adventor — render when installed locally; otherwise the stacks fall back
+to **Poppins** (for Sofia Pro) and **Montserrat** (for Novecento and the wordmark face),
+loaded automatically through a Google Fonts `@import` in `tokens.css`. Self-host those
+two families and the `@import` becomes a no-op you can drop.
 
 ## The system in three ideas
 
@@ -87,7 +94,7 @@ no `next/*` anywhere.
 `…/state` is a typed `useReducer` exposed through context:
 
 ```tsx
-import { useAppState, useDispatch, setTheme, pushNotice } from '@tuomashatakka/hummingbird-design-system/state'
+import { useAppState, useDispatch, setTheme, pushNotice } from 'hummingbird-design-system/state'
 
 const { theme } = useAppState()
 const dispatch  = useDispatch()
