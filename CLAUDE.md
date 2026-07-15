@@ -39,11 +39,18 @@ This is a Bun-workspace monorepo:
    px literal appears in a component or `components.css`, it's a bug.
 5. **CSS is grouped with native nesting.** Each component is one nested block in
    `components.css` whose selectors mirror its markup (`button { &.primary { … } }`).
-   Keep the `@layer base, components;` order.
-6. **Global state changes go through the reducer.** Add to the `AppAction`
-   union in `src/lib/state/types.ts`, handle in `reducer.ts`, export a
-   creator from `actions.ts`. Components dispatch creators, never object
-   literals.
+   Variants, states, and media queries always nest inside their base selector —
+   never a flat `button:hover` or a detached `@media` at the top level. Values
+   stay vertically aligned. Keep the `@layer base, components;` order (tokens
+   stay unlayered). Docs-only chrome (specimens, TOC, token previews) styles
+   live in `apps/web/src/app/globals.css`, not the package.
+6. **The package ships no app state.** `src/lib/state/` holds only the generic
+   `createStore(reducer, initialState)` factory; reducers, actions, and state
+   shapes live in the consuming app (`apps/web/src/lib/state/`). App state
+   changes go through that reducer — add to its `AppAction` union in
+   `types.ts`, handle in `reducer.ts`, export a creator from `actions.ts`.
+   Components dispatch creators, never object literals. Package components
+   are controlled: they take props/callbacks, never import a store.
 7. **Prefer native platform behavior** (dialog `showModal`, details `name`
    accordions, `:user-invalid`, the Popover API) over JS reimplementations.
 8. **Server components by default**; add `'use client'` only for interactivity.

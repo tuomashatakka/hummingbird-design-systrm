@@ -3,15 +3,21 @@ import type { FC, ReactNode } from 'react'
 
 interface FieldProps {
   label:    ReactNode
-  htmlFor:  string // ties the label to the control it wraps
   children: ReactNode
   hint?:    ReactNode
   error?:   ReactNode
 }
 
-export const Field: FC<FieldProps> = ({ label, htmlFor, children, hint, error }) =>
-  <div data-field>
-    <label htmlFor={ htmlFor }>{label}</label>
+/**
+ * A form field: the label IS the wrapper, so the association is implicit —
+ * no `htmlFor`, no ids to keep in sync. Clicking any of it focuses the
+ * control. Don't nest self-labelling controls (Checkbox/Radio/Switch, which
+ * render `label[data-check]`) inside — a label inside a label is invalid;
+ * don't put links in `hint` either, clicks there focus the control.
+ */
+export const Field: FC<FieldProps> = ({ label, children, hint, error }) =>
+  <label data-field>
+    <span>{label}</span>
     {children}
 
     {error
@@ -19,6 +25,6 @@ export const Field: FC<FieldProps> = ({ label, htmlFor, children, hint, error })
       : hint
         ? <small>{hint}</small>
         : null}
-  </div>
+  </label>
 
 Field.displayName = 'Field'

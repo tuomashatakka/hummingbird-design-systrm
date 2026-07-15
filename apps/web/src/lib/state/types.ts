@@ -1,14 +1,13 @@
-export type Theme = 'light' | 'dark' | 'system'
+import type { Notice } from 'hummingbird-design-system'
 
-export interface Notice {
-  id:      string
-  kind:    'info' | 'success' | 'danger'
-  message: string
-}
+
+export type { Notice }
+
+export type Theme = 'light' | 'dark' | 'system'
 
 // — palette customization —
 // Each brand color is an oklch channel triplet mirroring the
-// --{color}-l/c/h custom properties in src/styles/tokens.css.
+// --{color}-l/c/h custom properties in the package's tokens.css.
 // State holds only *overrides*: an absent entry means the token
 // defaults (and their per-theme variants) stay in charge.
 

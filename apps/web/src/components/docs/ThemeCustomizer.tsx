@@ -1,7 +1,7 @@
 'use client'
 
 import type { FC } from 'react'
-import { Button, Slider } from 'Δ/components/primitives'
+import { Button, Slider } from 'hummingbird-design-system'
 import {
   BRAND_COLORS, PALETTE_DEFAULTS,
   resetPalette, setBrandColor, useAppState, useDispatch,
@@ -19,7 +19,7 @@ const RANGES: Record<typeof CHANNELS[number], { min: number, max: number, step: 
 
 /**
  * Live palette editor: three oklch sliders per brand color, written
- * through the reducer and applied as custom properties on <html>.
+ * through the app's reducer and applied as custom properties on <html>.
  * Reset hands control back to tokens.css (and its per-theme values).
  */
 export const ThemeCustomizer: FC = () => {

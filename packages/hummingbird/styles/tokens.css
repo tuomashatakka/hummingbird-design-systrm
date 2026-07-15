@@ -19,14 +19,25 @@
    must precede all other rules. */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300..700&family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+/* — theme plumbing —
+   color-scheme decides which side of every light-dark() pair below
+   renders: the attribute forces a side, 'system' (or no attribute)
+   lets the OS preference pick. Channel scalars (--accent-l & co)
+   are not colors, so light-dark() cannot wrap them — they keep the
+   small per-theme blocks at the end of this file. */
+:root                 { color-scheme: light dark; }
+[data-theme='light']  { color-scheme: light; }
+[data-theme='dark']   { color-scheme: dark; }
+[data-theme='system'] { color-scheme: light dark; }
+
 :root {
   /* — color · neutral ramp (true greys, brightness 19% / 28%) — */
-  --ink:        oklch(31% 0 0);      /* ≈ #303030 */
-  --ink-soft:   oklch(40% 0 0);      /* ≈ #474747 */
-  --ink-faint:  oklch(56% 0 0);      /* ≈ #757575 */
-  --line:       oklch(90% 0.006 85); /* ≈ #DEDCD7 */
-  --wash:       oklch(97% 0.004 85); /* ≈ #F5F4F2 */
-  --paper:      oklch(100% 0 0);     /* #FFFFFF  */
+  --ink:        light-dark(oklch(31% 0 0),      oklch(97% 0.004 85)); /* ≈ #303030 / #F5F4F2 */
+  --ink-soft:   light-dark(oklch(40% 0 0),      oklch(85% 0 0));      /* ≈ #474747 / #CFCFCF */
+  --ink-faint:  light-dark(oklch(56% 0 0),      oklch(70% 0 0));      /* ≈ #757575 / #9E9E9E */
+  --line:       light-dark(oklch(90% 0.006 85), oklch(40% 0 0));      /* ≈ #DEDCD7 / #474747 */
+  --wash:       light-dark(oklch(97% 0.004 85), oklch(27% 0 0));      /* ≈ #F5F4F2 / #262626 */
+  --paper:      light-dark(oklch(100% 0 0),     oklch(22% 0 0));      /* #FFFFFF  / ≈ #1A1A1A */
 
   /* — color · customizable channels —
      Every brand color is an oklch lightness/chroma/hue triplet.
@@ -53,6 +64,20 @@
 
   --danger:  oklch(var(--danger-l) var(--danger-c) var(--danger-h));
   --success: oklch(var(--success-l) var(--success-c) var(--success-h));
+
+  /* — color · on-brand ink —
+     Type sitting on a brand-color fill. Derived from the fill's own
+     oklch lightness — never from the theme — so a dark accent on a
+     dark theme still carries near-white type. Below the threshold
+     the ink snaps near-white, above it scrim-dark (the ±infinity
+     clamp trick); contrast-color() takes over where the platform
+     has it (see the @supports block at the end of this file). The
+     threshold must never equal a real brand lightness (0 × infinity
+     is NaN). */
+  --on-ink-threshold: 0.65;
+  --on-accent:  oklch(from var(--accent)  clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
+  --on-danger:  oklch(from var(--danger)  clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
+  --on-success: oklch(from var(--success) clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
 
   /* — color · variant ramps —
      Nine steps per brand color, 100 (near paper) → 900 (near ink).
@@ -143,9 +168,14 @@
   --border:        1px solid var(--line);
   --border-strong: 1px solid var(--ink);
 
-  /* — elevation · used very sparingly (soft cards on hover only) — */
-  --shadow-1: 0 0.0625rem 0.125rem color-mix(in oklch, var(--ink) 8%, transparent);
-  --shadow-2: 0 0.375rem  1.5rem   color-mix(in oklch, var(--ink) 12%, transparent);
+  /* — elevation · used very sparingly. Shadows are cast, not drawn:
+     always black, never ink (which inverts in dark mode and would
+     read as a glow). Dark surfaces need a heavier hand, hence the
+     light-dark() alpha split. --shadow-3 is the offsetless ambient
+     veil for fixed panels. */
+  --shadow-1: 0 0.0625rem 0.125rem light-dark(oklch(0 0 0 / 0.08), oklch(0 0 0 / 0.4));
+  --shadow-2: 0 0.375rem  1.5rem   light-dark(oklch(0 0 0 / 0.12), oklch(0 0 0 / 0.55));
+  --shadow-3: 0 0         2.5rem   light-dark(oklch(0 0 0 / 0.1),  oklch(0 0 0 / 0.5));
 
   /* — motion — */
   --snap:      200ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -159,14 +189,11 @@
   --grid-min:  16rem; /* Grid column floor; presets override per data-min */
 }
 
+/* — dark theme · channel scalars only —
+   The neutral ramp and shadows flip via light-dark() above; these
+   lightness/chroma scalars are not colors, so they still need the
+   explicit per-theme blocks. Keep both bodies identical. */
 [data-theme='dark'] {
-  --ink:        oklch(97% 0.004 85); /* ≈ #F5F4F2 */
-  --ink-soft:   oklch(85% 0 0);      /* ≈ #CFCFCF */
-  --ink-faint:  oklch(70% 0 0);      /* ≈ #9E9E9E */
-  --line:       oklch(40% 0 0);      /* ≈ #474747 */
-  --wash:       oklch(27% 0 0);      /* ≈ #262626 */
-  --paper:      oklch(22% 0 0);      /* ≈ #1A1A1A */
-
   --accent-l:        85%;
   --accent-strong-l: calc(var(--accent-l) + 12%);
   --danger-l:        48%; --danger-c: 0.12;
@@ -174,17 +201,20 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  [data-theme='system'] {
-    --ink:        oklch(97% 0.004 85);
-    --ink-soft:   oklch(85% 0 0);
-    --ink-faint:  oklch(70% 0 0);
-    --line:       oklch(40% 0 0);
-    --wash:       oklch(27% 0 0);
-    --paper:      oklch(22% 0 0);
-
+  :root:where(:not([data-theme]), [data-theme='system']) {
     --accent-l:        85%;
     --accent-strong-l: calc(var(--accent-l) + 12%);
     --danger-l:        48%; --danger-c: 0.12;
     --success-l:       58%;
+  }
+}
+
+/* Platforms with contrast-color() compute the on-brand inks natively
+   (and keep following the customizer with zero extra configuration). */
+@supports (color: contrast-color(red)) {
+  :root {
+    --on-accent:  contrast-color(var(--accent));
+    --on-danger:  contrast-color(var(--danger));
+    --on-success: contrast-color(var(--success));
   }
 }

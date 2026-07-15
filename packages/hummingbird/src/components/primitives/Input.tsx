@@ -12,19 +12,10 @@ interface InputProps {
   onChange?:    (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input: FC<InputProps> = ({
-  type = 'text',
-  name,
-  id,
-  placeholder,
-  value,
-  disabled = false,
-  required = false,
-  onChange,
-}) =>
+export const Input: FC<InputProps> = ({ type = 'text', name, id, placeholder, value, disabled = false, required = false, onChange }) =>
   <input
-    type={ type }
     id={ id }
+    type={ type }
     name={ name }
     placeholder={ placeholder }
     value={ value }

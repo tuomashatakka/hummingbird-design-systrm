@@ -2,4 +2,4 @@
 export { Header, Panel, Footer } from './landmarks'
 export { Row } from './Row'
 export { Grid } from './Grid'
-export { Overlay } from './Overlay'
+export { Center } from './Center'

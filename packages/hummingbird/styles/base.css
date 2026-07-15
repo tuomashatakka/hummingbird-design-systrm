@@ -10,9 +10,8 @@
     box-sizing: border-box;
   }
 
-  html {
-    color-scheme: light dark;
-  }
+  /* color-scheme lives in tokens.css — it is theme plumbing,
+     steering every light-dark() pair defined there. */
 
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
@@ -32,7 +31,7 @@
 
   ::selection {
     background: var(--accent);
-    color:      var(--paper);
+    color:      var(--on-accent);
   }
 
   :focus-visible {
@@ -230,24 +229,24 @@
     padding:        var(--space-sm) var(--space-md);
     cursor:         pointer;
     transition: background var(--snap), border-color var(--snap), color var(--snap);
-  }
 
-  button:hover:not(:disabled) {
-    background:   color-mix(in oklch, var(--ink) 5%, transparent);
-    border-color: var(--ink-soft);
-    color:        var(--ink);
-  }
+    &:hover:not(:disabled) {
+      background:   color-mix(in oklch, var(--ink) 5%, transparent);
+      border-color: var(--ink-soft);
+      color:        var(--ink);
+    }
 
-  button:active:not(:disabled) {
-    background:   var(--accent-wash);
-    border-color: var(--ink);
-  }
+    &:active:not(:disabled) {
+      background:   var(--accent-wash);
+      border-color: var(--ink);
+    }
 
-  button:disabled {
-    color:        var(--ink-faint);
-    border-color: transparent;
-    background:   var(--wash);
-    cursor:       not-allowed;
+    &:disabled {
+      color:        var(--ink-faint);
+      border-color: transparent;
+      background:   var(--wash);
+      cursor:       not-allowed;
+    }
   }
 
   input, textarea, select {
@@ -257,15 +256,15 @@
     border:     1px solid transparent;
     padding:    var(--space-xs) var(--space-sm);
     transition: border-color var(--snap), background var(--snap);
-  }
 
-  input:focus, textarea:focus, select:focus {
-    outline:      none;
-    background:   var(--paper);
-    border-color: var(--accent);
-  }
+    &:focus {
+      outline:      none;
+      background:   var(--paper);
+      border-color: var(--accent);
+    }
 
-  input:user-invalid { border-color: var(--danger); }
+    &:user-invalid { border-color: var(--danger); }
+  }
 
   textarea {
     min-block-size: 6rem;
@@ -284,13 +283,14 @@
     accent-color:   var(--ink);
     cursor:         pointer;
     vertical-align: text-bottom;
-  }
 
-  input[type='checkbox']:disabled,
-  input[type='radio']:disabled { cursor: not-allowed; }
+    &:disabled { cursor: not-allowed; }
+  }
 
   /* — range slider: hairline track, squared ink thumb — */
 
+  /* engine pseudo-elements stay in separate nested rules: a shared
+     selector list would be invalidated whole by the foreign engine. */
   input[type='range'] {
     appearance:  none;
     inline-size: 100%;
@@ -299,45 +299,45 @@
     border:      none;
     background:  transparent;
     cursor:      pointer;
-  }
 
-  input[type='range']:focus-visible {
-    outline:        2px solid var(--accent);
-    outline-offset: 2px;
-  }
+    &:focus-visible {
+      outline:        2px solid var(--accent);
+      outline-offset: 2px;
+    }
 
-  input[type='range']::-webkit-slider-runnable-track {
-    block-size: 0.125rem;
-    background: var(--line);
-  }
+    &::-webkit-slider-runnable-track {
+      block-size: 0.125rem;
+      background: var(--line);
+    }
 
-  input[type='range']::-webkit-slider-thumb {
-    appearance:        none;
-    inline-size:       0.875rem;
-    block-size:        0.875rem;
-    margin-block-start: -0.375rem;
-    border-radius:     var(--radius);
-    background:        var(--accent);
-    transition:        background var(--snap);
-  }
+    &::-webkit-slider-thumb {
+      appearance:        none;
+      inline-size:       0.875rem;
+      block-size:        0.875rem;
+      margin-block-start: -0.375rem;
+      border-radius:     var(--radius);
+      background:        var(--accent);
+      transition:        background var(--snap);
+    }
 
-  input[type='range']::-moz-range-track {
-    block-size: 0.125rem;
-    background: var(--line);
-  }
+    &::-moz-range-track {
+      block-size: 0.125rem;
+      background: var(--line);
+    }
 
-  input[type='range']::-moz-range-thumb {
-    inline-size:   0.875rem;
-    block-size:    0.875rem;
-    border:        none;
-    border-radius: var(--radius);
-    background:    var(--accent);
-    transition:    background var(--snap);
-  }
+    &::-moz-range-thumb {
+      inline-size:   0.875rem;
+      block-size:    0.875rem;
+      border:        none;
+      border-radius: var(--radius);
+      background:    var(--accent);
+      transition:    background var(--snap);
+    }
 
-  input[type='range']:disabled { cursor: not-allowed; }
-  input[type='range']:disabled::-webkit-slider-thumb { background: var(--ink-faint); }
-  input[type='range']:disabled::-moz-range-thumb     { background: var(--ink-faint); }
+    &:disabled { cursor: not-allowed; }
+    &:disabled::-webkit-slider-thumb { background: var(--ink-faint); }
+    &:disabled::-moz-range-thumb     { background: var(--ink-faint); }
+  }
 
   label {
     display:        block;
@@ -364,7 +364,27 @@
   /* — native disclosure — */
 
   details {
-    background: var(--wash);
+    background:       var(--wash);
+    /* lets block-size transition to `auto` below; engines without it
+       (or without ::details-content) fall back to an instant toggle */
+    interpolate-size: allow-keywords;
+
+    &::details-content {
+      block-size: 0;
+      overflow-y: clip;
+      transition: block-size          var(--snap),
+                  content-visibility  var(--snap) allow-discrete;
+    }
+
+    &[open] {
+      &::details-content { block-size: auto; }
+
+      & > summary { border-block-end: var(--border-hair); }
+    }
+
+    & > :not(summary) {
+      padding: var(--space-sm);
+    }
   }
 
   summary {
@@ -372,14 +392,8 @@
     cursor:      pointer;
     user-select: none;
     transition:  background var(--snap);
-  }
 
-  summary:hover { background: var(--accent-wash); }
-
-  details[open] > summary { border-block-end: var(--border-hair); }
-
-  details > :not(summary) {
-    padding: var(--space-sm);
+    &:hover { background: var(--accent-wash); }
   }
 
   /* — native dialog — */
@@ -388,36 +402,73 @@
     color:      var(--ink);
     background: var(--paper);
     border:     none;
-    box-shadow: 0 0.125rem 0.875rem var(--hairline);
+    box-shadow: var(--shadow-2);
     padding:    0;
     max-width:  min(90vw, 32rem);
     margin:     auto;
-  }
+    opacity:    0;
+    translate:  0 0.5rem;
+    transition: opacity var(--snap), translate var(--snap),
+                display var(--snap) allow-discrete,
+                overlay var(--snap) allow-discrete;
 
-  dialog::backdrop {
-    background:      oklch(10% 0.01 260 / 0.5);
-    backdrop-filter: blur(2px);
-  }
+    &[open] {
+      opacity:   1;
+      translate: 0 0;
 
-  dialog > header {
-    display:          flex;
-    align-items:      center;
-    justify-content:  space-between;
-    gap:              var(--space-sm);
-    padding:          var(--space-sm) var(--space-md);
-    border-block-end: var(--border-hair);
-  }
+      @starting-style {
+        opacity:   0;
+        translate: 0 0.5rem;
+      }
 
-  dialog > header > button { border: none; background: none; padding: var(--space-xs); }
+      &::backdrop {
+        background: oklch(10% 0.01 260 / 0.5);
 
-  dialog > article { padding: var(--space-md); }
+        @starting-style { background: oklch(10% 0.01 260 / 0); }
+      }
+    }
 
-  dialog > footer {
-    display:            flex;
-    justify-content:    flex-end;
-    gap:                var(--space-sm);
-    padding:            var(--space-sm) var(--space-md);
-    border-block-start: var(--border-hair);
+    &::backdrop {
+      background:      oklch(10% 0.01 260 / 0);
+      backdrop-filter: blur(2px);
+      transition:      background var(--snap),
+                       display var(--snap) allow-discrete,
+                       overlay var(--snap) allow-discrete;
+    }
+
+    & > header {
+      display:          flex;
+      align-items:      center;
+      justify-content:  space-between;
+      gap:              var(--space-sm);
+      padding:          var(--space-sm) var(--space-md);
+      border-block-end: var(--border-hair);
+
+      & > button { border: none; background: none; padding: var(--space-xs); }
+    }
+
+    & > article { padding: var(--space-md); }
+
+    & > footer {
+      display:            flex;
+      justify-content:    flex-end;
+      gap:                var(--space-sm);
+      padding:            var(--space-sm) var(--space-md);
+      border-block-start: var(--border-hair);
+    }
+
+    /* — immersive takeover on an opaque scrim (the retired Overlay) — */
+    &[data-variant='overlay'] {
+      max-width:  min(90vw, 40rem);
+      max-height: 90vh;
+      padding:    var(--space-lg);
+
+      &::backdrop { backdrop-filter: none; }
+
+      &[open]::backdrop {
+        background: color-mix(in oklch, var(--scrim) 72%, transparent);
+      }
+    }
   }
 
   /* — tables — */
@@ -452,21 +503,24 @@
     background:  var(--wash);
     color:       var(--ink); /* Firefox fill colour */
     overflow:    hidden;
+
+    &::-webkit-progress-bar   { background: var(--wash); }
+    &::-webkit-progress-value { background: var(--ink); transition: inline-size var(--snap); }
+    &::-moz-progress-bar      { background: var(--ink); }
+
+    /* value-less <progress> is indeterminate → a marching bar painted on
+       the element itself; both engines' bar pseudos must go transparent
+       or they paint over it (Firefox notably shows its own animation) */
+    &:indeterminate {
+      background-image:  linear-gradient(90deg, transparent 0%, var(--ink) 50%, transparent 100%);
+      background-size:   40% 100%;
+      background-repeat: no-repeat;
+      animation:         progress-slide 1.2s ease-in-out infinite;
+
+      &::-webkit-progress-bar { background: transparent; }
+      &::-moz-progress-bar    { background: transparent; }
+    }
   }
-
-  progress::-webkit-progress-bar   { background: var(--wash); }
-  progress::-webkit-progress-value { background: var(--ink); transition: inline-size var(--snap); }
-  progress::-moz-progress-bar      { background: var(--ink); }
-
-  /* value-less <progress> is indeterminate → a marching bar */
-  progress:indeterminate {
-    background-image:  linear-gradient(90deg, transparent 0%, var(--ink) 50%, transparent 100%);
-    background-size:   40% 100%;
-    background-repeat: no-repeat;
-    animation:         progress-slide 1.2s ease-in-out infinite;
-  }
-
-  progress:indeterminate::-webkit-progress-bar { background: transparent; }
 
   @keyframes progress-slide {
     from { background-position: -40% 0; }

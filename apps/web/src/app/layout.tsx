@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { Footer, Header, Notification } from 'hummingbird-design-system'
-import { AppStateProvider } from 'hummingbird-design-system/state'
+import { Footer } from 'hummingbird-design-system'
+import { AppStateProvider, ThemeApplier } from 'Δ/lib/state'
+import { SiteHeader, SiteNotifications } from 'Δ/components/SiteChrome'
 import './globals.css'
 
 
 export const metadata: Metadata = {
   title:       'Hummingbird Design System',
-  description: 'A monochrome design system portfolio — semantic HTML, native elements, customizable oklch tokens, zero utility classes.',
+  description: 'A monochrome design system — semantic HTML, native elements, customizable oklch tokens, zero utility classes.',
 }
 
 interface RootLayoutProps {
@@ -25,18 +26,24 @@ export default function RootLayout ({ children, panel }: RootLayoutProps) {
   return <html suppressHydrationWarning lang='en' data-theme='light'>
     <body>
       <AppStateProvider>
-        <Header
+        <ThemeApplier />
+
+        <SiteHeader
           homeHref={ withBase('/') }
           links={ [
             { label: 'Home', href: withBase('/') },
-            { label: 'Portfolio', href: withBase('/portfolio') },
             { label: 'Design system', href: withBase('/design-system') },
+            { label: 'State', href: withBase('/design-system/state') },
           ] } />
 
         <main>{children}</main>
         {panel}
-        <Footer />
-        <Notification />
+
+        <Footer>
+          Hummingbird — a monochrome design system. Semantic markup, native elements, zero utility classes.
+        </Footer>
+
+        <SiteNotifications />
       </AppStateProvider>
     </body>
   </html>

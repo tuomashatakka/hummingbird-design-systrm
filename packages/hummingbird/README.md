@@ -21,20 +21,17 @@ Import the stylesheet once at the root of your app, then use the components:
 
 ```tsx
 import 'hummingbird-design-system/styles'
-import { AppStateProvider } from 'hummingbird-design-system/state'
-import { Button, Card, Row, Grid, ArticleHero } from 'hummingbird-design-system'
+import { Button, Card, Row, Grid, Spinner } from 'hummingbird-design-system'
 
 export default function App () {
   return (
-    <AppStateProvider>          {/* theming, palette, notices */}
-      <Card title='Hello'>
-        <p>Semantic HTML, styled directly — no className, no utility soup.</p>
-        <Row>
-          <Button variant='primary'>Primary</Button>
-          <Button variant='ghost'>Ghost</Button>
-        </Row>
-      </Card>
-    </AppStateProvider>
+    <Card title='Hello'>
+      <p>Semantic HTML, styled directly — no className, no utility soup.</p>
+      <Row>
+        <Button variant='primary'>Primary</Button>
+        <Button variant='ghost'>Ghost</Button>
+      </Row>
+    </Card>
   )
 }
 ```
@@ -44,7 +41,7 @@ export default function App () {
 | Import (`hummingbird-design-system…`) | What you get                                             |
 | ------------------------------------- | -------------------------------------------------------- |
 | `.`                                    | every primitive, composite, and layout component         |
-| `./state`                              | the reducer, action creators, `AppStateProvider`, hooks  |
+| `./state`                              | `createStore(reducer, initialState)` — a typed store factory |
 | `./styles`                             | the whole stylesheet — tokens, base defaults, components |
 
 One stylesheet import covers everything: it declares `@layer base, components;` and
@@ -76,11 +73,25 @@ those two families and the `@import` becomes a no-op.
 ## Components
 
 **Primitives** (Button, Input, Textarea, Select, Checkbox, Radio, Switch, Slider,
-Heading, Mark, Badge, Progress, Disclosure, Dialog, Popover, Icon, Medallion),
-**composites** (Card, Field, Alert, Tabs, Breadcrumb, SearchField, Carousel, Meta,
-Swatches, ThemeCustomizer, Notification, Lockup, FounderCard, Pillars, CapabilityStrip,
-ArticleHero, ContactPanel, RecentWork), and **layouts** — landmarks (Header, Footer,
-Panel) plus the helpers **Row**, **Grid**, and **Overlay**.
+Heading, Mark, Badge, Progress, Spinner, Skeleton, Divider, Disclosure, Dialog,
+Popover, Icon, Medallion), **composites** (Card, Field, Alert, Tabs, Breadcrumb,
+SearchField, ButtonGroup, Carousel, Meta, Notification, Lockup), and **layouts** —
+landmarks (Header, Footer, Panel) plus the helpers **Row**, **Grid**, and **Center**.
+
+Highlights:
+
+- **Field** wraps its control in the label — implicit association, no `htmlFor`/`id`
+  pairing. Don't nest the self-labelling controls (Checkbox/Radio/Switch) inside it.
+- **Dialog** is the one overlay surface: a native `<dialog>` with `variant='overlay'`
+  for immersive takeovers, `modal` (`showModal()` vs `show()`), and `dismissible`.
+- **Header / Panel / Footer / Notification** are controlled and stateless — wire them
+  to whatever state you use (see Theming & state below).
+- **Spinner, Skeleton, Divider, ButtonGroup, Center** are CSS-first: the same looks
+  work on plain HTML via `data-spinner`, `data-skeleton`, `hr[data-label]`,
+  `data-button-group`, and `data-layout='center'`.
+- Accordions animate natively (`interpolate-size` + `::details-content`), overlays
+  enter/exit via `@starting-style`, and `progress:indeterminate` animates in every
+  engine.
 
 Server components by default; interactive pieces carry their own `'use client'`
 directive, so the package is RSC-safe. Framework-agnostic: plain `<a>`, plain `<img>` —
@@ -88,20 +99,27 @@ no `next/*` anywhere.
 
 ### Theming & state
 
-`…/state` is a typed `useReducer` exposed through context:
+The package predefines **no state shape and no actions**. `…/state` exports one thing —
+a typed store factory:
 
 ```tsx
-import { useAppState, useDispatch, setTheme, pushNotice } from 'hummingbird-design-system/state'
+import { createStore } from 'hummingbird-design-system/state'
 
-const { theme } = useAppState()
-const dispatch  = useDispatch()
-dispatch(setTheme('dark'))                 // mirrors data-theme on <html>
-dispatch(pushNotice('Saved', 'success'))   // renders in <Notification />
+const store = createStore(reducer, initialState)
+// → { Provider, useStore, useSelector, useDispatch } — all typed from your reducer
+
+export const { Provider, useStore, useDispatch } = store
 ```
 
-`theme` is `'light'` (default) / `'dark'` / `'system'`; `palette` holds per-colour oklch
-overrides applied as inline custom properties on `<html>`; `notices` back the
-`Notification` toast region. Mount `<Notification />` once near the root.
+Call it once at module scope and import the result from that one module everywhere
+(each call creates its own context pair — a second call is a second store). The
+`Provider` accepts an optional per-mount `initialState` override.
+
+Theming is pure CSS: set `data-theme='light' | 'dark' | 'system'` on `<html>` — the
+neutral ramp and shadows flip through `light-dark()` pairs steered by `color-scheme`.
+Recolour by writing the `--accent-l/-c/-h` channels (inline on `<html>`, or in your own
+stylesheet); text on brand fills derives from the fill itself via `--on-accent`, so any
+lightness stays readable.
 
 ## Docs
 

@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import {
-  Button, Checkbox, Dialog, Field, Heading, Input, Overlay, Radio, SearchField,
+  Button, Checkbox, Dialog, Field, Heading, Input, Panel, Radio, SearchField,
   Select, Slider, Switch, Textarea,
 } from 'hummingbird-design-system'
-import { pushNotice, useDispatch } from 'hummingbird-design-system/state'
+import { pushNotice, useDispatch } from 'Δ/lib/state'
 
 
 const PLANS = [
@@ -14,6 +14,93 @@ const PLANS = [
   { value: 'team', label: 'Team' },
 ]
 
+// — single-control leaves for the registry —
+
+export const InputDemo = () =>
+  <Input required type='email' placeholder='you@example.com' />
+
+export const TextareaDemo = () =>
+  <Textarea placeholder='Tell us more…' rows={ 4 } />
+
+export const SelectDemo = () => {
+  const [ plan, setPlan ] = useState('pro')
+
+  return <Select
+    options={ PLANS }
+    value={ plan }
+    onChange={ event => setPlan(event.target.value) } />
+}
+
+export const CheckboxDemo = () => {
+  const [ terms, setTerms ] = useState(false)
+
+  return <Checkbox
+    label='I agree to the terms'
+    checked={ terms }
+    onChange={ event => setTerms(event.target.checked) } />
+}
+
+export const RadioDemo = () => {
+  const [ delivery, setDelivery ] = useState('standard')
+
+  return <div data-layout='stack'>
+    <Radio
+      name='delivery-demo'
+      value='standard'
+      label='Standard (3–5 days)'
+      checked={ delivery === 'standard' }
+      onChange={ event => setDelivery(event.target.value) } />
+
+    <Radio
+      name='delivery-demo'
+      value='express'
+      label='Express (next day)'
+      checked={ delivery === 'express' }
+      onChange={ event => setDelivery(event.target.value) } />
+  </div>
+}
+
+export const SwitchDemo = () => {
+  const [ notify, setNotify ] = useState(true)
+
+  return <Switch
+    label='Email notifications'
+    checked={ notify }
+    onChange={ event => setNotify(event.target.checked) } />
+}
+
+export const FieldDemo = () =>
+  <div data-layout='stack'>
+    <Field label='Email' hint='We never share it.'>
+      <Input required type='email' placeholder='you@example.com' />
+    </Field>
+
+    <Field label='Password' error='Must be at least 8 characters.'>
+      <Input type='password' placeholder='••••••••' />
+    </Field>
+  </div>
+
+export const SliderDemo = () => {
+  const [ volume, setVolume ] = useState(64)
+
+  return <div data-layout='cluster'>
+    <Slider
+      label='Volume'
+      min={ 0 }
+      max={ 100 }
+      value={ volume }
+      onChange={ event => setVolume(Number(event.target.value)) } />
+
+    <output>{volume}</output>
+    <Slider disabled label='Disabled slider' min={ 0 } max={ 100 } value={ 30 } />
+  </div>
+}
+
+export const SearchFieldDemo = () =>
+  <SearchField onSearch={ query => console.info('search:', query) } />
+
+// — the full form recipe (patterns section) —
+
 export const FormsDemo = () => {
   const [ plan, setPlan ]         = useState('pro')
   const [ terms, setTerms ]       = useState(false)
@@ -21,21 +108,20 @@ export const FormsDemo = () => {
   const [ notify, setNotify ]     = useState(true)
 
   return <div data-layout='stack'>
-    <Field label='Email' htmlFor='ds-email' hint='We never share it.'>
-      <Input required id='ds-email' type='email' placeholder='you@example.com' />
+    <Field label='Email' hint='We never share it.'>
+      <Input required type='email' placeholder='you@example.com' />
     </Field>
 
-    <Field label='Password' htmlFor='ds-pass' error='Must be at least 8 characters.'>
-      <Input id='ds-pass' type='password' placeholder='••••••••' />
+    <Field label='Password' error='Must be at least 8 characters.'>
+      <Input type='password' placeholder='••••••••' />
     </Field>
 
-    <Field label='Message' htmlFor='ds-msg'>
-      <Textarea id='ds-msg' placeholder='Tell us more…' />
+    <Field label='Message'>
+      <Textarea placeholder='Tell us more…' />
     </Field>
 
-    <Field label='Plan' htmlFor='ds-plan'>
+    <Field label='Plan'>
       <Select
-        id='ds-plan'
         options={ PLANS }
         value={ plan }
         onChange={ event => setPlan(event.target.value) } />
@@ -75,21 +161,7 @@ export const FormsDemo = () => {
   </div>
 }
 
-export const SliderDemo = () => {
-  const [ volume, setVolume ] = useState(64)
-
-  return <div data-layout='cluster'>
-    <Slider
-      label='Volume'
-      min={ 0 }
-      max={ 100 }
-      value={ volume }
-      onChange={ event => setVolume(Number(event.target.value)) } />
-
-    <output>{volume}</output>
-    <Slider disabled label='Disabled slider' min={ 0 } max={ 100 } value={ 30 } />
-  </div>
-}
+// — overlay-family leaves —
 
 export const DialogDemo = () => {
   const [ open, setOpen ] = useState(false)
@@ -128,7 +200,7 @@ export const OverlayDemo = () => {
       Open overlay
     </Button>
 
-    <Overlay label='Immersive overlay' open={ open } onClose={ () => setOpen(false) }>
+    <Dialog variant='overlay' label='Immersive overlay' open={ open } onClose={ () => setOpen(false) }>
       <div data-layout='stack'>
         <Heading level={ 3 }>Fixed overlay</Heading>
 
@@ -143,7 +215,21 @@ export const OverlayDemo = () => {
 
         <Button onClick={ () => setOpen(false) }>Close</Button>
       </div>
-    </Overlay>
+    </Dialog>
+  </div>
+}
+
+export const PanelDemo = () => {
+  const [ open, setOpen ] = useState(false)
+
+  return <div data-layout='cluster'>
+    <Button onClick={ () => setOpen(true) }>
+      Open a local panel
+    </Button>
+
+    <Panel label='Demo panel' open={ open } onClose={ () => setOpen(false) }>
+      <p>A locally-controlled drawer — slide in, slide out, inert while closed.</p>
+    </Panel>
   </div>
 }
 

@@ -135,7 +135,7 @@ export default function HomePage () {
     <section data-hero=''>
       <Mark />
       <Heading level={ 1 }>Hummingbird</Heading>
-      <Heading level={ 6 }>Design system · Portfolio · Est. 2015</Heading>
+      <Heading level={ 6 }>Design system · Est. 2015</Heading>
 
       <p>
         A monochrome design system reconstructed from the studio&apos;s 2015
@@ -238,7 +238,7 @@ import { Button, Card } from 'hummingbird-design-system'
 
       <div data-layout='cluster'>
         <Link data-cta='' href='/design-system'>Design system</Link>
-        <Link data-cta='' href='/design-system#inventory'>Component inventory</Link>
+        <Link data-cta='' href='/design-system#primitives'>Browse the components</Link>
       </div>
 
       <p>

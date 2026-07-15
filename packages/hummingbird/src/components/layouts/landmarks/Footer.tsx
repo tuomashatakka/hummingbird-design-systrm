@@ -1,11 +1,15 @@
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 
 
-export const Footer: FC = () =>
+interface FooterProps {
+
+  /** Footer line, rendered inside a `<small>`. Omit for an empty landmark. */
+  children?: ReactNode
+}
+
+export const Footer: FC<FooterProps> = ({ children }) =>
   <footer>
-    <small>
-      Hummingbird — a monochrome design system. Semantic markup, native elements, zero utility classes.
-    </small>
+    {children != null && <small>{children}</small>}
   </footer>
 
 Footer.displayName = 'Footer'
