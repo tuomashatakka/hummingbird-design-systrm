@@ -35,8 +35,32 @@ const CAROUSEL_DEMO = [
   { id: 'three', content: <p>Slide three — keyboard scrolling works out of the box.</p> },
 ]
 
+const TOC = [
+  { href: '#color', label: 'Color' },
+  { href: '#typography', label: 'Typography' },
+  { href: '#spacing', label: 'Spacing' },
+  { href: '#motion', label: 'Motion' },
+  { href: '#variables', label: 'CSS variables' },
+  { href: '#primitives', label: 'Primitives' },
+  { href: '#composites', label: 'Composites' },
+  { href: '#layouts', label: 'Layouts' },
+  { href: '#elements', label: 'Base elements' },
+  { href: '#inventory', label: 'Inventory' },
+]
+
 export default function DesignSystemPage () {
   return <div data-layout='stack'>
+    <nav aria-label='On this page' data-toc=''>
+      <span>On this page</span>
+
+      <ol>
+        {TOC.map(item =>
+          <li key={ item.href }>
+            <a href={ item.href }>{item.label}</a>
+          </li>)}
+      </ol>
+    </nav>
+
     <section>
       <Breadcrumb
         items={ [

@@ -14,6 +14,10 @@
     color-scheme: light dark;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
   body {
     margin:      0;
     font-family: var(--font-sans);
@@ -43,6 +47,14 @@
     margin-block: 0 var(--space-sm);
     text-wrap:    balance;
   }
+
+  /* anchored headings clear the sticky header when jumped to */
+  :where(h1, h2, h3, h4, h5, h6)[id] { scroll-margin-block-start: var(--space-xl); }
+
+  /* subsection rhythm: an h3 that follows content opens a new group */
+  section > h3:not(:first-child),
+  section > div > h3:not(:first-child),
+  section > div + div > h3:first-child { margin-block-start: var(--space-lg); }
 
   h1 {
     font-family:    var(--font-display);
