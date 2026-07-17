@@ -3,7 +3,9 @@ import bgBlue from 'Δ/assets/bg-mountain-blue.jpg'
 import bgClear from 'Δ/assets/bg-mountain-clear.jpg'
 import bgDark from 'Δ/assets/bg-mountain-dark.jpg'
 import bgMagenta from 'Δ/assets/bg-mountain-magenta.jpg'
-import { Badge, Carousel, Heading, Mark, Meta } from 'hummingbird-design-system'
+import {
+  Badge, Carousel, Eyebrow, Grain, Heading, Icon, Mark, Meta, Pillars, Wrap,
+} from 'hummingbird-design-system'
 
 
 const SLIDES = [
@@ -132,8 +134,10 @@ const SLIDES = [
 
 export default function HomePage () {
   return <div data-layout='screens'>
-    <section data-hero=''>
-      <Mark />
+    <Grain />
+
+    <section data-hero='' data-reveal='cinematic'>
+      <Mark animate />
       <Heading level={ 1 }>Hummingbird</Heading>
       <Heading level={ 6 }>Design system · Est. 2015</Heading>
 
@@ -153,97 +157,134 @@ export default function HomePage () {
     <Carousel label='Design system highlights' slides={ SLIDES } />
 
     <section>
-      <Heading level={ 6 }>About</Heading>
+      <Wrap>
+        <Eyebrow>About</Eyebrow>
 
-      <Heading level={ 2 }>
-        Formal &amp;
-        <br />
-        elegant
-      </Heading>
+        <Heading level={ 2 }>
+          Formal &amp;
+          <br />
+          elegant
+        </Heading>
 
-      <div data-layout='split'>
-        <div>
-          <p>
-            Hummingbird is minimal yet bold: defined, clean, immersive. Surfaces
-            separate through whitespace and washes rather than boxes; when a
-            line is unavoidable it is a hairline, not a border. Display type is
-            letterspaced uppercase; body copy stays light and generous.
-          </p>
+        <div data-layout='split'>
+          <div>
+            <p>
+              Hummingbird is minimal yet bold: defined, clean, immersive. Surfaces
+              separate through whitespace and washes rather than boxes; when a
+              line is unavoidable it is a hairline, not a border. Display type is
+              letterspaced uppercase; body copy stays light and generous.
+            </p>
 
-          <p>
-            The whole theme lives in one token file. Brand colors are oklch
-            channel triplets — monochrome by default, and yours to recolor
-            live, with every variant ramp following along.
-          </p>
+            <p>
+              The whole theme lives in one token file. Brand colors are oklch
+              channel triplets — monochrome by default, and yours to recolor
+              live, with every variant ramp following along.
+            </p>
+          </div>
+
+          <Meta
+            items={ [
+              { label: 'Identity', value: 'Hummingbird Design, November 2015' },
+              { label: 'Principles', value: 'Squared. Monochrome. Native first.' },
+              { label: 'Type', value: 'Novecento Sans Wide · Sofia Pro · Montserrat' },
+              { label: 'Built with', value: 'Next.js · semantic HTML · hand-written CSS' },
+            ] } />
         </div>
-
-        <Meta
-          items={ [
-            { label: 'Identity', value: 'Hummingbird Design, November 2015' },
-            { label: 'Principles', value: 'Squared. Monochrome. Native first.' },
-            { label: 'Type', value: 'Novecento Sans Wide · Sofia Pro · Montserrat' },
-            { label: 'Built with', value: 'Next.js · semantic HTML · hand-written CSS' },
-          ] } />
-      </div>
+      </Wrap>
     </section>
 
     <section>
-      <Heading level={ 6 }>How to use</Heading>
+      <Wrap>
+        <Eyebrow>Principles</Eyebrow>
 
-      <Heading level={ 2 }>
-        Install &amp;
-        <br />
-        import
-      </Heading>
+        <Heading level={ 2 }>
+          Built to
+          <br />
+          last
+        </Heading>
 
-      <p>
-        One package, one stylesheet, no config. Install, import the CSS once
-        at your app root, and compose with the components.
-      </p>
+        <Pillars
+          items={ [
+            {
+              icon:        <Icon name='award' label='Award' />,
+              title:       'Considered',
+              description: 'Every token, ramp, and component has a documented reason.',
+            },
+            {
+              icon:        <Icon name='user' label='User' />,
+              title:       'Accessible',
+              description: 'Native elements first — dialog, details, :user-invalid do the work.',
+            },
+            {
+              icon:        <Icon name='umbrella' label='Umbrella' />,
+              title:       'Durable',
+              description: 'One token file changes the whole theme, light and dark.',
+            },
+          ] } />
+      </Wrap>
+    </section>
 
-      <pre>
-        <code>{'npm i hummingbird-design-system'}</code>
-      </pre>
+    <section>
+      <Wrap>
+        <Eyebrow>How to use</Eyebrow>
 
-      <pre>
-        <code>{`import 'hummingbird-design-system/styles'
+        <Heading level={ 2 }>
+          Install &amp;
+          <br />
+          import
+        </Heading>
+
+        <p>
+          One package, one stylesheet, no config. Install, import the CSS once
+          at your app root, and compose with the components.
+        </p>
+
+        <pre>
+          <code>{'npm i hummingbird-design-system'}</code>
+        </pre>
+
+        <pre>
+          <code>{`import 'hummingbird-design-system/styles'
 import { Button, Card } from 'hummingbird-design-system'
 
 <Card title='Hello'>
   <Button variant='primary'>Get started</Button>
 </Card>`}
-        </code>
-      </pre>
+          </code>
+        </pre>
 
-      <p>
-        The one import carries the whole system — tokens, semantic element
-        defaults, and component CSS, layered in the right order.
-      </p>
+        <p>
+          The one import carries the whole system — tokens, semantic element
+          defaults, and component CSS, layered in the right order.
+        </p>
+      </Wrap>
     </section>
 
     <section>
-      <Heading level={ 6 }>Get started</Heading>
+      <Wrap>
+        <Eyebrow>Get started</Eyebrow>
 
-      <Heading level={ 2 }>
-        Explore the
-        <br />
-        system
-      </Heading>
+        <Heading level={ 2 }>
+          Explore the
+          <br />
+          system
+        </Heading>
 
-      <p>
-        Every token, ramp, primitive, composite, and layout — documented with
-        live examples, swatches for every color variant, and sliders that
-        recolor the brand in real time.
-      </p>
+        <p>
+          Every token, ramp, primitive, composite, and layout — documented with
+          live examples, swatches for every color variant, and sliders that
+          recolor the brand in real time.
+        </p>
 
-      <div data-layout='cluster'>
-        <Link data-cta='' href='/design-system'>Design system</Link>
-        <Link data-cta='' href='/design-system#primitives'>Browse the components</Link>
-      </div>
+        <div data-layout='cluster'>
+          <Link data-cta='' href='/design-system'>Design system</Link>
+          <Link data-cta='' href='/design-system#primitives'>Browse the components</Link>
+        </div>
 
-      <p>
-        <small>Hummingbird — a monochrome design system. Semantic markup, native elements, zero utility classes.</small>
-      </p>
+        <p>
+          <small>Hummingbird — a monochrome design system. Semantic markup, native elements, zero utility classes.</small>
+        </p>
+      </Wrap>
     </section>
   </div>
 }

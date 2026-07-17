@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Button, Checkbox, Dialog, Field, Heading, Input, Panel, Radio, SearchField,
   Select, Slider, Switch, Textarea,
@@ -230,6 +230,59 @@ export const PanelDemo = () => {
     <Panel label='Demo panel' open={ open } onClose={ () => setOpen(false) }>
       <p>A locally-controlled drawer — slide in, slide out, inert while closed.</p>
     </Panel>
+  </div>
+}
+
+// — scroll-spy nav (Header's `current` link driven by IntersectionObserver) —
+
+export const HeaderScrollSpyDemo = () => {
+  const [ current, setCurrent ] = useState('demo-a')
+  const scroller                = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const root = scroller.current
+    if (root == null)
+      return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries.find(entry => entry.isIntersecting)
+        if (visible != null)
+          setCurrent(visible.target.id)
+      },
+      { root, threshold: 0.6 })
+
+    root.querySelectorAll('section[id]').forEach(section => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  const links = [
+    { id: 'demo-a', label: 'One' },
+    { id: 'demo-b', label: 'Two' },
+    { id: 'demo-c', label: 'Three' },
+  ]
+
+  return <div data-layout='stack'>
+    {/* the real underline-grow treatment is scoped to `body > header nav a`;
+       this demo lives mid-page, so it marks the current link with a visible
+       weight change instead — the aria-current='page' contract is identical */}
+    <nav aria-label='Scroll-spy demo' data-layout='cluster'>
+      {links.map(link =>
+        <a
+          key={ link.id }
+          style={{ fontWeight: current === link.id ? 700 : 400 }}
+          aria-current={ current === link.id ? 'page' : undefined }
+          href={ `#${link.id}` }>
+          {link.label}
+        </a>)}
+    </nav>
+
+    <div ref={ scroller } style={{ blockSize: '10rem', overflowY: 'auto', border: 'var(--border-hair)' }}>
+      {links.map(link =>
+        <section key={ link.id } id={ link.id } style={{ blockSize: '10rem', display: 'grid', placeItems: 'center' }}>
+          {link.label}
+        </section>)}
+    </div>
   </div>
 }
 

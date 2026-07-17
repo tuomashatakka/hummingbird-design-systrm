@@ -10,6 +10,13 @@ interface GridProps {
    * `lg` ≈ 22rem. Defaults to `md`.
    */
   min?: 'sm' | 'md' | 'lg'
+
+  /**
+   * Render as `ul` for genuine list content (e.g. a grid of cards) instead
+   * of `div`. Pass `<li>` children yourself — Grid does not wrap them.
+   * Defaults to `div`.
+   */
+  as?: 'div' | 'ul'
 }
 
 /**
@@ -17,9 +24,9 @@ interface GridProps {
  * The column floor is a token preset chosen through `data-min`, so no size
  * literals leak into markup. `[data-layout='grid']`.
  */
-export const Grid: FC<GridProps> = ({ children, min = 'md' }) =>
-  <div data-layout='grid' data-min={ min }>
+export const Grid: FC<GridProps> = ({ children, min = 'md', as: Tag = 'div' }) =>
+  <Tag data-layout='grid' data-min={ min } role={ Tag === 'ul' ? 'list' : undefined }>
     {children}
-  </div>
+  </Tag>
 
 Grid.displayName = 'Grid'

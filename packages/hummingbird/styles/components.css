@@ -290,6 +290,49 @@
     letter-spacing: 0.32em;
     text-transform: uppercase;
     color:          var(--ink-faint);
+
+    &[data-eyebrow='flourish'] {
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      gap:             var(--space-sm);
+      margin-block:    0 var(--space-md);
+
+      &::before,
+      &::after {
+        content:     '';
+        flex:        0 0 auto;
+        block-size:  0.0625rem;
+        inline-size: clamp(1.75rem, 6vw, 4rem);
+        background:  currentColor;
+        opacity:     0.6;
+      }
+    }
+  }
+
+  /* — grain: atmosphere noise texture overlay — */
+
+  [data-grain] {
+    position:          fixed;
+    inset:             0;
+    z-index:           90;
+    pointer-events:    none;
+    background-image:  var(--texture-grain);
+    background-size:   200px 200px;
+    opacity:           0.05;
+    mix-blend-mode:    overlay;
+    animation:         grain 0.5s steps(5) infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
+  }
+
+  @keyframes grain {
+    0%   { translate: 0 0; }
+    40%  { translate: -4% 3%; }
+    80%  { translate: 3% -3%; }
+    100% { translate: -2% 1%; }
   }
 
   /* — section head: eyebrow + title + lede — */
@@ -794,6 +837,51 @@
     &[data-align='baseline'] { align-items: baseline; }
   }
 
+  /* page-width container */
+  [data-layout='wrap'] {
+    width:         min(var(--page-max), 100%);
+    margin-inline: auto;
+  }
+
+  /* icon-led feature columns */
+  [data-layout='pillars'] {
+    display:    flex;
+    flex-wrap:  wrap;
+    gap:        clamp(1.4rem, 3vw, 2.4rem);
+    text-align: center;
+
+    & > div {
+      flex:           1 0 12rem;
+      max-width:      20rem;
+      margin-inline:  auto;
+      display:        flex;
+      flex-direction: column;
+      align-items:    center;
+      gap:            var(--space-sm);
+    }
+
+    & [data-medallion] {
+      inline-size: 8rem;
+      block-size:  8rem;
+    }
+
+    & h3 {
+      font-family:    var(--font-display);
+      font-size:      var(--text-lg);
+      font-weight:    600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color:          var(--ink);
+    }
+
+    & p {
+      max-width:   30ch;
+      font-weight: 300;
+      font-size:   var(--text-sm);
+      color:       var(--ink-soft);
+    }
+  }
+
   /* responsive grid view */
   [data-layout='grid'] {
     display:               grid;
@@ -984,6 +1072,24 @@
     }
   }
 
+  /* photo drifts opposite the scroll as each slide crosses the viewport —
+     progressive enhancement, no JS, no new markup. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      section[data-component='carousel'] > ul > li > img {
+        scale:              1.12;
+        animation:          carousel-parallax linear both;
+        animation-timeline: view(inline);
+        animation-range:    cover;
+      }
+    }
+  }
+
+  @keyframes carousel-parallax {
+    from { translate:  4% 0; }
+    to   { translate: -4% 0; }
+  }
+
   /* — portfolio hero — */
 
   section[data-hero] {
@@ -1033,6 +1139,38 @@
       color:           var(--ink-faint);
       animation:       scroll-bob 2.8s ease infinite;
     }
+
+    /* — cinematic entrance: opt in with data-reveal='cinematic' —
+       an 8s blur-in envelope on the section, then a staggered rise for
+       each direct child. Reduced motion needs no override: the global
+       kill-switch (base.css) collapses all of this to its end state. */
+    &[data-reveal='cinematic'] {
+      animation:   hero-in 8s var(--immersive) both;
+      will-change: filter, opacity, translate;
+
+      & > * {
+        opacity:   0;
+        animation: hero-rise 1.1s var(--immersive) forwards;
+      }
+
+      & > svg                     { animation-delay: 1s;    }
+      & > [data-eyebrow]          { animation-delay: 0.4s;  }
+      & > h1                      { animation-delay: 4.2s;  }
+      & > h6                      { animation-delay: 4.6s;  }
+      & > p                       { animation-delay: 5.4s;  }
+      & > [data-layout='cluster'] { animation-delay: 5.8s;  }
+      & > [data-scroll-hint]      { animation-delay: 6.2s;  }
+    }
+  }
+
+  @keyframes hero-in {
+    from { opacity: 0; translate: 0 1.75rem; filter: blur(2rem); }
+    to   { opacity: 1; translate: 0 0;       filter: blur(0);    }
+  }
+
+  @keyframes hero-rise {
+    from { opacity: 0; translate: 0 1.125rem; }
+    to   { opacity: 1; translate: 0 0;        }
   }
 
   a[data-cta] {
@@ -1159,6 +1297,63 @@
       line-height: 1.5;
     }
   }
+
+  /* — sheet: term/value grid, term as a fixed-width eyebrow column — */
+
+  dl[data-sheet] {
+    display:               grid;
+    grid-template-columns: max-content 1fr;
+    gap:                   0.35rem 1.4rem;
+    align-items:           baseline;
+    max-width:             35rem;
+    margin:                0;
+
+    & dt {
+      font-family:    var(--font-display);
+      font-weight:    450;
+      font-size:      var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color:          var(--ink-faint);
+      padding-block-start: 0.18rem;
+    }
+
+    & dd {
+      margin:      0;
+      font-size:   var(--text-sm);
+      font-weight: 300;
+      color:       var(--ink);
+    }
+  }
+
+  /* — mark: opt-in stroke-draw-in reveal, no inline styles required —
+     pathLength='1' on each path normalizes the dash math regardless of
+     real geometry; :nth-of-type staggers the 4 fixed paths (Mark always
+     renders exactly these 4, in this order). This is explicitly NOT a
+     multi-frame wingbeat illusion — that depends on bespoke hand-traced
+     artwork this mark doesn't have. */
+
+  svg[data-animate] {
+    & path {
+      fill-opacity:      0;
+      stroke:            currentColor;
+      stroke-width:      2;
+      stroke-linejoin:   round;
+      stroke-dasharray:  1;
+      stroke-dashoffset: 1;
+      animation:
+        mark-stroke 1.1s var(--immersive) forwards,
+        mark-ink    0.9s ease            forwards;
+    }
+
+    & path:nth-of-type(1) { animation-delay: 0ms,   900ms;  }
+    & path:nth-of-type(2) { animation-delay: 140ms, 990ms;  }
+    & path:nth-of-type(3) { animation-delay: 280ms, 1080ms; }
+    & path:nth-of-type(4) { animation-delay: 420ms, 1170ms; }
+  }
+
+  @keyframes mark-stroke { to { stroke-dashoffset: 0; } }
+  @keyframes mark-ink    { to { fill-opacity: 1; stroke-opacity: 0; } }
 
   /* — brand mark specimen — */
 

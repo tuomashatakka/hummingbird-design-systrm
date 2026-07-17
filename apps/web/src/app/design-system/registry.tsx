@@ -4,8 +4,9 @@
 // are imported from the client-leaf demos.tsx.
 import {
   Alert, Badge, Breadcrumb, Button, ButtonGroup, Card, Carousel, Center,
-  Disclosure, Divider, Grid, Heading, Icon, Lockup, Mark, Medallion, Meta,
-  Popover, Progress, Row, Skeleton, Spinner, Tabs,
+  Disclosure, Divider, Eyebrow, Grain, Grid, Heading, Icon, Lockup, Mark,
+  Medallion, Meta, Pillars, Popover, Progress, Row, Sheet, Skeleton, Spinner,
+  Tabs, Wrap,
 } from 'hummingbird-design-system'
 import bgClear from 'Δ/assets/bg-mountain-clear.jpg'
 import type { ComponentEntry } from './components/ComponentDoc'
@@ -272,13 +273,44 @@ export const PRIMITIVES: ComponentEntry[] = [
   {
     name:        'Mark',
     renders:     'svg',
-    props:       'label',
-    description: 'The Hummingbird mark from the identity kit, inlined so it inherits currentColor — it sits in the header and anywhere ink goes.',
-    code:        `<Mark label='Hummingbird mark' />`,
+    props:       'label, animate',
+    description: 'The Hummingbird mark from the identity kit, inlined so it inherits currentColor — it sits in the header and anywhere ink goes. animate plays a stroke-draw-in reveal once on mount (each path draws, then inks in); reload to replay it.',
+    code:        `<Mark label='Hummingbird mark' />
+<Mark label='Hummingbird mark' animate />`,
     preview:
-  <span data-brand-mark=''>
-    <Mark label='Hummingbird mark' />
-  </span>,
+  <Row>
+    <span data-brand-mark=''>
+      <Mark label='Hummingbird mark' />
+    </span>
+
+    <span data-brand-mark=''>
+      <Mark label='Hummingbird mark' animate />
+    </span>
+  </Row>,
+  },
+  {
+    name:        'Eyebrow',
+    renders:     'p[data-eyebrow]',
+    props:       'variant',
+    description: 'A small-caps kicker label above a heading. variant="flourish" centers it between two hairline segments — the identity kit’s section-opening treatment.',
+    code:        `<Eyebrow>01 · Color</Eyebrow>
+<Eyebrow variant='flourish'>Selected work</Eyebrow>`,
+    preview:
+  <div data-layout='stack'>
+    <Eyebrow>01 · Color</Eyebrow>
+    <Eyebrow variant='flourish'>Selected work</Eyebrow>
+  </div>,
+  },
+  {
+    name:        'Grain',
+    renders:     'div[data-grain]',
+    props:       '—',
+    description: 'A fixed, full-bleed procedural noise texture at 5% opacity, blend mode overlay — the identity kit’s atmosphere layer. Mount once, near the root. Freezes (and hides) under reduced motion.',
+    code:        `<Grain />`,
+    preview:
+  <div style={{ position: 'relative', overflow: 'hidden', contain: 'paint', blockSize: '8rem', border: 'var(--border-hair)' }}>
+    <Grain />
+  </div>,
   },
   {
     name:        'Medallion',
@@ -424,7 +456,7 @@ export const COMPOSITES: ComponentEntry[] = [
     name:        'Carousel',
     renders:     "section[data-component='carousel']",
     props:       'slides, label',
-    description: 'A native scroll-snap list with chevron controls and line dots — swipe, scroll, or keyboard. A slide with an image renders it full-bleed under the identity’s diagonal scrim.',
+    description: 'A native scroll-snap list with chevron controls and line dots — swipe, scroll, or keyboard. A slide with an image renders it full-bleed under the identity’s diagonal scrim. Where the platform supports scroll-linked animation (animation-timeline: view()), each slide’s photography drifts opposite the scroll as it crosses the viewport — pure CSS, gated behind prefers-reduced-motion.',
     code:        `<Carousel label='Demo' slides={ [
   { id: 'photo', image: bgClear, content: <p>Photography</p> },
   { id: 'two',   content: <p>Slide two</p> },
@@ -460,6 +492,23 @@ export const COMPOSITES: ComponentEntry[] = [
     items={ [
       { label: 'Location', value: 'Helsinki, Finland' },
       { label: 'Focus', value: 'Design systems · Creative coding' },
+    ] } />,
+  },
+  {
+    name:        'Sheet',
+    renders:     'dl[data-sheet]',
+    props:       'items',
+    description: 'A two-column spec sheet — term/value pairs on a baseline grid, the term set as a fixed-width uppercase eyebrow column. Denser than Meta and without the hairline rule: reach for Sheet with many short facts (a spec list, a colophon), Meta with fewer, longer-form pairs that read well as a hairline-ruled list.',
+    code:        `<Sheet items={ [
+  { term: 'Role', value: 'Lead full-stack developer' },
+  { term: 'Based', value: 'Helsinki, Finland' },
+] } />`,
+    preview:
+  <Sheet
+    items={ [
+      { term: 'Role', value: 'Design systems engineer' },
+      { term: 'Studio', value: 'Hummingbird Design' },
+      { term: 'Stack', value: 'Next.js · TypeScript · CSS nesting' },
     ] } />,
   },
   {
@@ -522,22 +571,78 @@ export const LAYOUTS: ComponentEntry[] = [
   {
     name:        'Grid',
     renders:     "[data-layout='grid']",
-    props:       'min',
-    description: 'An auto-filling grid whose column floor is a token preset (sm / md / lg).',
+    props:       'min, as',
+    description: 'An auto-filling grid whose column floor is a token preset (sm / md / lg). as="ul" renders a semantic list instead of a div — pass your own <li> children (e.g. a grid of cards).',
     code:        `<Grid min='sm'>
   <Card>1</Card>
   <Card>2</Card>
   <Card>3</Card>
+</Grid>
+
+<Grid as='ul' min='sm'>
+  <li><Card>1</Card></li>
+  <li><Card>2</Card></li>
 </Grid>`,
     preview:
-  <Grid min='sm'>
-    <Boxish>1</Boxish>
-    <Boxish>2</Boxish>
-    <Boxish>3</Boxish>
-    <Boxish>4</Boxish>
-    <Boxish>5</Boxish>
-    <Boxish>6</Boxish>
-  </Grid>,
+  <div data-layout='stack'>
+    <Grid min='sm'>
+      <Boxish>1</Boxish>
+      <Boxish>2</Boxish>
+      <Boxish>3</Boxish>
+      <Boxish>4</Boxish>
+      <Boxish>5</Boxish>
+      <Boxish>6</Boxish>
+    </Grid>
+
+    <Grid as='ul' min='sm'>
+      <li>
+        <Boxish>ul/li</Boxish>
+      </li>
+
+      <li>
+        <Boxish>card grid</Boxish>
+      </li>
+
+      <li>
+        <Boxish>as='ul'</Boxish>
+      </li>
+    </Grid>
+  </div>,
+  },
+  {
+    name:        'Wrap',
+    renders:     "[data-layout='wrap']",
+    props:       '—',
+    description: 'A page-width container — clamps content to --page-max and centers it. The plain wrapper most sections in this system use for their content measure.',
+    code:        `<Wrap>
+  <Heading level={ 2 }>Section title</Heading>
+  <p>Body copy, clamped to the page's max width.</p>
+</Wrap>`,
+    preview:
+  <Wrap>
+    <p>
+      Clamped to
+      <code>--page-max</code>
+      {' '}
+      and centered.
+    </p>
+  </Wrap>,
+  },
+  {
+    name:        'Pillars',
+    renders:     "[data-layout='pillars']",
+    props:       'items',
+    description: 'A row of icon-led feature columns — medallion, heading, body copy. Wraps onto multiple rows past three or four items.',
+    code:        `<Pillars items={ [
+  { icon: <Icon name='award' />, title: 'Considered', description: '…' },
+] } />`,
+    preview:
+  <Pillars
+    items={ [
+      { icon: <Icon name='award' label='Award' />, title: 'Considered', description: 'Every token, ramp, and component has a documented reason.' },
+      { icon: <Icon name='user' label='User' />, title: 'Accessible', description: 'Native elements first — the platform does the work.' },
+      { icon: <Icon name='umbrella' label='Umbrella' />, title: 'Durable', description: 'One token file changes the whole theme, light and dark.' },
+    ] } />,
   },
   {
     name:        'Center',
@@ -570,11 +675,11 @@ export const LAYOUTS: ComponentEntry[] = [
   {
     name:        'Header',
     renders:     'body > header',
-    props:       'brand, links, homeHref, actions',
-    description: 'The sticky page header landmark — brand lockup, primary nav, and an actions slot for the consumer’s own controls (this site passes its theme cycler and panel toggle). Plain anchors keep it framework-agnostic.',
+    props:       'brand, links (label, href, current), homeHref, actions',
+    description: 'The sticky page header landmark — brand lockup, primary nav, and an actions slot for the consumer’s own controls (this site passes its theme cycler and panel toggle). Plain anchors keep it framework-agnostic. Mark a link current to render aria-current="page" — the CSS underline-grow follows it; see the scroll-spy demo in Patterns for a live example driven by IntersectionObserver.',
     code:        `<Header
   homeHref='/'
-  links={ [ { label: 'Docs', href: '/docs' } ] }
+  links={ [ { label: 'Docs', href: '/docs', current: true } ] }
   actions={ <li><Button onClick={ cycleTheme }>theme</Button></li> } />`,
     preview: <p>Framing this page right now — the sticky bar up top.</p>,
   },

@@ -5,6 +5,9 @@ import { Mark } from 'Δ/components/primitives'
 interface NavLink {
   label: string
   href:  string
+
+  /** Marks this link as the current page/section — renders `aria-current='page'`. */
+  current?: boolean
 }
 
 interface HeaderProps {
@@ -44,7 +47,8 @@ export const Header: FC<HeaderProps> = ({ brand = 'Hummingbird', links = [], hom
 
     {links.length > 0 &&
       <nav aria-label='Main'>
-        {links.map(link => <a key={ link.href } href={ link.href }>{link.label}</a>)}
+        {links.map(link =>
+          <a key={ link.href } aria-current={ link.current ? 'page' : undefined } href={ link.href }>{link.label}</a>)}
       </nav>}
 
     {actions != null && <menu>{actions}</menu>}

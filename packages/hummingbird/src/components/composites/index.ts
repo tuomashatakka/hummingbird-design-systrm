@@ -1,4 +1,5 @@
 export { Card } from './Card'
+export { Sheet } from './Sheet'
 export { Field } from './Field'
 export { Alert } from './Alert'
 export { Tabs } from './Tabs'

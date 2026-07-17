@@ -113,6 +113,11 @@
   --tint-wine:    #6B1E3A;
   --tint-mist:    #C4C9CE;
 
+  /* — texture · the one procedural-noise literal, same accepted-exception
+     class as the tint kit above: a fractal-noise filter can't be
+     expressed any other way in pure CSS. */
+  --texture-grain: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC45IiBudW1PY3RhdmVzPSIyIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNuKSIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+");
+
   /* — color · photo scrim + type on photography —
      Fixed regardless of theme: photography is always deep, and the
      type sitting on it is always near-white. */
