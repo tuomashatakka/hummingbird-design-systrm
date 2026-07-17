@@ -32,15 +32,15 @@
       }
     }
 
-    &.danger {
-      color:        var(--color-danger);
-      border-color: var(--color-danger);
+    &.error {
+      color:        var(--color-error);
+      border-color: var(--color-error);
       background:   transparent;
 
       &:hover:not(:disabled) {
-        background:   var(--color-danger);
-        border-color: var(--color-danger);
-        color:        var(--on-danger);
+        background:   var(--color-error);
+        border-color: var(--color-error);
+        color:        var(--on-error);
       }
     }
 
@@ -182,9 +182,9 @@
       color:        var(--on-accent);
     }
 
-    &[data-badge='danger'] {
-      color:        var(--color-danger);
-      border-color: color-mix(in oklch, var(--color-danger) 40%, transparent);
+    &[data-badge='error'] {
+      color:        var(--color-error);
+      border-color: color-mix(in oklch, var(--color-error) 40%, transparent);
     }
 
     &[data-badge='success'] {
@@ -455,7 +455,7 @@
     & > small {
       color: var(--ink-faint);
 
-      &[role='alert'] { color: var(--color-danger); }
+      &[role='alert'] { color: var(--color-error); }
     }
   }
 
@@ -471,7 +471,7 @@
     color:              var(--ink);
 
     &[data-alert='success'] { border-inline-start-color: var(--color-success); }
-    &[data-alert='danger']  { border-inline-start-color: var(--color-danger); }
+    &[data-alert='error']  { border-inline-start-color: var(--color-error); }
 
     & > strong {
       font-family:    var(--font-display);
@@ -861,6 +861,12 @@
     & [data-medallion] {
       inline-size: 8rem;
       block-size:  8rem;
+    }
+
+    & [data-medallion="outline"] {
+      border: 1px solid;
+      background: transparent;
+      color: var(--ink);
     }
 
     & h3 {
@@ -1490,7 +1496,7 @@
       animation:           notice-in 320ms var(--immersive);
 
       &[data-kind='success'] { border-inline-start-color: var(--color-success); }
-      &[data-kind='danger']  { border-inline-start-color: var(--color-danger); }
+      &[data-kind='error']  { border-inline-start-color: var(--color-error); }
 
       & p {
         margin:    0;

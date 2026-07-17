@@ -7,7 +7,7 @@ import { Button, Icon } from 'Δ/components/primitives'
 
 export interface Notice {
   id:      string
-  kind:    'info' | 'success' | 'danger'
+  kind:    'info' | 'success' | 'error'
   message: string
 }
 

@@ -69,7 +69,7 @@ the rest of the system derives from:
 
 ```css
 --color-accent-l: 40%;  --color-accent-c: 0;    --color-accent-h: 85;
---color-danger-l: 40%;  --color-danger-c: 0.11; --color-danger-h: 5;
+--color-error-l: 40%;  --color-error-c: 0.11; --color-error-h: 5;
 --color-success-l: 50%; --color-success-c: 0.05; --color-success-h: 135;
 ```
 
@@ -77,7 +77,7 @@ the rest of the system derives from:
 - `--color-accent-strong` (hover) derives from `--color-accent-l` via `calc()`, so it
   tracks customization and flips direction per theme.
 - `--color-accent-wash` is `color-mix(in oklch, var(--color-accent) 12%, var(--paper))`.
-- `danger` (wine) and `success` (moss) are not in the brand book — a
+- `error` (wine) and `success` (moss) are not in the brand book — a
   monochrome identity has no error state — but keep its low-vibrancy feel.
 
 The **ThemeCustomizer** composite edits the triplets at runtime: sliders
@@ -92,7 +92,7 @@ Each brand color ships as a nine-step ramp, `100` (near paper) → `900`
 
 ```css
 --color-accent-100 … --color-accent-900
---color-danger-100 … --color-danger-900
+--color-error-100 … --color-error-900
 --color-success-100 … --color-success-900
 ```
 

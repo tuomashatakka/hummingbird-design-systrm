@@ -17,7 +17,7 @@ Anything that renders a single element. `packages/hummingbird/src/components/pri
 
 | Component | Renders | Essential props | Use it for |
 |---|---|---|---|
-| `Button` | `button` | `variant, size, disabled, type, onClick` | The one clickable action element. `primary` / `ghost` / `danger`, optional `small`. |
+| `Button` | `button` | `variant, size, disabled, type, onClick` | The one clickable action element. `primary` / `ghost` / `error`, optional `small`. |
 | `Input` | `input` | `type, name, placeholder, value, disabled, required, onChange` | Bare text control; validation rides on `:user-invalid`. Label it with `Field`. |
 | `Textarea` | `textarea` | `name, placeholder, value, rows, disabled, required, onChange` | Multi-line input, vertically resizable. |
 | `Select` | `select` | `options, name, value, disabled, required, onChange` | Native select fed an options array. |
@@ -27,7 +27,7 @@ Anything that renders a single element. `packages/hummingbird/src/components/pri
 | `Slider` | `input[type=range]` | `label, min, max, step, value, disabled, onChange` | Native range input. |
 | `Heading` | `h1`…`h6` | `level, id` | Level-checked heading with an optional anchor id. |
 | `Eyebrow` | `p[data-eyebrow]` | `variant` | A small-caps kicker label above a heading. `variant='flourish'` centers it between two hairline segments. |
-| `Badge` | `span[data-badge]` | `variant` | Uppercase hairline chip — `accent` / `success` / `danger` or neutral. |
+| `Badge` | `span[data-badge]` | `variant` | Uppercase hairline chip — `accent` / `success` / `error` or neutral. |
 | `Progress` | `progress` | `label, value, max` | Native progress; omit `value` for an indeterminate marching bar. |
 | `Spinner` | `span[data-spinner]` | `label, size` | Pure-CSS loading spinner. Freezes under reduced motion. |
 | `Skeleton` | `span[data-skeleton]` | `variant, lines` | Loading placeholder shapes with a shimmer sweep. |
@@ -48,7 +48,7 @@ Anything composed of primitives. `packages/hummingbird/src/components/composites
 |---|---|---|---|
 | `Card` | `article.card` | `title, footer, children` | Header/body/footer on a washed surface. |
 | `Field` | `label[data-field]` | `label, hint, error, children` | Wraps a control with an implicit label association. Don't nest `Checkbox`/`Radio`/`Switch` in it — they self-label. |
-| `Alert` | `aside[data-alert]` | `variant, title, children` | A callout on a hairline spine — `info`/`success` announce via `role=status`, `danger` via `role=alert`. |
+| `Alert` | `aside[data-alert]` | `variant, title, children` | A callout on a hairline spine — `info`/`success` announce via `role=status`, `error` via `role=alert`. |
 | `Tabs` | `[role=tablist] + panels` | `tabs, label` | ARIA tablist with roving tabindex. |
 | `Breadcrumb` | `nav > ol` | `items` | A structured trail; the last item is the current page. |
 | `SearchField` | `form[role=search]` | `placeholder, onSearch` | Input + submit in a search landmark. |

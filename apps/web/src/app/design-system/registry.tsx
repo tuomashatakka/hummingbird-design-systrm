@@ -28,7 +28,7 @@ export const PRIMITIVES: ComponentEntry[] = [
     code:        `<Button>Default</Button>
 <Button variant='primary'>Primary</Button>
 <Button variant='ghost'>Ghost</Button>
-<Button variant='danger'>Danger</Button>
+<Button variant='error'>error</Button>
 <Button variant='primary' size='small'>Small</Button>
 <Button disabled>Disabled</Button>`,
     preview:
@@ -36,7 +36,7 @@ export const PRIMITIVES: ComponentEntry[] = [
     <Button>Default</Button>
     <Button variant='primary'>Primary</Button>
     <Button variant='ghost'>Ghost</Button>
-    <Button variant='danger'>Danger</Button>
+    <Button variant='error'>error</Button>
     <Button variant='primary' size='small'>Small</Button>
     <Button disabled>Disabled</Button>
   </div>,
@@ -117,13 +117,13 @@ export const PRIMITIVES: ComponentEntry[] = [
     code:        `<Badge>Neutral</Badge>
 <Badge variant='accent'>Accent</Badge>
 <Badge variant='success'>Success</Badge>
-<Badge variant='danger'>Danger</Badge>`,
+<Badge variant='error'>error</Badge>`,
     preview:
   <div data-layout='cluster'>
     <Badge>Neutral</Badge>
     <Badge variant='accent'>Accent</Badge>
     <Badge variant='success'>Success</Badge>
-    <Badge variant='danger'>Danger</Badge>
+    <Badge variant='error'>error</Badge>
   </div>,
   },
   {
@@ -365,10 +365,10 @@ export const COMPOSITES: ComponentEntry[] = [
     name:        'Alert',
     renders:     'aside[data-alert]',
     props:       'variant, title, children',
-    description: 'A callout on a hairline spine. Info and success announce politely via role="status"; danger interrupts via role="alert".',
+    description: 'A callout on a hairline spine. Info and success announce politely via role="status"; error interrupts via role="alert".',
     code:        `<Alert title='Heads up'><p>An informational callout.</p></Alert>
 <Alert variant='success' title='Saved'><p>Changes written.</p></Alert>
-<Alert variant='danger' title='Something broke'><p>A destructive callout.</p></Alert>`,
+<Alert variant='error' title='Something broke'><p>A destructive callout.</p></Alert>`,
     preview:
   <div data-layout='stack'>
     <Alert title='Heads up'>
@@ -383,7 +383,7 @@ export const COMPOSITES: ComponentEntry[] = [
       <p>Your changes were written successfully.</p>
     </Alert>
 
-    <Alert variant='danger' title='Something broke'>
+    <Alert variant='error' title='Something broke'>
       <p>
         A destructive callout announced via
         <code>role=&quot;alert&quot;</code>
@@ -637,12 +637,22 @@ export const LAYOUTS: ComponentEntry[] = [
   { icon: <Icon name='award' />, title: 'Considered', description: '…' },
 ] } />`,
     preview:
-  <Pillars
-    items={ [
-      { icon: <Icon name='award' label='Award' />, title: 'Considered', description: 'Every token, ramp, and component has a documented reason.' },
-      { icon: <Icon name='user' label='User' />, title: 'Accessible', description: 'Native elements first — the platform does the work.' },
-      { icon: <Icon name='umbrella' label='Umbrella' />, title: 'Durable', description: 'One token file changes the whole theme, light and dark.' },
-    ] } />,
+  <>
+    <Pillars
+      items={ [
+        { icon: <Icon name='award' label='Award' />, title: 'Considered', description: 'Every token, ramp, and component has a documented reason.' },
+        { icon: <Icon name='user' label='User' />, title: 'Accessible', description: 'Native elements first — the platform does the work.' },
+        { icon: <Icon name='umbrella' label='Umbrella' />, title: 'Durable', description: 'One token file changes the whole theme, light and dark.' },
+      ] } />
+
+    <Pillars
+      items={ [
+        { icon: <Icon name='award' label='Award' />, title: 'Considered', description: 'Every token, ramp, and component has a documented reason.', variant: 'outline' },
+        { icon: <Icon name='user' label='User' />, title: 'Accessible', description: 'Native elements first — the platform does the work.', variant: 'outline' },
+        { icon: <Icon name='umbrella' label='Umbrella' />, title: 'Durable', description: 'One token file changes the whole theme, light and dark.', variant: 'outline' },
+      ] } />
+
+  </>,
   },
   {
     name:        'Center',

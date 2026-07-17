@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/jsx-one-expression-per-line */
 import { Heading } from 'hummingbird-design-system'
 import { Swatches } from 'Δ/components/docs/Swatches'
 
@@ -40,44 +41,35 @@ export const Color = () =>
 
     <p>
       Six working surfaces from paper to ink (plus the accent wash between
-      them), each declared once as a
-      {' '}
-      <code>light-dark()</code>
-      {' '}
-      pair — the theme attribute flips
-      {' '}
-      <code>color-scheme</code>
-      {' '}
-      and the whole ramp follows. This ramp is the brand.
+      them), each declared once as a <code>light-dark()</code> pair —
+      the theme attribute flips <code>color-scheme</code> and the whole ramp follows.
+      This ramp is the brand.
     </p>
 
     <Swatches label='Neutral ramp' tokens={ NEUTRAL_RAMP } />
-    <Heading level={ 3 }>Brand colors &amp; variants</Heading>
+
+    <Heading level={ 3 }>
+      Brand colors &amp; variants
+    </Heading>
 
     <p>
       Each brand color ships as a nine-step ramp, 100 (near paper) to 900
-      (near ink), derived in
-      {' '}
-      <code>tokens.css</code>
-      {' '}
-      with
-      {' '}
-      <code>color-mix()</code>
-      {' '}
-      so the variants stay correct in both themes and under customization.
+      (near ink), derived in <code>tokens.css</code> with <code>color-mix()</code> so
+      the variants stay correct in both themes and under customization.
       The accent defaults to chroma 0 — it is ink until you say otherwise.
     </p>
 
     <div data-layout='stack'>
-      <Swatches label='Accent ramp' tokens={ ramp('accent') } />
-      <Swatches label='Danger ramp' tokens={ ramp('danger') } />
-      <Swatches label='Success ramp' tokens={ ramp('success') } />
+      <Swatches label='Accent ramp' tokens={ ramp('color-accent') } />
+      <Swatches label='error ramp' tokens={ ramp('color-error') } />
+      <Swatches label='Success ramp' tokens={ ramp('color-success') } />
+      <Swatches label='Success ramp' tokens={ ramp('color-info') } />
     </div>
 
     <Heading level={ 3 }>Ink on a brand fill</Heading>
 
     <p>
-      Text sitting on an accent, danger, or success fill never uses a theme
+      Text sitting on an accent, error, or success fill never uses a theme
       color — it derives from the fill&apos;s own oklch lightness
       (
       <code>--on-accent</code>

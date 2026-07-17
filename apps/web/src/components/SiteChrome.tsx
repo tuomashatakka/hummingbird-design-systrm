@@ -1,8 +1,9 @@
 'use client'
 
 import { Button, Header, Notification } from 'hummingbird-design-system'
-import { dismissNotice, setTheme, togglePanel, useAppState, useDispatch } from 'Δ/lib/state'
-import type { Theme } from 'Δ/lib/state'
+import { dismissNotice, setTheme, togglePanel } from 'Δ/lib/state/actions'
+import { useAppState, useDispatch } from 'Δ/lib/state'
+import type { Theme } from 'Δ/lib/state/types'
 
 
 interface NavLink {

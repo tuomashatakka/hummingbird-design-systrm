@@ -4,8 +4,10 @@ import type { AppAction, BrandColor, ColorChannels, Notice, Theme } from './type
 export const setTheme = (theme: Theme): AppAction =>
   ({ type: 'theme/set', theme })
 
-export const setBrandColor = (color: BrandColor, channels: ColorChannels): AppAction =>
-  ({ type: 'palette/set', color, channels })
+export const setBrandColor = (color: BrandColor, channels: ColorChannels): AppAction => {
+  console.log(channels, color)
+  return { type: 'palette/set', color, channels }
+}
 
 export const resetPalette = (): AppAction =>
   ({ type: 'palette/reset' })

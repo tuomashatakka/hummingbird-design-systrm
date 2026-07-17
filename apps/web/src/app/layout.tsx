@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Footer } from 'hummingbird-design-system'
-import { AppStateProvider } from 'Δ/lib/state'
+import { AppStateProviderWithSideEffects } from 'Δ/lib/state'
 import { SiteHeader, SiteNotifications } from 'Δ/components/SiteChrome'
 import './globals.css'
 
@@ -25,7 +25,7 @@ const withBase = (href: string) => `${basePath}${href}`
 export default function RootLayout ({ children, panel }: RootLayoutProps) {
   return <html suppressHydrationWarning lang='en'>
     <body>
-      <AppStateProvider>
+      <AppStateProviderWithSideEffects>
 
         <SiteHeader
           homeHref={ withBase('/') }
@@ -43,7 +43,7 @@ export default function RootLayout ({ children, panel }: RootLayoutProps) {
         </Footer>
 
         <SiteNotifications />
-      </AppStateProvider>
+      </AppStateProviderWithSideEffects>
     </body>
   </html>
 }

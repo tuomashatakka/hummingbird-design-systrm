@@ -2,11 +2,9 @@
 
 import type { FC } from 'react'
 import { Button, Slider } from 'hummingbird-design-system'
-import {
-  BRAND_COLORS, PALETTE_DEFAULTS,
-  resetPalette, setBrandColor, useAppState, useDispatch,
-} from 'Δ/lib/state'
-import type { ColorChannels } from 'Δ/lib/state'
+import { useAppState, useDispatch } from 'Δ/lib/state'
+import { setBrandColor, resetPalette } from 'Δ/lib/state/actions'
+import { BRAND_COLORS, PALETTE_DEFAULTS, type ColorChannels } from 'Δ/lib/state/types'
 
 
 const CHANNELS = [ 'lightness', 'chroma', 'hue' ] as const
@@ -35,7 +33,7 @@ export const ThemeCustomizer: FC = () => {
 
       return <fieldset key={ color }>
         <legend>--{color}</legend>
-        <div style={{ background: `var(--${color})` }} data-swatch='' />
+        <div style={{ background: `var(--color-${color})` }} data-swatch='' />
 
         {CHANNELS.map(channel =>
           <label key={ channel }>

@@ -5,7 +5,8 @@ import {
   Button, Checkbox, Dialog, Field, Heading, Input, Panel, Radio, SearchField,
   Select, Slider, Switch, Textarea,
 } from 'hummingbird-design-system'
-import { pushNotice, useDispatch } from 'Δ/lib/state'
+import { pushNotice } from 'Δ/lib/state/actions'
+import { useDispatch } from 'Δ/lib/state'
 
 
 const PLANS = [
@@ -298,8 +299,8 @@ export const NotificationDemo = () => {
       Push success
     </Button>
 
-    <Button variant='danger' onClick={ () => dispatch(pushNotice('Something went wrong.', 'danger')) }>
-      Push danger
+    <Button variant='error' onClick={ () => dispatch(pushNotice('Something went wrong.', 'error')) }>
+      Push error
     </Button>
   </div>
 }

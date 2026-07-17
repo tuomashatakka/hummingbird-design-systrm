@@ -272,7 +272,7 @@
       border-color: var(--color-accent);
     }
 
-    &:user-invalid { border-color: var(--color-danger); }
+    &:user-invalid { border-color: var(--color-error); }
   }
 
   textarea {

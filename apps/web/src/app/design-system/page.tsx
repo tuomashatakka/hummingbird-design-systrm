@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/jsx-one-expression-per-line */
 import type { Metadata } from 'next'
 import { Breadcrumb, Heading } from 'hummingbird-design-system'
 import { Toc } from 'Δ/components/Toc'
@@ -52,12 +53,11 @@ export default function DesignSystemPage () {
 
       <p>
         Every brand color is an oklch lightness / chroma / hue triplet.
-        The sliders write those channels through this site&apos;s store onto
-        {' '}
-        <code>&lt;html&gt;</code>
-        , overriding both light and dark defaults until reset. Watch the
-        ramps and every accent surface follow in real time — including the
-        on-brand ink flipping when you cross the lightness threshold.
+        The sliders write those channels through this site&apos;s store
+        onto <code>&lt;html&gt;</code>, overriding both light and dark
+        defaults until reset. Watch the ramps and every accent surface
+        follow in real time — including the on-brand ink flipping when
+        you cross the lightness threshold.
       </p>
 
       <ThemeCustomizer />

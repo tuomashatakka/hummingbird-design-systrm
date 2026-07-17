@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react'
 
 interface BadgeProps {
   children: ReactNode
-  variant?: 'accent' | 'danger' | 'success' | null
+  variant?: 'accent' | 'error' | 'success' | null
 }
 
 export const Badge: FC<BadgeProps> = ({ children, variant = null }) =>

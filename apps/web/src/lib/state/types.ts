@@ -11,7 +11,7 @@ export type Theme = 'light' | 'dark' | 'system'
 // State holds only *overrides*: an absent entry means the token
 // defaults (and their per-theme variants) stay in charge.
 
-export const BRAND_COLORS = [ 'accent', 'danger', 'success' ] as const
+export const BRAND_COLORS = [ 'accent', 'error', 'success', 'info' ] as const
 
 export type BrandColor = typeof BRAND_COLORS[number]
 
@@ -26,8 +26,9 @@ export type PaletteOverrides = Partial<Record<BrandColor, ColorChannels>>
 // Light-theme defaults from tokens.css — the sliders' resting position.
 export const PALETTE_DEFAULTS: Record<BrandColor, ColorChannels> = {
   accent:  { lightness: 40, chroma: 0, hue: 85 },
-  danger:  { lightness: 40, chroma: 0.11, hue: 5 },
+  error:   { lightness: 40, chroma: 0.11, hue: 5 },
   success: { lightness: 50, chroma: 0.05, hue: 135 },
+  info:    { lightness: 50, chroma: 0.05, hue: 135 },
 }
 
 export interface AppState {

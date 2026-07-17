@@ -58,10 +58,10 @@ const TABLES: { title: string, rows: VarRow[] }[] = [
       { name: '--color-accent-strong', value: 'calc(--color-accent-l ± 9–12%)', role: 'hover, per-theme', preview: <Chips tokens={ [ 'accent-strong' ] } /> },
       { name: '--color-accent-wash', value: 'mix(accent 12%, paper)', role: 'tinted surface', preview: <Chips tokens={ [ 'accent-wash' ] } /> },
       { name: '--color-accent-100 … -900', value: 'color-mix ramp', role: 'nine-step variant ramp', preview: <Chips kind='ramp' tokens={ ramp('accent') } /> },
-      { name: '--color-danger / --color-success', value: 'wine / moss', role: 'off-brand state colors', preview: <Chips tokens={ [ 'danger', 'success' ] } /> },
-      { name: '--color-danger-100 … -900', value: 'color-mix ramp', role: 'danger variant ramp', preview: <Chips kind='ramp' tokens={ ramp('danger') } /> },
+      { name: '--color-error / --color-success', value: 'wine / moss', role: 'off-brand state colors', preview: <Chips tokens={ [ 'error', 'success' ] } /> },
+      { name: '--color-error-100 … -900', value: 'color-mix ramp', role: 'error variant ramp', preview: <Chips kind='ramp' tokens={ ramp('error') } /> },
       { name: '--color-success-100 … -900', value: 'color-mix ramp', role: 'success variant ramp', preview: <Chips kind='ramp' tokens={ ramp('success') } /> },
-      { name: '--on-accent / -danger / -success', value: 'oklch(from …) threshold', role: 'ink on a brand fill — derived from the fill, not the theme', preview: <OnChips pairs={ [[ 'accent', 'on-accent' ], [ 'danger', 'on-danger' ], [ 'success', 'on-success' ]] } /> },
+      { name: '--on-accent / -error / -success', value: 'oklch(from …) threshold', role: 'ink on a brand fill — derived from the fill, not the theme', preview: <OnChips pairs={ [[ 'accent', 'on-accent' ], [ 'error', 'on-error' ], [ 'success', 'on-success' ]] } /> },
       { name: '--on-ink-threshold', value: '0.65', role: 'the lightness where on-brand ink flips', preview: null },
     ],
   },
@@ -216,7 +216,7 @@ export const TokensReference = () =>
       <code>--color-accent-strong-l</code>
       ,
       {' '}
-      <code>--color-danger-l/-c</code>
+      <code>--color-error-l/-c</code>
       ,
       {' '}
       <code>--color-success-l</code>

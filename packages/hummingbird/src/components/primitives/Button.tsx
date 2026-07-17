@@ -4,7 +4,7 @@ import { classNames } from 'Δ/lib/classNames'
 
 interface ButtonProps {
   children:  ReactNode
-  variant?:  'primary' | 'ghost' | 'danger' | null
+  variant?:  'primary' | 'ghost' | 'error' | null
   size?:     'small' | null
   disabled?: boolean
   type?:     'button' | 'submit' | 'reset'
