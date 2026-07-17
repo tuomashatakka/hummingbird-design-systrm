@@ -4,5 +4,5 @@
 // components consumed the root's copy got two different React runtimes. The
 // self-referencing import is externalized by bunchee, so both entries resolve
 // to the same runtime at load time.
-export { createStore } from 'hummingbird-design-system'
-export type { Store, StoreProviderProps } from 'hummingbird-design-system'
+export { createStore } from './lib/state'
+export type { Store, StoreProviderProps } from './lib/state'

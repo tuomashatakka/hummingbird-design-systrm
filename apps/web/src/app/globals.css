@@ -16,14 +16,14 @@
   --shiki-foreground:              var(--ink-soft);
   --shiki-background:              var(--wash);
   --shiki-token-keyword:           var(--ink);
-  --shiki-token-string:            var(--accent-700);
+  --shiki-token-string:            var(--color-accent-700);
   --shiki-token-comment:           var(--ink-faint);
   --shiki-token-function:          var(--ink);
-  --shiki-token-constant:          var(--accent-800);
+  --shiki-token-constant:          var(--color-accent-800);
   --shiki-token-parameter:         var(--ink-soft);
   --shiki-token-punctuation:       var(--ink-faint);
-  --shiki-token-string-expression: var(--success-700);
-  --shiki-token-link:              var(--accent-600);
+  --shiki-token-string-expression: var(--color-success-700);
+  --shiki-token-link:              var(--color-accent-600);
 }
 
 [data-code-block] {

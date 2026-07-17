@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Footer } from 'hummingbird-design-system'
-import { AppStateProvider, ThemeApplier } from 'Δ/lib/state'
+import { AppStateProvider } from 'Δ/lib/state'
 import { SiteHeader, SiteNotifications } from 'Δ/components/SiteChrome'
 import './globals.css'
 
@@ -23,10 +23,9 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 const withBase = (href: string) => `${basePath}${href}`
 
 export default function RootLayout ({ children, panel }: RootLayoutProps) {
-  return <html suppressHydrationWarning lang='en' data-theme='light'>
+  return <html suppressHydrationWarning lang='en'>
     <body>
       <AppStateProvider>
-        <ThemeApplier />
 
         <SiteHeader
           homeHref={ withBase('/') }

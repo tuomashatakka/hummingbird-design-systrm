@@ -11,13 +11,13 @@
 
   button {
     &.primary {
-      background:   var(--accent);
-      border-color: var(--accent);
+      background:   var(--color-accent);
+      border-color: var(--color-accent);
       color:        var(--on-accent);
 
       &:hover:not(:disabled) {
-        background:   var(--accent-strong);
-        border-color: var(--accent-strong);
+        background:   var(--color-accent-strong);
+        border-color: var(--color-accent-strong);
       }
     }
 
@@ -33,13 +33,13 @@
     }
 
     &.danger {
-      color:        var(--danger);
-      border-color: var(--danger);
+      color:        var(--color-danger);
+      border-color: var(--color-danger);
       background:   transparent;
 
       &:hover:not(:disabled) {
-        background:   var(--danger);
-        border-color: var(--danger);
+        background:   var(--color-danger);
+        border-color: var(--color-danger);
         color:        var(--on-danger);
       }
     }
@@ -75,13 +75,13 @@
     }
 
     &[data-button='primary'] {
-      background:   var(--accent);
-      border-color: var(--accent);
+      background:   var(--color-accent);
+      border-color: var(--color-accent);
       color:        var(--on-accent);
 
       &:hover {
-        background:   var(--accent-strong);
-        border-color: var(--accent-strong);
+        background:   var(--color-accent-strong);
+        border-color: var(--color-accent-strong);
       }
     }
   }
@@ -127,7 +127,7 @@
     block-size:   1.25rem;
     padding:      0;
     border:       none;
-    background:   var(--accent-wash);
+    background:   var(--color-accent-wash);
     cursor:       pointer;
     position:     relative;
     transition:   background var(--snap);
@@ -177,19 +177,19 @@
     background:     transparent;
 
     &[data-badge='accent'] {
-      background:   var(--accent);
-      border-color: var(--accent);
+      background:   var(--color-accent);
+      border-color: var(--color-accent);
       color:        var(--on-accent);
     }
 
     &[data-badge='danger'] {
-      color:        var(--danger);
-      border-color: color-mix(in oklch, var(--danger) 40%, transparent);
+      color:        var(--color-danger);
+      border-color: color-mix(in oklch, var(--color-danger) 40%, transparent);
     }
 
     &[data-badge='success'] {
-      color:        var(--success);
-      border-color: color-mix(in oklch, var(--success) 40%, transparent);
+      color:        var(--color-success);
+      border-color: color-mix(in oklch, var(--color-success) 40%, transparent);
     }
   }
 
@@ -202,7 +202,7 @@
     /* the second brand-sanctioned circle, after the medallion */
     border-radius: var(--radius-full);
     border:        0.125rem solid var(--hairline);
-    border-block-start-color: var(--accent);
+    border-block-start-color: var(--color-accent);
     animation:     spinner-turn 0.8s linear infinite;
 
     &[data-spinner='small'] {
@@ -455,7 +455,7 @@
     & > small {
       color: var(--ink-faint);
 
-      &[role='alert'] { color: var(--danger); }
+      &[role='alert'] { color: var(--color-danger); }
     }
   }
 
@@ -470,8 +470,8 @@
     background:          var(--wash);
     color:              var(--ink);
 
-    &[data-alert='success'] { border-inline-start-color: var(--success); }
-    &[data-alert='danger']  { border-inline-start-color: var(--danger); }
+    &[data-alert='success'] { border-inline-start-color: var(--color-success); }
+    &[data-alert='danger']  { border-inline-start-color: var(--color-danger); }
 
     & > strong {
       font-family:    var(--font-display);
@@ -787,7 +787,7 @@
 
       &[data-role='user'] {
         align-self: flex-end;
-        background: var(--accent-wash);
+        background: var(--color-accent-wash);
       }
 
       &[data-role='assistant'] {
@@ -813,8 +813,6 @@
     flex-direction: column;
     gap:            var(--space-md);
 
-    /* page-level stacks: sections breathe more than form rows */
-    & > section + section { margin-block-start: var(--space-lg); }
   }
 
   [data-layout='cluster'] {
@@ -1118,7 +1116,7 @@
     }
 
     & > h6 {
-      color:  var(--accent);
+      color:  var(--color-accent);
       margin: 0;
     }
 
@@ -1224,7 +1222,7 @@
 
     & > section[data-component='carousel'] > ul > li { min-block-size: 100%; }
 
-    & h6 { color: var(--accent); }
+    & h6 { color: var(--color-accent); }
   }
 
   /* — center: horizontal, or both axes with data-axis — */
@@ -1491,8 +1489,8 @@
       box-shadow:          var(--shadow-2);
       animation:           notice-in 320ms var(--immersive);
 
-      &[data-kind='success'] { border-inline-start-color: var(--success); }
-      &[data-kind='danger']  { border-inline-start-color: var(--danger); }
+      &[data-kind='success'] { border-inline-start-color: var(--color-success); }
+      &[data-kind='danger']  { border-inline-start-color: var(--color-danger); }
 
       & p {
         margin:    0;

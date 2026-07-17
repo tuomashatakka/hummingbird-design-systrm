@@ -63,7 +63,7 @@ those two families and the `@import` becomes a no-op.
    no Radix, no inline styles. Components take essential props only (no `className`, no
    `style`, no size/colour/margin props — that is CSS's job).
 2. **One token file.** Every visual decision resolves to a custom property in
-   `tokens.css`. Brand colours are **oklch channel triplets** (`--accent-l/-c/-h`) with
+   `tokens.css`. Brand colours are **oklch channel triplets** (`--color-accent-l/-c/-h`) with
    nine-step `color-mix` ramps; the accent defaults to chroma 0, so it *is* ink until you
    recolour it.
 3. **Native first.** `<dialog>` with `showModal`, `<details name>` accordions, the
@@ -117,7 +117,7 @@ Call it once at module scope and import the result from that one module everywhe
 
 Theming is pure CSS: set `data-theme='light' | 'dark' | 'system'` on `<html>` — the
 neutral ramp and shadows flip through `light-dark()` pairs steered by `color-scheme`.
-Recolour by writing the `--accent-l/-c/-h` channels (inline on `<html>`, or in your own
+Recolour by writing the `--color-accent-l/-c/-h` channels (inline on `<html>`, or in your own
 stylesheet); text on brand fills derives from the fill itself via `--on-accent`, so any
 lightness stays readable.
 

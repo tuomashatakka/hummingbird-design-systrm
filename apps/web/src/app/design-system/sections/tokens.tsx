@@ -53,14 +53,14 @@ const TABLES: { title: string, rows: VarRow[] }[] = [
   {
     title: 'Brand channels + resolved',
     rows:  [
-      { name: '--accent-l / -c / -h', value: '40% · 0 · 85', role: 'accent oklch triplet (chroma 0 → ink)', preview: <Chips tokens={ [ 'accent' ] } /> },
-      { name: '--accent', value: 'oklch(l c h)', role: 'resolved accent', preview: <Chips tokens={ [ 'accent' ] } /> },
-      { name: '--accent-strong', value: 'calc(--accent-l ± 9–12%)', role: 'hover, per-theme', preview: <Chips tokens={ [ 'accent-strong' ] } /> },
-      { name: '--accent-wash', value: 'mix(accent 12%, paper)', role: 'tinted surface', preview: <Chips tokens={ [ 'accent-wash' ] } /> },
-      { name: '--accent-100 … -900', value: 'color-mix ramp', role: 'nine-step variant ramp', preview: <Chips kind='ramp' tokens={ ramp('accent') } /> },
-      { name: '--danger / --success', value: 'wine / moss', role: 'off-brand state colors', preview: <Chips tokens={ [ 'danger', 'success' ] } /> },
-      { name: '--danger-100 … -900', value: 'color-mix ramp', role: 'danger variant ramp', preview: <Chips kind='ramp' tokens={ ramp('danger') } /> },
-      { name: '--success-100 … -900', value: 'color-mix ramp', role: 'success variant ramp', preview: <Chips kind='ramp' tokens={ ramp('success') } /> },
+      { name: '--color-accent-l / -c / -h', value: '40% · 0 · 85', role: 'accent oklch triplet (chroma 0 → ink)', preview: <Chips tokens={ [ 'accent' ] } /> },
+      { name: '--color-accent', value: 'oklch(l c h)', role: 'resolved accent', preview: <Chips tokens={ [ 'accent' ] } /> },
+      { name: '--color-accent-strong', value: 'calc(--color-accent-l ± 9–12%)', role: 'hover, per-theme', preview: <Chips tokens={ [ 'accent-strong' ] } /> },
+      { name: '--color-accent-wash', value: 'mix(accent 12%, paper)', role: 'tinted surface', preview: <Chips tokens={ [ 'accent-wash' ] } /> },
+      { name: '--color-accent-100 … -900', value: 'color-mix ramp', role: 'nine-step variant ramp', preview: <Chips kind='ramp' tokens={ ramp('accent') } /> },
+      { name: '--color-danger / --color-success', value: 'wine / moss', role: 'off-brand state colors', preview: <Chips tokens={ [ 'danger', 'success' ] } /> },
+      { name: '--color-danger-100 … -900', value: 'color-mix ramp', role: 'danger variant ramp', preview: <Chips kind='ramp' tokens={ ramp('danger') } /> },
+      { name: '--color-success-100 … -900', value: 'color-mix ramp', role: 'success variant ramp', preview: <Chips kind='ramp' tokens={ ramp('success') } /> },
       { name: '--on-accent / -danger / -success', value: 'oklch(from …) threshold', role: 'ink on a brand fill — derived from the fill, not the theme', preview: <OnChips pairs={ [[ 'accent', 'on-accent' ], [ 'danger', 'on-danger' ], [ 'success', 'on-success' ]] } /> },
       { name: '--on-ink-threshold', value: '0.65', role: 'the lightness where on-brand ink flips', preview: null },
     ],
@@ -210,16 +210,16 @@ export const TokensReference = () =>
       {' '}
       <code>color-scheme</code>
       ; only the five brand channel scalars (
-      <code>--accent-l</code>
+      <code>--color-accent-l</code>
       ,
       {' '}
-      <code>--accent-strong-l</code>
+      <code>--color-accent-strong-l</code>
       ,
       {' '}
-      <code>--danger-l/-c</code>
+      <code>--color-danger-l/-c</code>
       ,
       {' '}
-      <code>--success-l</code>
+      <code>--color-success-l</code>
       ) keep explicit
       {' '}
       <code>[data-theme=&apos;dark&apos;]</code>

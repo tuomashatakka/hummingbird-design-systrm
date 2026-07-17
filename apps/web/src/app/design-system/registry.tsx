@@ -24,7 +24,7 @@ export const PRIMITIVES: ComponentEntry[] = [
     name:        'Button',
     renders:     'button',
     props:       'variant, size, disabled, type, onClick',
-    description: 'Four looks, one element. Uppercase display face, hairline border; the primary fill takes --accent and derives its ink from the fill itself (--on-accent), so it stays readable whatever the accent lightness.',
+    description: 'Four looks, one element. Uppercase display face, hairline border; the primary fill takes --color-accent and derives its ink from the fill itself (--on-accent), so it stays readable whatever the accent lightness.',
     code:        `<Button>Default</Button>
 <Button variant='primary'>Primary</Button>
 <Button variant='ghost'>Ghost</Button>

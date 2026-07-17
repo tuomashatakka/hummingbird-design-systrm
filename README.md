@@ -66,7 +66,7 @@ order.
    no Radix, no inline styles. Components take essential props only (no `className`, no
    `style`, no size/colour/margin props — that is CSS's job).
 2. **One token file.** Every visual decision resolves to a custom property in
-   `tokens.css`. Brand colours are **oklch channel triplets** (`--accent-l/-c/-h`) with
+   `tokens.css`. Brand colours are **oklch channel triplets** (`--color-accent-l/-c/-h`) with
    nine-step `color-mix` ramps; the accent defaults to chroma 0, so it *is* ink until you
    recolour it. `--radius` is `0`; the sole exception is `--radius-full` for icon
    medallions.

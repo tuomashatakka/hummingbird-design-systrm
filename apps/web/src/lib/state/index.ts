@@ -1,5 +1,12 @@
+import { AppStateProvider, useSelector, useAppState, useDispatch } from './store'
+
 export * from './types'
 export * from './actions'
-export { reducer } from './reducer'
-export { AppStateProvider, useAppState, useSelector, useDispatch } from './store'
-export { ThemeApplier } from './ThemeApplier'
+
+
+export {
+  AppStateProvider,
+  useSelector,
+  useAppState,
+  useDispatch,
+}

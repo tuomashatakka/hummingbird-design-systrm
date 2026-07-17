@@ -7,9 +7,16 @@ import { initialState } from './types'
 // The one store instance for the docs site. createStore builds its contexts
 // per call, so this module must stay the single import point (Δ/lib/state) —
 // a second call elsewhere would be a second, disconnected store.
-export const {
+const {
   Provider: AppStateProvider,
   useStore: useAppState,
   useSelector,
   useDispatch,
 } = createStore(reducer, initialState)
+
+export {
+  AppStateProvider,
+  useAppState,
+  useSelector,
+  useDispatch,
+}

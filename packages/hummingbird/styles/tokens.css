@@ -7,7 +7,7 @@
    November 2015 identity style guide. The brand is genuinely
    monochrome (true greys only); color exists solely as
    photographic overlay tints, never as a flat UI fill. So
-   --accent below intentionally resolves to ink, not a hue —
+   --color-accent below intentionally resolves to ink, not a hue —
    see the note next to it.
    ———————————————————————————————————————————————— */
 
@@ -22,7 +22,7 @@
 /* — theme plumbing —
    color-scheme decides which side of every light-dark() pair below
    renders: the attribute forces a side, 'system' (or no attribute)
-   lets the OS preference pick. Channel scalars (--accent-l & co)
+   lets the OS preference pick. Channel scalars (--color-accent-l & co)
    are not colors, so light-dark() cannot wrap them — they keep the
    small per-theme blocks at the end of this file. */
 :root                 { color-scheme: light dark; }
@@ -46,11 +46,11 @@
      hovers, washes, the 100–900 ramps below — follows. The brand
      default is genuinely monochrome, so accent chroma is 0: the
      accent IS ink until someone slides chroma up. */
-  --accent-l:  40%;  --accent-c:  0;     --accent-h:  85;
-  --danger-l:  40%;  --danger-c:  0.11;  --danger-h:  5;
-  --success-l: 50%;  --success-c: 0.05;  --success-h: 135;
+  --color-accent-l:  40%;  --color-accent-c:  0;     --color-accent-h:  85;
+  --color-danger-l:  40%;  --color-danger-c:  0.11;  --color-danger-h:  5;
+  --color-success-l: 50%;  --color-success-c: 0.05;  --color-success-h: 135;
 
-  --accent-strong-l: calc(var(--accent-l) - 9%);
+  --color-accent-strong-l: calc(var(--color-accent-l) - 9%);
 
   /* — color · resolved brand colors —
      accent-wash steps one notch off wash so two neutral surfaces
@@ -58,12 +58,12 @@
      danger/success are not part of the brand book (a monochrome
      identity has no error state); wine and a desaturated moss keep
      the low-vibrancy feel. */
-  --accent:        oklch(var(--accent-l) var(--accent-c) var(--accent-h));
-  --accent-strong: oklch(var(--accent-strong-l) var(--accent-c) var(--accent-h));
-  --accent-wash:   color-mix(in oklch, var(--accent) 12%, var(--paper));
+  --color-accent:        oklch(var(--color-accent-l) var(--color-accent-c) var(--color-accent-h));
+  --color-accent-strong: oklch(var(--color-accent-strong-l) var(--color-accent-c) var(--color-accent-h));
+  --color-accent-wash:   color-mix(in oklch, var(--color-accent) 12%, var(--paper));
 
-  --danger:  oklch(var(--danger-l) var(--danger-c) var(--danger-h));
-  --success: oklch(var(--success-l) var(--success-c) var(--success-h));
+  --color-danger:  oklch(var(--color-danger-l) var(--color-danger-c) var(--color-danger-h));
+  --color-success: oklch(var(--color-success-l) var(--color-success-c) var(--color-success-h));
 
   /* — color · on-brand ink —
      Type sitting on a brand-color fill. Derived from the fill's own
@@ -75,33 +75,33 @@
      threshold must never equal a real brand lightness (0 × infinity
      is NaN). */
   --on-ink-threshold: 0.65;
-  --on-accent:  oklch(from var(--accent)  clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
-  --on-danger:  oklch(from var(--danger)  clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
-  --on-success: oklch(from var(--success) clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
+  --on-accent:  oklch(from var(--color-accent)  clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
+  --on-danger:  oklch(from var(--color-danger)  clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
+  --on-success: oklch(from var(--color-success) clamp(0.15, (var(--on-ink-threshold) - l) * infinity, 0.98) 0 h);
 
   /* — color · variant ramps —
      Nine steps per brand color, 100 (near paper) → 900 (near ink).
      500 is the color itself. Mixing toward --paper / --ink keeps the
      ramps correct in both themes and under customization. */
-  --accent-100: color-mix(in oklch, var(--accent) 10%, var(--paper));
-  --accent-200: color-mix(in oklch, var(--accent) 22%, var(--paper));
-  --accent-300: color-mix(in oklch, var(--accent) 40%, var(--paper));
-  --accent-400: color-mix(in oklch, var(--accent) 65%, var(--paper));
-  --accent-500: var(--accent);
-  --accent-600: color-mix(in oklch, var(--accent) 88%, var(--ink));
-  --accent-700: color-mix(in oklch, var(--accent) 72%, var(--ink));
-  --accent-800: color-mix(in oklch, var(--accent) 55%, var(--ink));
-  --accent-900: color-mix(in oklch, var(--accent) 38%, var(--ink));
+  --color-accent-100: color-mix(in oklch, var(--color-accent) 10%, var(--paper));
+  --color-accent-200: color-mix(in oklch, var(--color-accent) 22%, var(--paper));
+  --color-accent-300: color-mix(in oklch, var(--color-accent) 40%, var(--paper));
+  --color-accent-400: color-mix(in oklch, var(--color-accent) 65%, var(--paper));
+  --color-accent-500: var(--color-accent);
+  --color-accent-600: color-mix(in oklch, var(--color-accent) 88%, var(--ink));
+  --color-accent-700: color-mix(in oklch, var(--color-accent) 72%, var(--ink));
+  --color-accent-800: color-mix(in oklch, var(--color-accent) 55%, var(--ink));
+  --color-accent-900: color-mix(in oklch, var(--color-accent) 38%, var(--ink));
 
-  --danger-100: color-mix(in oklch, var(--danger) 10%, var(--paper));
-  --danger-200: color-mix(in oklch, var(--danger) 22%, var(--paper));
-  --danger-300: color-mix(in oklch, var(--danger) 40%, var(--paper));
-  --danger-400: color-mix(in oklch, var(--danger) 65%, var(--paper));
-  --danger-500: var(--danger);
-  --danger-600: color-mix(in oklch, var(--danger) 88%, var(--ink));
-  --danger-700: color-mix(in oklch, var(--danger) 72%, var(--ink));
-  --danger-800: color-mix(in oklch, var(--danger) 55%, var(--ink));
-  --danger-900: color-mix(in oklch, var(--danger) 38%, var(--ink));
+  --color-danger-100: color-mix(in oklch, var(--color-danger) 10%, var(--paper));
+  --color-danger-200: color-mix(in oklch, var(--color-danger) 22%, var(--paper));
+  --color-danger-300: color-mix(in oklch, var(--color-danger) 40%, var(--paper));
+  --color-danger-400: color-mix(in oklch, var(--color-danger) 65%, var(--paper));
+  --color-danger-500: var(--color-danger);
+  --color-danger-600: color-mix(in oklch, var(--color-danger) 88%, var(--ink));
+  --color-danger-700: color-mix(in oklch, var(--color-danger) 72%, var(--ink));
+  --color-danger-800: color-mix(in oklch, var(--color-danger) 55%, var(--ink));
+  --color-danger-900: color-mix(in oklch, var(--color-danger) 38%, var(--ink));
 
   /* — color · photographic overlay tints —
      From the identity kit: color exists only as a tint laid over
@@ -126,22 +126,23 @@
   --on-photo-soft: oklch(98% 0 0 / 0.62);
   --on-photo-faint: oklch(98% 0 0 / 0.32);
 
-  --success-100: color-mix(in oklch, var(--success) 10%, var(--paper));
-  --success-200: color-mix(in oklch, var(--success) 22%, var(--paper));
-  --success-300: color-mix(in oklch, var(--success) 40%, var(--paper));
-  --success-400: color-mix(in oklch, var(--success) 65%, var(--paper));
-  --success-500: var(--success);
-  --success-600: color-mix(in oklch, var(--success) 88%, var(--ink));
-  --success-700: color-mix(in oklch, var(--success) 72%, var(--ink));
-  --success-800: color-mix(in oklch, var(--success) 55%, var(--ink));
-  --success-900: color-mix(in oklch, var(--success) 38%, var(--ink));
+  --color-success-100: color-mix(in oklch, var(--color-success) 10%, var(--paper));
+  --color-success-200: color-mix(in oklch, var(--color-success) 22%, var(--paper));
+  --color-success-300: color-mix(in oklch, var(--color-success) 40%, var(--paper));
+  --color-success-400: color-mix(in oklch, var(--color-success) 65%, var(--paper));
+  --color-success-500: var(--color-success);
+  --color-success-600: color-mix(in oklch, var(--color-success) 88%, var(--ink));
+  --color-success-700: color-mix(in oklch, var(--color-success) 72%, var(--ink));
+  --color-success-800: color-mix(in oklch, var(--color-success) 55%, var(--ink));
+  --color-success-900: color-mix(in oklch, var(--color-success) 38%, var(--ink));
 
   /* — type — */
-  --font-sans:    'Sofia Pro', 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-display: 'Novecento Sans Wide', 'Montserrat', 'Futura PT', Futura, 'Helvetica Neue', sans-serif;
-  --font-sub:     'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-mark:    'TeX Gyre Adventor', 'Montserrat', 'Futura PT', Futura, sans-serif;
-  --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', monospace;
+  --font-base:     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans:    'Sofia Pro', 'Poppins', var(--font-base);
+  --font-display: 'Novecento Sans Wide', 'Montserrat', 'Futura PT', Futura, var(--font-base);
+  --font-sub:     'Montserrat', var(--font-base);
+  --font-mark:    'TeX Gyre Adventor', 'Montserrat', 'Futura PT', Futura, var(--font-base);
+  --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', Consolas, "Andale Mono", "Courier New", monospace;
 
   --text-xs: 0.6875rem; /* 11px — caption, eyebrow */
   --text-sm: 0.8125rem; /* 13px — small print */
@@ -199,18 +200,18 @@
    lightness/chroma scalars are not colors, so they still need the
    explicit per-theme blocks. Keep both bodies identical. */
 [data-theme='dark'] {
-  --accent-l:        85%;
-  --accent-strong-l: calc(var(--accent-l) + 12%);
-  --danger-l:        48%; --danger-c: 0.12;
-  --success-l:       58%;
+  --color-accent-l:        85%;
+  --color-accent-strong-l: calc(var(--color-accent-l) + 12%);
+  --color-danger-l:        48%; --color-danger-c: 0.12;
+  --color-success-l:       58%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:where(:not([data-theme]), [data-theme='system']) {
-    --accent-l:        85%;
-    --accent-strong-l: calc(var(--accent-l) + 12%);
-    --danger-l:        48%; --danger-c: 0.12;
-    --success-l:       58%;
+    --color-accent-l:        85%;
+    --color-accent-strong-l: calc(var(--color-accent-l) + 12%);
+    --color-danger-l:        48%; --color-danger-c: 0.12;
+    --color-success-l:       58%;
   }
 }
 
@@ -218,8 +219,8 @@
    (and keep following the customizer with zero extra configuration). */
 @supports (color: contrast-color(red)) {
   :root {
-    --on-accent:  contrast-color(var(--accent));
-    --on-danger:  contrast-color(var(--danger));
-    --on-success: contrast-color(var(--success));
+    --on-accent:  contrast-color(var(--color-accent));
+    --on-danger:  contrast-color(var(--color-danger));
+    --on-success: contrast-color(var(--color-success));
   }
 }

@@ -68,15 +68,15 @@ Every brand color is an **oklch channel triplet** — three custom properties
 the rest of the system derives from:
 
 ```css
---accent-l: 40%;  --accent-c: 0;    --accent-h: 85;
---danger-l: 40%;  --danger-c: 0.11; --danger-h: 5;
---success-l: 50%; --success-c: 0.05; --success-h: 135;
+--color-accent-l: 40%;  --color-accent-c: 0;    --color-accent-h: 85;
+--color-danger-l: 40%;  --color-danger-c: 0.11; --color-danger-h: 5;
+--color-success-l: 50%; --color-success-c: 0.05; --color-success-h: 135;
 ```
 
-- `--accent` defaults to **chroma 0** — the accent *is* ink until customized.
-- `--accent-strong` (hover) derives from `--accent-l` via `calc()`, so it
+- `--color-accent` defaults to **chroma 0** — the accent *is* ink until customized.
+- `--color-accent-strong` (hover) derives from `--color-accent-l` via `calc()`, so it
   tracks customization and flips direction per theme.
-- `--accent-wash` is `color-mix(in oklch, var(--accent) 12%, var(--paper))`.
+- `--color-accent-wash` is `color-mix(in oklch, var(--color-accent) 12%, var(--paper))`.
 - `danger` (wine) and `success` (moss) are not in the brand book — a
   monochrome identity has no error state — but keep its low-vibrancy feel.
 
@@ -91,9 +91,9 @@ Each brand color ships as a nine-step ramp, `100` (near paper) → `900`
 (near ink), with `500` the color itself:
 
 ```css
---accent-100 … --accent-900
---danger-100 … --danger-900
---success-100 … --success-900
+--color-accent-100 … --color-accent-900
+--color-danger-100 … --color-danger-900
+--color-success-100 … --color-success-900
 ```
 
 Steps are derived in `tokens.css` with `color-mix(in oklch, …)` toward
