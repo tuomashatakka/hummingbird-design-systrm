@@ -29,6 +29,9 @@ interface NotificationProps {
  * `timeout` is 0, on a timer. Mount once, near the root. `[data-notifications]`.
  */
 export const Notification: FC<NotificationProps> = ({ notices, onDismiss, timeout = 6000 }) => {
+  // Auto-dismiss timers are a genuine side effect (window.setTimeout) with
+  // cleanup — the archetypal, unavoidable useEffect case.
+  // eslint-disable-next-line react-strict/prefer-no-use-effect
   useEffect(() => {
     if (timeout <= 0 || notices.length === 0)
       return

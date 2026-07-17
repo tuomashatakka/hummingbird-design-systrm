@@ -1,3 +1,7 @@
+// A flat data registry of every component + a couple of layout specimens that
+// size themselves with inline styles — both the file length and those dynamic
+// preview styles are inherent to what this module is.
+/* eslint-disable max-lines, react-strict/no-style-prop */
 // The component registry — the single source of truth for the docs.
 // Every export of the package appears here exactly once, with the code
 // that produces its live preview. Server module: interactive previews
@@ -61,7 +65,7 @@ export const PRIMITIVES: ComponentEntry[] = [
     name:        'Select',
     renders:     'select',
     props:       'options, name, value, disabled, required, onChange',
-    description: 'A native select fed an options array — the platform owns the popup.',
+    description: 'A native select fed an options array. Where the engine supports appearance:base-select the dropdown renders as our own styled popover menu — checkmarks, hover, scale+fade in/out — with zero JS and full keyboard/form behavior; elsewhere it degrades to the platform control.',
     code:        `<Select options={ [
   { value: 'free', label: 'Free' },
   { value: 'pro',  label: 'Pro' },
@@ -72,7 +76,7 @@ export const PRIMITIVES: ComponentEntry[] = [
     name:        'Checkbox',
     renders:     "label[data-check] > input[type='checkbox']",
     props:       'label, name, value, checked, disabled, onChange',
-    description: 'Self-labelling: the control lives inside its own label, so the association is implicit. accent-color keeps the tick on brand.',
+    description: 'Self-labelling: the control lives inside its own label, so the association is implicit. appearance:none gives it a squared box whose tick draws itself on — the two arms grow in sequence — and erases on uncheck. Pure CSS.',
     code:        `<Checkbox label='I agree to the terms' />`,
     preview:     <CheckboxDemo />,
   },
@@ -117,13 +121,15 @@ export const PRIMITIVES: ComponentEntry[] = [
     code:        `<Badge>Neutral</Badge>
 <Badge variant='accent'>Accent</Badge>
 <Badge variant='success'>Success</Badge>
-<Badge variant='error'>error</Badge>`,
+<Badge variant='error'>error</Badge>
+<Badge variant='info'>Info</Badge>`,
     preview:
   <div data-layout='cluster'>
     <Badge>Neutral</Badge>
     <Badge variant='accent'>Accent</Badge>
     <Badge variant='success'>Success</Badge>
     <Badge variant='error'>error</Badge>
+    <Badge variant='info'>Info</Badge>
   </div>,
   },
   {
@@ -687,11 +693,11 @@ export const LAYOUTS: ComponentEntry[] = [
       <Badgeish>horizontally centered</Badgeish>
     </Center>
 
-    <div style={{ blockSize: '8rem', border: 'var(--border-hair)' }}>
+    <section style={{ blockSize: '8rem', border: 'var(--border-hair)' }}>
       <Center axis='both'>
         <Badgeish>dead center</Badgeish>
       </Center>
-    </div>
+    </section>
   </div>,
   },
   {

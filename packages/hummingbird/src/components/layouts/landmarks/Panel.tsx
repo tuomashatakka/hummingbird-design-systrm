@@ -21,7 +21,7 @@ interface PanelProps {
  * slides it away and `inert` removes it from focus and the a11y tree.
  */
 export const Panel: FC<PanelProps> = ({ children, label, open, onClose }) =>
-  <aside data-slot='panel' data-open={ open ? '' : undefined } inert={ !open } aria-label={ label }>
+  <aside data-slot='panel' data-open={ open ? '' : undefined } aria-label={ label } inert={ !open }>
     <header data-layout='cluster'>
       <h6>{label}</h6>
 

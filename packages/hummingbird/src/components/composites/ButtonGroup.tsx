@@ -14,7 +14,7 @@ interface ButtonGroupProps {
  * hovered or focused member lifts above its neighbours.
  */
 export const ButtonGroup: FC<ButtonGroupProps> = ({ children, label }) =>
-  <div role='group' aria-label={ label } data-button-group=''>
+  <div data-button-group='' aria-label={ label } role='group'>
     {children}
   </div>
 

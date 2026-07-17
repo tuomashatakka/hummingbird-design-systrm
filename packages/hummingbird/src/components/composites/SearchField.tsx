@@ -19,7 +19,7 @@ export const SearchField: FC<SearchFieldProps> = ({ placeholder = 'Search…', o
       onSearch(value.trim())
   }
 
-  return <form role='search' aria-label='Search' onSubmit={ handleSubmit }>
+  return <form aria-label='Search' role='search' onSubmit={ handleSubmit }>
     <Input
       type='search'
       placeholder={ placeholder }

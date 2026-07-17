@@ -15,6 +15,6 @@ interface SpinnerProps {
  * `<span>` too; freezes under reduced motion.
  */
 export const Spinner: FC<SpinnerProps> = ({ label = 'Loading', size = null }) =>
-  <span data-spinner={ size ?? '' } role='status' aria-label={ label } />
+  <span data-spinner={ size ?? '' } aria-label={ label } role='status' />
 
 Spinner.displayName = 'Spinner'

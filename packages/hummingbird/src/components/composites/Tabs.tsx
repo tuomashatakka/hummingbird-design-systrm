@@ -35,19 +35,19 @@ export const Tabs: FC<TabsProps> = ({ tabs, label }) => {
     select((active + dir + tabs.length) % tabs.length)
   }
 
-  return <div data-tabs>
-    <div role='tablist' aria-label={ label }>
+  return <section data-tabs>
+    <div aria-label={ label } role='tablist'>
       {tabs.map((tab, index) =>
         <button
           key={ tab.id }
           ref={ element => {
             refs.current[index] = element
           } }
-          type='button'
-          role='tab'
           id={ `${base}-tab-${tab.id}` }
           aria-selected={ index === active }
           aria-controls={ `${base}-panel-${tab.id}` }
+          type='button'
+          role='tab'
           tabIndex={ index === active ? 0 : -1 }
           onClick={ () => setActive(index) }
           onKeyDown={ handleKeyDown }>
@@ -58,14 +58,14 @@ export const Tabs: FC<TabsProps> = ({ tabs, label }) => {
     {tabs.map((tab, index) =>
       <div
         key={ tab.id }
-        role='tabpanel'
         id={ `${base}-panel-${tab.id}` }
         aria-labelledby={ `${base}-tab-${tab.id}` }
+        role='tabpanel'
         hidden={ index !== active }
         tabIndex={ 0 }>
         {tab.content}
       </div>)}
-  </div>
+  </section>
 }
 
 Tabs.displayName = 'Tabs'

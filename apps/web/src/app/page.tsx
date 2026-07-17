@@ -167,7 +167,7 @@ export default function HomePage () {
         </Heading>
 
         <div data-layout='split'>
-          <div>
+          <section>
             <p>
               Hummingbird is minimal yet bold: defined, clean, immersive. Surfaces
               separate through whitespace and washes rather than boxes; when a
@@ -180,7 +180,7 @@ export default function HomePage () {
               channel triplets — monochrome by default, and yours to recolor
               live, with every variant ramp following along.
             </p>
-          </div>
+          </section>
 
           <Meta
             items={ [

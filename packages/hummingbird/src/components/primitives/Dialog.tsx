@@ -39,6 +39,10 @@ export const Dialog: FC<DialogProps> = ({
   const ref     = useRef<HTMLDialogElement>(null)
   const titleId = useId()
 
+  // Bridges the `open` prop to the dialog's imperative top-layer API
+  // (showModal/show/close) — there is no declarative equivalent, so an
+  // effect is the correct tool here.
+  // eslint-disable-next-line react-strict/prefer-no-use-effect
   useEffect(() => {
     const dialog = ref.current
     if (!dialog)

@@ -1,3 +1,8 @@
+// This module is nothing but live token previews: every chip samples an
+// arbitrary custom property through an inline style, which is exactly the
+// dynamic case the no-inline-style rule exempts. Ordering is moot when the
+// style value is the point, so both rules are relaxed for the file.
+/* eslint-disable react-strict/no-style-prop, react-strict/jsx-prop-layout */
 import type { FC, ReactNode } from 'react'
 import { Heading } from 'hummingbird-design-system'
 

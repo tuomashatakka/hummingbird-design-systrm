@@ -11,10 +11,15 @@ import { BRAND_COLORS } from './types'
 const StateSideEffects = () => {
   const { theme, palette } = useAppState()
 
+  // These effects reflect app state onto <html> (the theme attribute and the
+  // customizer's inline custom properties) — writing to a DOM node outside
+  // React's tree is a legitimate, unavoidable side effect.
+  // eslint-disable-next-line react-strict/prefer-no-use-effect
   useEffect(() => {
     document.documentElement.dataset.theme = theme
   }, [ theme ])
 
+  // eslint-disable-next-line react-strict/prefer-no-use-effect
   useEffect(() => {
     const root = document.documentElement
 

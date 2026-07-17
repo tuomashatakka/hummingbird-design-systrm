@@ -1,5 +1,9 @@
 'use client'
 
+// The live swatch renders the current --color-{name} through an inline
+// style — the dynamic preview case the no-inline-style rule exempts.
+/* eslint-disable react-strict/no-style-prop */
+
 import type { FC } from 'react'
 import { Button, Slider } from 'hummingbird-design-system'
 import { useAppState, useDispatch } from 'Δ/lib/state'

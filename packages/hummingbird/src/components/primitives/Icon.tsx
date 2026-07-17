@@ -53,9 +53,9 @@ interface IconProps {
 export const Icon: FC<IconProps> = ({ name, label }) =>
   <svg
     data-icon={ name }
-    viewBox='0 0 24 24'
     aria-hidden={ label ? undefined : true }
     aria-label={ label }
+    viewBox='0 0 24 24'
     role={ label ? 'img' : undefined }
     xmlns='http://www.w3.org/2000/svg'>
     {PATHS[name]}

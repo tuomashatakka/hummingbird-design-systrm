@@ -1,5 +1,10 @@
 'use client'
 
+// The scroll-spy specimen sizes its scroller and marks the active link with
+// inline styles that depend on runtime state — the dynamic case the
+// no-inline-style rule exempts.
+/* eslint-disable react-strict/no-style-prop */
+
 import { useEffect, useRef, useState } from 'react'
 import {
   Button, Checkbox, ContextMenu, Dialog, Field, Heading, Input, Panel, Radio,
@@ -35,11 +40,13 @@ export const SelectDemo = () => {
 export const ContextMenuDemo = () => {
   const dispatch = useDispatch()
 
-  return <ContextMenu label='Actions' items={ [
-    { label: 'Edit',      onSelect: () => dispatch(pushNotice('Edit selected')) },
-    { label: 'Duplicate', onSelect: () => dispatch(pushNotice('Duplicated')) },
-    { label: 'Delete',    onSelect: () => dispatch(pushNotice('Deleted')), destructive: true },
-  ] } />
+  return <ContextMenu
+    label='Actions'
+    items={ [
+      { label: 'Edit', onSelect: () => dispatch(pushNotice('Edit selected')) },
+      { label: 'Duplicate', onSelect: () => dispatch(pushNotice('Duplicated')) },
+      { label: 'Delete', onSelect: () => dispatch(pushNotice('Deleted')), destructive: true },
+    ] } />
 }
 
 export const CheckboxDemo = () => {
@@ -248,8 +255,11 @@ export const PanelDemo = () => {
 
 export const HeaderScrollSpyDemo = () => {
   const [ current, setCurrent ] = useState('demo-a')
-  const scroller                = useRef<HTMLDivElement>(null)
+  const scroller                = useRef<HTMLElement>(null)
 
+  // Subscribes an IntersectionObserver to the live scroller — an external
+  // subscription with cleanup, the archetypal useEffect case.
+  // eslint-disable-next-line react-strict/prefer-no-use-effect
   useEffect(() => {
     const root = scroller.current
     if (root == null)
@@ -288,12 +298,12 @@ export const HeaderScrollSpyDemo = () => {
         </a>)}
     </nav>
 
-    <div ref={ scroller } style={{ blockSize: '10rem', overflowY: 'auto', border: 'var(--border-hair)' }}>
+    <section ref={ scroller } style={{ blockSize: '10rem', overflowY: 'auto', border: 'var(--border-hair)' }}>
       {links.map(link =>
         <section key={ link.id } id={ link.id } style={{ blockSize: '10rem', display: 'grid', placeItems: 'center' }}>
           {link.label}
         </section>)}
-    </div>
+    </section>
   </div>
 }
 

@@ -47,7 +47,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({ label, items, id }) => {
   const menuId     = id ?? fallbackId
 
   return <span data-popover='' data-contextmenu=''>
-    <button type='button' aria-haspopup='menu' popoverTarget={ menuId } popoverTargetAction='toggle'>
+    <button aria-haspopup='menu' type='button' popoverTarget={ menuId } popoverTargetAction='toggle'>
       {label}
     </button>
 
@@ -57,15 +57,15 @@ export const ContextMenu: FC<ContextMenuProps> = ({ label, items, id }) => {
           {item.href
             ? <a
               data-destructive={ item.destructive ? '' : undefined }
-              role='menuitem'
               aria-disabled={ item.disabled || undefined }
+              role='menuitem'
               href={ item.href }>
               {item.icon}
               <span>{item.label}</span>
             </a>
             : <button
-              type='button'
               data-destructive={ item.destructive ? '' : undefined }
+              type='button'
               role='menuitem'
               disabled={ item.disabled }
               popoverTarget={ menuId }

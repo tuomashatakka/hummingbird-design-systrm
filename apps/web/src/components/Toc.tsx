@@ -22,6 +22,10 @@ interface TocProps {
 export function Toc ({ entries, label = 'On this page' }: TocProps) {
   const [ active, setActive ] = useState<string>()
 
+  // Wires an IntersectionObserver to the live DOM to track the active
+  // section — an external subscription with cleanup, which is exactly what
+  // useEffect exists for.
+  // eslint-disable-next-line react-strict/prefer-no-use-effect
   useEffect(() => {
     const targets = entries
       .map(entry => document.getElementById(entry.id))
@@ -59,8 +63,8 @@ export function Toc ({ entries, label = 'On this page' }: TocProps) {
       {entries.map(entry =>
         <li key={ entry.id }>
           <a
-            href={ `#${entry.id}` }
             aria-current={ active === entry.id ? 'true' : undefined }
+            href={ `#${entry.id}` }
             onClick={ () => setActive(entry.id) }>
             {entry.label}
           </a>

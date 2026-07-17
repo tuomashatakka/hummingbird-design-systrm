@@ -1,3 +1,6 @@
+// Swatches paint arbitrary theme colors via inline style — the dynamic
+// preview case the no-inline-style rule exempts.
+/* eslint-disable react-strict/no-style-prop */
 import type { FC } from 'react'
 
 

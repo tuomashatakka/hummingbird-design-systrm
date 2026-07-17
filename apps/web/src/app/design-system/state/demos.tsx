@@ -58,7 +58,7 @@ export const CaseStudyDemo = () => {
       {JSON.stringify(state, null, 2)}
     </pre>
 
-    <div data-layout='cluster'>
+    <section data-layout='cluster'>
       <Button onClick={ () => dispatch(pushNotice('Pushed from the state guide.')) }>
         Push notice
       </Button>
@@ -66,6 +66,6 @@ export const CaseStudyDemo = () => {
       <Button variant='ghost' onClick={ () => dispatch(setPanel(!state.panelOpen)) }>
         Toggle panel
       </Button>
-    </div>
+    </section>
   </div>
 }
