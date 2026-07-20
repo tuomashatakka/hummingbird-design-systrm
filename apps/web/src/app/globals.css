@@ -305,3 +305,97 @@ nav[data-toc] {
   from { translate: 0 0; }
   to   { translate: var(--space-lg) 0; }
 }
+
+/* — motion showcase (the Motion foundations section) —
+   Framing only: the animations themselves are package tokens/primitives;
+   this is the scroll frame, the easing "lab", and the demo tiles. */
+
+[data-ease-lab] {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-sm);
+  margin-block:   var(--space-md);
+
+  & figure {
+    display:               grid;
+    grid-template-columns: 7rem 1fr;
+    align-items:           center;
+    gap:                   var(--space-sm);
+    margin:                0;
+  }
+
+  & figcaption {
+    font-family: var(--font-mono);
+    font-size:   var(--text-xs);
+    color:       var(--ink-faint);
+  }
+
+  & [data-track] {
+    position:   relative;
+    block-size: 0.125rem;
+    background: var(--line);
+  }
+
+  & [data-dot] {
+    position:           absolute;
+    inset-block-start:  50%;
+    inset-inline-start: 0;
+    inline-size:        0.75rem;
+    block-size:         0.75rem;
+    margin-block-start: -0.375rem;
+    background:         var(--ink);
+    animation:         ease-run 1.6s infinite alternate both;
+  }
+
+  & [data-ease='snap']      [data-dot] { animation-timing-function: var(--ease-snap); }
+  & [data-ease='immersive'] [data-dot] { animation-timing-function: var(--immersive); }
+  & [data-ease='spring']    [data-dot] { animation-timing-function: var(--spring); }
+}
+
+@keyframes ease-run {
+  from { inset-inline-start: 0; }
+  to   { inset-inline-start: calc(100% - 0.75rem); }
+}
+
+/* bounded scroller: gives the scroll-driven reveals something to scroll within,
+   so view() resolves against this frame and the demo stays self-contained */
+[data-motion-scroller] {
+  block-size: 12rem;
+  overflow-y: auto;
+  padding:    var(--space-md);
+  border:     var(--border-hair);
+  background: var(--wash);
+
+  & > * + * { margin-block-start: var(--space-md); }
+
+  /* force overflow so tiles actually transit the entry band and reveal;
+     a single wide row would fit the frame and sit pinned at its end state */
+  & [data-motion-grid] { grid-template-columns: repeat(3, 1fr); }
+}
+
+[data-motion-hint] {
+  font-family:    var(--font-display);
+  font-size:      var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--ink-faint);
+  text-align:     center;
+}
+
+[data-motion-grid] {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  gap:                   var(--space-sm);
+
+  /* reveal tiles are plain divs; the hook demos use real <button>s, left alone */
+  & > div {
+    display:       grid;
+    place-items:   center;
+    padding-block: var(--space-md);
+    border:        var(--border-hair);
+    background:    var(--paper);
+    font-family:   var(--font-mono);
+    font-size:     var(--text-xs);
+    color:         var(--ink-soft);
+  }
+}

@@ -196,9 +196,22 @@
   --shadow-2: 0 0.375rem  1.5rem   light-dark(oklch(0 0 0 / 0.12), oklch(0 0 0 / 0.55));
   --shadow-3: 0 0         2.5rem   light-dark(oklch(0 0 0 / 0.1),  oklch(0 0 0 / 0.5));
 
-  /* — motion — */
-  --snap:      200ms cubic-bezier(0.4, 0, 0.2, 1);
-  --immersive: cubic-bezier(0.16, 1, 0.3, 1); /* signature reveal curve */
+  /* — motion · the system's whole sense of timing lives here —
+     --snap stays the combined duration+ease workhorse for micro-interactions;
+     the duration scale replaces scattered magic numbers for new motion, and
+     easings are named separately so any duration can pair with any curve.
+     ┌── TUNE ME · these few values set the personality of every animation ──┐ */
+  --dur-fast:   120ms;
+  --dur-base:   200ms;
+  --dur-slow:   320ms;
+  --dur-slower: 560ms;
+
+  --ease-snap:  cubic-bezier(0.4, 0, 0.2, 1);      /* standard · UI micro-motion  */
+  --immersive:  cubic-bezier(0.16, 1, 0.3, 1);     /* signature reveal (ease-out-expo) */
+  --spring:     cubic-bezier(0.34, 1.56, 0.64, 1); /* gentle overshoot · opt-in    */
+  /* └──────────────────────────────────────────────────────────────────────┘ */
+
+  --snap:       var(--dur-base) var(--ease-snap);  /* = 200ms + standard · unchanged */
 
   /* — layout — */
   --measure:   68ch;

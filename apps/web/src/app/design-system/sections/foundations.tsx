@@ -1,6 +1,8 @@
 /* eslint-disable @stylistic/jsx-one-expression-per-line */
-import { Heading } from 'hummingbird-design-system'
+import { Disclosure, Heading } from 'hummingbird-design-system'
+import { Specimen } from 'Δ/components/Specimen'
 import { Swatches } from 'Δ/components/docs/Swatches'
+import { DialogDemo, PanelDemo } from '../demos'
 
 
 const NEUTRAL_RAMP = [ 'paper', 'wash', 'accent-wash', 'line', 'ink-faint', 'ink-soft', 'ink' ]
@@ -210,38 +212,121 @@ export const Spacing = () =>
     </p>
   </section>
 
+const REVEAL_CODE = `<!-- staggered group: each child drifts in a beat later -->
+<div data-reveal-group>
+  <article>…</article>
+  <article>…</article>
+</div>
+
+<!-- or pick a gesture per element -->
+<div data-reveal='blur'>…</div>
+<div data-reveal='scale'>…</div>
+<div data-reveal='clip'>…</div>
+<div data-reveal='pop'>…</div>`
+
+const HOOKS_CODE = `<button data-motion='lift'>Lift</button>
+<button data-motion='press'>Press</button>
+<button data-motion='sheen'>Sheen</button>`
+
+const OVERLAY_CODE = `// enter via @starting-style, leave via a discrete display
+// transition — native top-layer, no animation library
+<Dialog open={ open } onClose={ close }>…</Dialog>
+<Panel  open={ open } onClose={ close }>…</Panel>
+
+// the accordion animates its own height with interpolate-size
+<Disclosure summary='Details'>…</Disclosure>`
+
 export const Motion = () =>
   <section>
     <Heading id='motion' level={ 2 }>Motion</Heading>
 
     <p>
-      One easing token,
-      {' '}
-      <code>--snap</code>
-      {' '}
-      (200ms cubic-bezier), for every hover, toggle, and slide — plus the
-      {' '}
-      <code>--immersive</code>
-      {' '}
-      reveal curve for the panel. Overlays enter through
-      {' '}
-      <code>@starting-style</code>
-      {' '}
-      and leave through discrete
-      {' '}
-      <code>display</code>
-      {' '}
-      transitions; accordions animate their height with
-      {' '}
-      <code>interpolate-size</code>
-      {' '}
-      and
-      {' '}
-      <code>::details-content</code>
-      .
-      {' '}
-      <code>prefers-reduced-motion</code>
-      {' '}
-      collapses all of it.
+      Timing lives in tokens. <code>--snap</code> (200ms plus a standard ease)
+      drives every hover, toggle, and slide; the <code>--immersive</code> reveal
+      curve and an opt-in <code>--spring</code> overshoot carry the cinematic
+      moments — all over a four-step duration scale from <code>--dur-fast</code>{' '}
+      to <code>--dur-slower</code>. Overlays enter through <code>@starting-style</code>{' '}
+      and leave through discrete <code>display</code> transitions; accordions
+      animate height with <code>interpolate-size</code>. Two reusable primitives
+      layer on top — <code>[data-reveal]</code> for scroll-driven entrances and{' '}
+      <code>[data-motion]</code> for pointer micro-interactions — and{' '}
+      <code>prefers-reduced-motion</code> collapses all of it to nothing.
     </p>
+
+    <Heading level={ 3 }>Easing &amp; duration</Heading>
+
+    <p>
+      Three curves, side by side: <code>--snap</code> for UI, the{' '}
+      <code>--immersive</code> ease-out-expo for reveals, and the{' '}
+      <code>--spring</code> overshoot for playful accents.
+    </p>
+
+    <div data-ease-lab aria-hidden='true'>
+      {[ 'snap', 'immersive', 'spring' ].map(ease =>
+        <figure key={ ease } data-ease={ ease }>
+          <figcaption>--{ease}</figcaption>
+          <span data-track><span data-dot /></span>
+        </figure>)}
+    </div>
+
+    <Heading level={ 3 }>Scroll reveals</Heading>
+
+    <p>
+      Add <code>[data-reveal]</code> to any element and it drifts in as it enters
+      the viewport; a <code>[data-reveal-group]</code> parent staggers its
+      children. Scroll the frame to replay.
+    </p>
+
+    <Specimen code={ REVEAL_CODE } lang='html'>
+      <section data-motion-scroller aria-label='Scroll reveal demo'>
+        <p data-motion-hint>Scroll ↓</p>
+
+        <div data-reveal-group data-motion-grid>
+          {[ 1, 2, 3, 4, 5, 6 ].map(n =>
+            <div key={ n } data-reveal=''>{`0${n}`}</div>)}
+        </div>
+
+        <div data-motion-grid>
+          {[ 'fade', 'scale', 'blur', 'clip', 'pop' ].map(variant =>
+            <div key={ variant } data-reveal={ variant }>{variant}</div>)}
+        </div>
+      </section>
+    </Specimen>
+
+    <Heading level={ 3 }>Interaction hooks</Heading>
+
+    <p>
+      Drop <code>[data-motion]</code> on any control: <code>lift</code> rises on
+      hover, <code>press</code> sinks on click, and <code>sheen</code> sweeps a
+      monochrome highlight across.
+    </p>
+
+    <Specimen code={ HOOKS_CODE } lang='html'>
+      <section data-motion-grid aria-label='Interaction hooks'>
+        <button data-motion='lift' type='button'>Lift</button>
+        <button data-motion='press' type='button'>Press</button>
+        <button data-motion='sheen' type='button'>Sheen</button>
+      </section>
+    </Specimen>
+
+    <Heading level={ 3 }>Overlays &amp; height</Heading>
+
+    <p>
+      The immersive work already shipping across the system: native top-layer
+      overlays that transition in and out, and accordions that animate their own
+      height — no JavaScript animation anywhere.
+    </p>
+
+    <Specimen code={ OVERLAY_CODE }>
+      <DialogDemo />
+      <PanelDemo />
+
+      <Disclosure summary='Animated height (interpolate-size)'>
+        <p>
+          Opening and closing this disclosure animates its height from 0 to
+          auto with <code>interpolate-size: allow-keywords</code> — a real
+          keyword-to-length transition, native to the platform.
+        </p>
+      </Disclosure>
+    </Specimen>
   </section>

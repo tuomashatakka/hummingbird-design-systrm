@@ -1262,21 +1262,94 @@
     }
   }
 
-  /* sections drift in as they enter the viewport */
+  /* sections drift in as they enter the viewport (shares reveal-blur below) */
 
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       [data-layout='screens'] > section:not([data-hero], [data-component='carousel']) > * {
-        animation:          screen-reveal 1ms linear both;
+        animation:          reveal-blur 1ms linear both;
         animation-timeline: view();
         animation-range:    entry 5% entry 50%;
       }
     }
   }
 
-  @keyframes screen-reveal {
-    from { opacity: 0; translate: 0 2.75rem; filter: blur(0.625rem); }
-    to   { opacity: 1; translate: 0 0; filter: blur(0); }
+  /* — reveal · declarative scroll-driven entrances —
+     Drop [data-reveal] on any element and it drifts in as it scrolls into
+     view, on the --immersive curve. A variant picks the gesture; wrap a set in
+     [data-reveal-group] to stagger them. Generalizes the screens reveal above.
+     Gated on scroll-timeline support + no-preference — where either is missing
+     the element simply starts at its visible end state, nothing to undo. */
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+
+      [data-reveal],
+      [data-reveal-group] > * {
+        animation:          reveal-rise 1ms var(--immersive) both;
+        animation-timeline: view();
+        animation-range:    entry 5% entry 45%;
+      }
+
+      [data-reveal='fade']  { animation-name: reveal-fade; }
+      [data-reveal='scale'] { animation-name: reveal-scale; }
+      [data-reveal='blur']  { animation-name: reveal-blur; }
+      [data-reveal='clip']  { animation-name: reveal-clip; }
+      [data-reveal='pop']   { animation-name:            reveal-pop;
+                              animation-timing-function: var(--spring); }
+
+      /* stagger: scroll timelines ignore time-based delay, so each child's
+         entry window is nudged ~7% later instead of delayed (TUNE ME). */
+      [data-reveal-group] > *:nth-child(2)   { animation-range: entry 12% entry 52%; }
+      [data-reveal-group] > *:nth-child(3)   { animation-range: entry 19% entry 59%; }
+      [data-reveal-group] > *:nth-child(4)   { animation-range: entry 26% entry 66%; }
+      [data-reveal-group] > *:nth-child(5)   { animation-range: entry 33% entry 73%; }
+      [data-reveal-group] > *:nth-child(n+6) { animation-range: entry 40% entry 80%; }
+    }
+  }
+
+  @keyframes reveal-rise  { from { opacity: 0; translate: 0 2rem; }                             to { opacity: 1; translate: 0 0; } }
+  @keyframes reveal-fade  { from { opacity: 0; }                                                to { opacity: 1; } }
+  @keyframes reveal-scale { from { opacity: 0; scale: 0.94; }                                   to { opacity: 1; scale: 1; } }
+  @keyframes reveal-blur  { from { opacity: 0; translate: 0 2.75rem; filter: blur(0.625rem); }  to { opacity: 1; translate: 0 0; filter: blur(0); } }
+  @keyframes reveal-clip  { from { opacity: 0; clip-path: inset(0 0 100% 0); }                  to { opacity: 1; clip-path: inset(0 0 0 0); } }
+  @keyframes reveal-pop   { from { opacity: 0; scale: 0.8; }                                    to { opacity: 1; scale: 1; } }
+
+  /* — motion · reusable pointer micro-interactions —
+     Opt-in affordances any element can carry. The global reduced-motion
+     kill-switch (base.css) collapses all of them back to their resting state. */
+
+  [data-motion='lift'] {
+    transition: translate var(--snap), box-shadow var(--snap);
+
+    &:hover  { translate: 0 -0.25rem; box-shadow: var(--shadow-2); }
+    &:active { translate: 0 0;        box-shadow: var(--shadow-1); }
+  }
+
+  [data-motion='press'] {
+    transition: scale var(--snap);
+
+    &:active { scale: 0.97; }
+  }
+
+  [data-motion='sheen'] {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content:        '';
+      position:       absolute;
+      inset:          0;
+      translate:      -120% 0;
+      background:      linear-gradient(105deg,
+                        transparent 40%,
+                        color-mix(in oklch, var(--paper) 55%, transparent) 50%,
+                        transparent 60%);
+      pointer-events: none;
+      transition:     translate var(--dur-slower) var(--immersive);
+    }
+
+    &:hover::after { translate: 120% 0; }
   }
 
   /* — meta list: label / value pairs on a hairline rule — */
